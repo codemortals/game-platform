@@ -1,0 +1,31 @@
+.brand-input {
+    position: relative;
+    margin-bottom: 1em;
+
+    input, textarea {
+        display: inline-block;
+        color: #322E2D;
+        margin: 0;
+        width: 100%;
+        font-size: 1rem;
+        appearance: none;
+        padding: 0.5em 0.75em;
+        box-sizing: border-box;
+        border: 1px solid;
+
+        &[disabled]:hover {
+            cursor: default;
+        }
+
+        &:focus, &:active {
+            outline: none;
+        }
+    }
+
+    textarea {
+        overflow: auto;
+        min-height: 4em;
+        max-height: 20em;
+        resize: vertical;
+    }
+}

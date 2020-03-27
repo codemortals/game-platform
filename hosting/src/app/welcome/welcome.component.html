@@ -15,15 +15,12 @@
 
 <form [formGroup]="joinForm" (submit)="enterQuiz()">
 
-    <label>Name</label>
-    <input type="text" formControlName="alias">
+    <brand-input type="text" label="Name" formControlName="alias"></brand-input>
 
-    <label>Email</label>
-    <input type="email" formControlName="email">
+    <brand-input type="email" label="Email address" formControlName="email"></brand-input>
 
-    <label>Location</label>
-    <input type="text" formControlName="location">
+    <brand-input type="text" label="Location" formControlName="location"></brand-input>
 
-    <button type="submit">Join</button>
+    <button type="submit" [disabled]="joinForm.pristine || joinForm.invalid">Join</button>
 
 </form>

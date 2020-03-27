@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { RegistrationService } from '../core/services';
 
 @Component({
   templateUrl: './welcome.component.html',
@@ -10,7 +13,9 @@ export class WelcomeComponent implements OnInit {
   public joinForm: FormGroup;
 
   constructor(
+    private router: Router,
     private forms: FormBuilder,
+    private registrationService: RegistrationService,
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +29,13 @@ export class WelcomeComponent implements OnInit {
   }
 
   public enterQuiz(): void {
-    console.log(this.joinForm.getRawValue());
+    const entrant = this.joinForm.getRawValue();
+
+    this.registrationService
+      .create(entrant)
+      .subscribe(
+        () => this.router.navigate(['/', 'quiz'])
+      );
   }
 
 }
