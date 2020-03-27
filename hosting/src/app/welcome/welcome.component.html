@@ -1,0 +1,29 @@
+<h2>Join the quiz</h2>
+
+<p>Quiz starts at 9pm GMT</p>
+
+<p>Rounds:</p>
+
+<ol>
+    <li>General Knowledge</li>
+    <li>Hardware / Communications</li>
+    <li>The Picture Round</li>
+    <li>Gaming</li>
+    <li>Software / Programming</li>
+    <li>History</li>
+</ol>
+
+<form [formGroup]="joinForm" (submit)="enterQuiz()">
+
+    <label>Name</label>
+    <input type="text" formControlName="alias">
+
+    <label>Email</label>
+    <input type="email" formControlName="email">
+
+    <label>Location</label>
+    <input type="text" formControlName="location">
+
+    <button type="submit">Join</button>
+
+</form>
