@@ -1,17 +1,24 @@
+@import '../variables';
+
 .brand-input {
     position: relative;
     margin-bottom: 1em;
 
+    label + input, label + textarea {
+        margin-top: 0.25rem;
+    }
+
     input, textarea {
         display: inline-block;
-        color: #322E2D;
+        color: $brand-dark-color;
         margin: 0;
         width: 100%;
         font-size: 1rem;
         appearance: none;
-        padding: 0.5em 0.75em;
+        padding: $input-padding ($input-padding * 1.5);
         box-sizing: border-box;
-        border: 1px solid;
+        border-radius: 6px;
+        border: 1px solid $brand-secondary-dark;
 
         &[disabled]:hover {
             cursor: default;

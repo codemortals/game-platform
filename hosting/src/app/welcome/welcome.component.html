@@ -1,5 +1,3 @@
-<h2>Join the quiz</h2>
-
 <p>Quiz starts at 9pm GMT</p>
 
 <p>Rounds:</p>
@@ -13,14 +11,17 @@
     <li>History</li>
 </ol>
 
-<form [formGroup]="joinForm" (submit)="enterQuiz()">
+<div class="welcome-register">
+    <form [formGroup]="joinForm" (submit)="enterQuiz()">
+        <h2>Join our Quiz</h2>
 
-    <brand-input type="text" label="Name" formControlName="alias"></brand-input>
+        <brand-input type="text" label="Name" formControlName="alias"></brand-input>
 
-    <brand-input type="email" label="Email address" formControlName="email"></brand-input>
+        <brand-input type="email" label="Email address" formControlName="email"></brand-input>
 
-    <brand-input type="text" label="Location" formControlName="location"></brand-input>
+        <brand-input type="text" label="Location" formControlName="location"></brand-input>
 
-    <button type="submit" [disabled]="joinForm.pristine || joinForm.invalid">Join</button>
+        <brand-button type="submit" [disabled]="joinForm.pristine || joinForm.invalid">Start Quiz</brand-button>
 
-</form>
+    </form>
+</div>

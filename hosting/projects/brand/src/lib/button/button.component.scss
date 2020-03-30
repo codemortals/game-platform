@@ -1,0 +1,20 @@
+@import '../variables';
+
+.brand-button {
+    font-size: 1rem;
+    color: $brand-dark-color;
+    border-radius: 6px;
+    border: 1px solid $brand-secondary-dark;
+    padding: $input-padding ($input-padding * 1.5);
+    background-color: $brand-secondary;
+    width: 100%;
+
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+
+    &[disabled] {
+        border-color: $brand-dark-color;
+        background-color: $input-disabled;
+    }
+}

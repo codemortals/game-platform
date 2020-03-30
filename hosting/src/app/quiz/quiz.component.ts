@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+
+import { Entrant } from '../core/models';
 
 @Component({
   selector: 'app-quiz',
@@ -7,7 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizComponent implements OnInit {
 
-  constructor() { }
+  public entrants: any = []
+
+
+  constructor(
+    private firestore: AngularFirestore
+  ) {
+    // @TODO:filter by quiz
+    this.firestore
+      .collection<Entrant>('entrants')
+      .valueChanges()
+      .subscribe((data) => this.entrants = data);
+  }
 
   ngOnInit(): void {
   }
