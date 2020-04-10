@@ -5,8 +5,18 @@ name: Production
 
 on:
   push:
-    branches: 
+    branches:
       - master
+env:
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+  FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+  FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+  FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
+  FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.FIREBASE_MESSAGE_SENDER_ID }}
+  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+  FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+  FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
 
 jobs:
   build:
@@ -23,6 +33,14 @@ jobs:
       run: |
         cd hosting
         npm install
+        sed -i 's|{{ FIREBASE_API_KEY }}|'${FIREBASE_API_KEY}'|g' hosting/src/environments/environment.prod.ts
+        sed -i 's|{{ FIREBASE_APP_ID }}|'${FIREBASE_APP_ID}'|g' hosting/src/environments/environment.prod.ts
+        sed -i 's|{{ FIREBASE_AUTH_DOMAIN }}|'${FIREBASE_AUTH_DOMAIN}'|g' hosting/src/environments/environment.prod.ts
+        sed -i 's|{{ FIREBASE_DATABASE_URL }}|'${FIREBASE_DATABASE_URL}'|g' hosting/src/environments/environment.prod.ts
+        sed -i 's|{{ FIREBASE_MESSAGE_SENDER_ID }}|'${FIREBASE_MESSAGE_SENDER_ID}'|g' hosting/src/environments/environment.prod.ts
+        sed -i 's|{{ FIREBASE_PROJECT_ID }}|'${FIREBASE_PROJECT_ID}'|g' hosting/src/environments/environment.prod.ts
+        sed -i 's|{{ FIREBASE_STORAGE_BUCKET }}|'${FIREBASE_STORAGE_BUCKET}'|g' hosting/src/environments/environment.prod.ts
+        sed -i 's|{{ FIREBASE_MEASUREMENT_ID }}|'${FIREBASE_MEASUREMENT_ID}'|g' hosting/src/environments/environment.prod.ts
         npm run build
     - name: Build Functions
       run: |
@@ -31,4 +49,4 @@ jobs:
     - name: Deploy
       run: |
         npm install -g firebase-tools
-        firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+        firebase deploy --token ${FIREBASE_TOKEN}
