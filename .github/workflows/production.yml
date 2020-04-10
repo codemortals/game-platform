@@ -19,10 +19,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - name: Build
+    - name: Build UI
       run: |
         cd hosting
+        npm install
         npm run build
+    - name: Build Functions
+      run: |
+        cd functions
+        npm install
     - name: Deploy
       run: |
         npm install -g firebase-tools
