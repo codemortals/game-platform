@@ -5,7 +5,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-import { environment } from '../environments/environment.local';
+import { environment } from '../environments/environment';
 
 import { BrandButtonModule, BrandInputModule } from '@brand';
 
