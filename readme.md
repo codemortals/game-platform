@@ -1,5 +1,6 @@
- Quiz platform
+ Game Platform
  ===
-![Code mortals]( https://cdn.codemortals.io/mascot/5.png)
+ 
+![Code Mortals](https://cdn.codemortals.io/mascot/5.png)
 
-This is a quiz platform developt using angular framework, Node and Firestore
+This is a game platform developed using Angular framework with Node and Firestore

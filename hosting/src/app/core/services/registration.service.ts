@@ -11,11 +11,11 @@ import { Entrant } from '../models';
 export class RegistrationService {
 
     constructor(
-        private fireFunctions: AngularFireFunctions
+        private fireFunctions: AngularFireFunctions,
     ) { }
 
     public create(entrant: Entrant): Observable<any> {
-        entrant.quizId = 'GkvkdBEXij68ySCyyfgf';
+        entrant.gameId = 'GkvkdBEXij68ySCyyfgf';
         const createRegistration = this.fireFunctions.httpsCallable<any, any>('register');
         return createRegistration(entrant);
     }

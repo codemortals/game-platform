@@ -2,7 +2,7 @@ import { Result } from './result';
 
 export interface Entrant {
     id?: string;
-    quizId: string;
+    gameId: string;
     alias: string;
     email: string;
     location: string;

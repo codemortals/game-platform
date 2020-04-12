@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class QuizService {
 
@@ -14,7 +14,5 @@ export class QuizService {
     //       .valueChanges()
     //       .subscribe((data) => this.entrants = data);
     //   }
-
-
 
 }

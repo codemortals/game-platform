@@ -17,24 +17,24 @@ import { QuestionComponent } from './question/question.component';
 import { QuizComponent } from './quiz/quiz.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WelcomeComponent,
-    LeaderboardComponent,
-    QuestionComponent,
-    QuizComponent,
-  ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireFunctionsModule,
-    AngularFirestoreModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    BrandButtonModule,
-    BrandInputModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        WelcomeComponent,
+        LeaderboardComponent,
+        QuestionComponent,
+        QuizComponent,
+    ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireFunctionsModule,
+        AngularFirestoreModule,
+        BrowserModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        BrandButtonModule,
+        BrandInputModule,
+    ],
+    providers: [],
+    bootstrap: [ AppComponent ],
 })
-export class AppModule { }
+export class AppModule {}

@@ -6,16 +6,16 @@ import { BrandCoreModule } from '../core/core.module';
 import { BrandInputComponent } from './input.component';
 
 @NgModule({
-  declarations: [
-    BrandInputComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    BrandCoreModule,
-  ],
-  exports: [
-    BrandInputComponent
-  ]
+    declarations: [
+        BrandInputComponent,
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        BrandCoreModule,
+    ],
+    exports: [
+        BrandInputComponent,
+    ],
 })
-export class BrandInputModule { }
+export class BrandInputModule {}

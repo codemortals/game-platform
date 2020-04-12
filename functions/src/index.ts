@@ -16,7 +16,7 @@ export const register = functions.https.onCall((data: Entrant, context): Promise
     console.log(data);
 
     const entrant: Entrant = {
-        quizId: data.quizId,
+        gameId: data.gameId,
         alias: data.alias,
         email: data.email,
         location: data.location,
@@ -32,7 +32,7 @@ export const register = functions.https.onCall((data: Entrant, context): Promise
         })
         .then(() => admin.firestore()
             .collection('quizzes')
-            .doc(entrant.quizId)
+            .doc(entrant.gameId)
             .update({ entrants: admin.firestore.FieldValue.arrayUnion(entrant.id) }))
         .then(() => entrant);
 });

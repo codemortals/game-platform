@@ -41,6 +41,7 @@ export class BrandInputComponent implements AfterViewInit, ControlValueAccessor,
         this.hasChange(this.currentValue);
         this.isTouched();
     }
+
     get value(): string {
         return this.currentValue;
     }

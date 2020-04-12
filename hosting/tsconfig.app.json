@@ -1,15 +1,15 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "..",
-    "baseUrl": ".",
-    "paths": {
-        "@brand": [
-            "./projects/brand/src/public-api.ts"
-        ],
-        "@brand/*": [
-            "./projects/brand/src/lib/*"
-        ]
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "..",
+        "baseUrl": ".",
+        "paths": {
+            "@brand": [
+                "./projects/brand/src/public-api.ts"
+            ],
+            "@brand/*": [
+                "./projects/brand/src/lib/*"
+            ]
+        }
     }
-  }
 }

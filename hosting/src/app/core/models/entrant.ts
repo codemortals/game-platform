@@ -1,6 +1,6 @@
 export interface Entrant {
     id?: string;
-    quizId: string;
+    gameId: string;
     name: string;
     email: string;
     location: string;
