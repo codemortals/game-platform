@@ -1,27 +1,3 @@
-<p>Quiz starts at 9pm GMT</p>
-
-<p>Rounds:</p>
-
-<ol>
-    <li>General Knowledge</li>
-    <li>Hardware / Communications</li>
-    <li>The Picture Round</li>
-    <li>Gaming</li>
-    <li>Software / Programming</li>
-    <li>History</li>
-</ol>
-
 <div class="welcome-register">
-    <form [formGroup]="joinForm" (submit)="enterQuiz()">
-        <h2>Join our Quiz</h2>
-
-        <brand-input type="text" label="Name" formControlName="alias"></brand-input>
-
-        <brand-input type="email" label="Email address" formControlName="email"></brand-input>
-
-        <brand-input type="text" label="Location" formControlName="location"></brand-input>
-
-        <brand-button type="submit" [disabled]="joinForm.pristine || joinForm.invalid">Start Quiz</brand-button>
-
-    </form>
+    <brand-button type="button" (click)="facebookLogin()">Facebook</brand-button>
 </div>

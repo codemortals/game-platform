@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-leaderboard',
+    selector: 'mortal-leaderboard',
     templateUrl: './leaderboard.component.html',
     styleUrls: [ './leaderboard.component.scss' ],
 })

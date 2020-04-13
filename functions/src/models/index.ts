@@ -1,2 +1,1 @@
-export * from './entrant';
-export * from './result';
+export * from './game';

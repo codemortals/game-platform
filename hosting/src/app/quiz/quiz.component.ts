@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Entrant } from '../core/models';
 
 @Component({
-    selector: 'app-quiz',
+    selector: 'mortal-quiz',
     templateUrl: './quiz.component.html',
     styleUrls: [ './quiz.component.scss' ],
 })
