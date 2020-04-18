@@ -1,10 +1,13 @@
-import { Directive, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AuthenticationService } from '../services';
 
 @Directive({
     selector: '[mortalAuthenticated]',
 })
 export class AuthenticatedDirective implements OnInit {
+
+    @Input()
+    public mortalAuthenticated: boolean;
 
     constructor(
         private templateRef: TemplateRef<any>,
@@ -16,7 +19,7 @@ export class AuthenticatedDirective implements OnInit {
         this.authenticationService
             .account
             .subscribe((account) => {
-                if (account) {
+                if (this.mortalAuthenticated === !!account) {
                     this.viewContainerRef.createEmbeddedView(this.templateRef);
                 } else {
                     this.viewContainerRef.clear();

@@ -1,7 +1,22 @@
+@import './variables';
+
 html, body {
     font-family: 'Oxygen', sans-serif;
     font-size: 16px;
-    color: #322e2d;
+    color: $brand-dark-color;
+    height: 100vh;
+}
+
+body {
+    background-color: $brand-light-color;
+    background-image: url(/assets/background.jpg);
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(100px);
+    animation: blur-background 10s infinite cubic-bezier(0.7, 0, 0.7, 0);
+    animation-iteration-count: 1
+
 }
 
 h1, h2, h3 {
@@ -10,16 +25,48 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2.4em;
     font-weight: 300;
 }
 
 h2 {
-    font-size: 1.6em;
+    font-size: 1.75em;
     font-weight: 300;
 }
 
 h3 {
-    font-size: 1.4em;
+    font-size: 1.5em;
     font-weight: 500;
+}
+
+a {
+    color: $brand-primary;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+button {
+    padding: 0.6em;
+    border: none;
+
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+/* ANIMATIONS */
+@keyframes blur-background {
+    from {
+        backdrop-filter: blur(0);
+    }
+    to {
+        backdrop-filter: blur(100px);
+    }
 }

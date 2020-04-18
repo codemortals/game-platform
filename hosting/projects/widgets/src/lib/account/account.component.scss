@@ -1,0 +1,23 @@
+@import '../variables';
+
+.widget-account {
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(to left, transparentize($brand-dark-color, 0.2), transparent);
+
+    img {
+        border: 4px $brand-light-color solid;
+        border-radius: 10%;
+        transform: skewX(10deg);
+        margin: 0.5em 1.5em;
+    }
+
+    .user {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        color: $brand-light-color;
+        align-items: flex-end;
+        justify-content: center;
+    }
+}

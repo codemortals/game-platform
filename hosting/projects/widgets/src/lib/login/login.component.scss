@@ -1,0 +1,18 @@
+.widget-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 1.2em;
+
+    .facebook {
+        font-size: 1.2rem;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        background-color: #4267b2;
+
+        &:hover {
+            background-color: #444950;
+        }
+    }
+}

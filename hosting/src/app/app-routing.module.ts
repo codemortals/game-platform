@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VerifyGuard } from './core/guards/verify.guard';
+import { AuthenticationResolve } from './core/services/authentication.resolve';
 
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { QuizComponent } from './quiz/quiz.component';
+import { GameComponent } from './game.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 const routes: Routes = [
     {
         path: '',
-        canActivate: [ VerifyGuard ],
+        component: GameComponent,
+        resolve: { loggedIn: AuthenticationResolve },
         children: [
             {
                 path: '',

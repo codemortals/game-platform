@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { GameComponent } from './game.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -19,6 +20,7 @@ import { QuizComponent } from './quiz/quiz.component';
 @NgModule({
     declarations: [
         AppComponent,
+        GameComponent,
         WelcomeComponent,
         LeaderboardComponent,
         QuizComponent,

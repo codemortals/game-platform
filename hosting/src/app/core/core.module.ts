@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
-import { AuthenticatedDirective } from './directives/authenticated.directive';
+
 import { BrandButtonModule, BrandInputModule } from '@brand';
+import { WidgetAccountModule, WidgetLoginModule } from '@widget';
+
+import { AuthenticatedDirective } from './directives/authenticated.directive';
 
 @NgModule({
     declarations: [
@@ -14,6 +17,8 @@ import { BrandButtonModule, BrandInputModule } from '@brand';
         AuthenticatedDirective,
         BrandButtonModule,
         BrandInputModule,
+        WidgetAccountModule,
+        WidgetLoginModule,
     ]
 })
 export class CoreModule {

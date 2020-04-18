@@ -28,6 +28,7 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "./node_modules/normalize.css/normalize.css",
                             "src/styles.scss"
                         ],
                         "scripts": []
@@ -114,7 +115,7 @@
             "projectType": "library",
             "root": "projects/brand",
             "sourceRoot": "projects/brand/src",
-            "prefix": "lib",
+            "prefix": "brand",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-ng-packagr:build",
@@ -128,20 +129,44 @@
                         }
                     }
                 },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "projects/brand/src/test.ts",
-                        "tsConfig": "projects/brand/tsconfig.spec.json",
-                        "karmaConfig": "projects/brand/karma.conf.js"
-                    }
-                },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
                             "projects/brand/tsconfig.lib.json",
                             "projects/brand/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
+            }
+        },
+        "widgets": {
+            "projectType": "library",
+            "root": "projects/widgets",
+            "sourceRoot": "projects/widgets/src",
+            "prefix": "widgets",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/widgets/tsconfig.lib.json",
+                        "project": "projects/widgets/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/widgets/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/widgets/tsconfig.lib.json",
+                            "projects/widgets/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**"

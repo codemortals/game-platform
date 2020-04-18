@@ -23,7 +23,6 @@ export class AuthenticationService {
 
     public login(provider: 'facebook'): void {
         const provision = new firebase.auth.FacebookAuthProvider();
-
         this.firebaseAuthentication.auth.signInWithRedirect(provision);
     }
 
@@ -32,9 +31,8 @@ export class AuthenticationService {
             .pipe(
                 map((user) => {
                     if (!user) {
-                        return;
+                        throw new Error('no user');
                     }
-
                     const uid = user.uid;
                     const alias = user.displayName;
                     const email = user.email;
@@ -49,7 +47,7 @@ export class AuthenticationService {
                         .pipe(map(() => account)),
                 ),
                 mergeMap((account) => this.firestore.collection<UserAccount>('accounts').doc<UserAccount>(account.uid).valueChanges()),
-                tap((userAccount) => this.account.next(userAccount)),
+                tap((userAccount) => this.account.next(userAccount))
             );
     }
 

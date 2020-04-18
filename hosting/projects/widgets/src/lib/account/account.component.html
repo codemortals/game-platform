@@ -1,0 +1,7 @@
+<div class="widget-account">
+    <div class="user">
+        <div>{{ account.alias }}</div>
+        <a (click)="performLogout()">Logout</a>
+    </div>
+    <img [src]="account.avatar + '?height=60'">
+</div>

@@ -1,0 +1,13 @@
+<header>
+    <div class="title">
+        <img src="/assets/logo.png">
+        <div>
+            <div>Code Mortals Presents</div>
+            <h1>Game Night</h1>
+        </div>
+    </div>
+    <widget-account *mortalAuthenticated="true" [account]="user" (logout)="logout()"></widget-account>
+    <widget-login *mortalAuthenticated="false" (login)="login($event)"></widget-login>
+</header>
+
+<router-outlet></router-outlet>
