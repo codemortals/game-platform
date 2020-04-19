@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 
 import { Game } from '../models/game';
 
-export const gameEnd = functions
+export const GameEnd = functions
     .region('europe-west2')
     .https
     .onCall(async (data: Game, context): Promise<Game> => {

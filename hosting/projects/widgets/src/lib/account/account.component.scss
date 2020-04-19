@@ -3,6 +3,7 @@
 .widget-account {
     display: flex;
     flex-direction: row;
+    height: 100%;
     background: linear-gradient(to left, transparentize($brand-dark-color, 0.2), transparent);
 
     img {
@@ -13,11 +14,15 @@
     }
 
     .user {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        color: $brand-light-color;
-        align-items: flex-end;
-        justify-content: center;
+        display: none;
+
+        @media all and (min-width: $tablet-viewport) {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            color: $brand-light-color;
+            text-align: end;
+            justify-content: center;
+        }
     }
 }

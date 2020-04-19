@@ -4,10 +4,10 @@ import { AuthenticationService } from './core/services';
 import { UserAccount } from './core/models';
 
 @Component({
-    templateUrl: './game.component.html',
-    styleUrls: [ './game.component.scss' ],
+    templateUrl: './layout.component.html',
+    styleUrls: [ './layout.component.scss' ],
 })
-export class GameComponent implements OnInit {
+export class LayoutComponent implements OnInit {
 
     public user: UserAccount;
 

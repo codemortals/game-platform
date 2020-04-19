@@ -3,12 +3,12 @@
 header {
     display: flex;
     flex-direction: row;
-    background-color: transparentize($brand-dark-color, 0.6);
-    box-shadow: 0 0 2px 2px $brand-dark-color;
+    background-color: transparentize($brand-dark-color, 0.2);
+    box-shadow: 0 0 2px 2px transparentize($brand-dark-color, 0.2);
     height: 5em;
 
-    > * {
-        flex: 1 1 50%;
+    > :first-child {
+        flex: 1;
     }
 
     .title {
@@ -20,7 +20,7 @@ header {
         text-shadow: -2px -2px 0.01em $brand-dark-color;
 
         img {
-            height: 40px;
+            height: 2.5em;
             margin-right: 1em;
         }
 

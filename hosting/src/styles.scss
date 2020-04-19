@@ -2,19 +2,28 @@
 
 html, body {
     font-family: 'Oxygen', sans-serif;
-    font-size: 16px;
+    font-size: 7px;
     color: $brand-dark-color;
     height: 100vh;
+
+    @media all and (min-width: $tablet-viewport) {
+        font-size: 8px;
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        font-size: 9px;
+    }
 }
 
 body {
+    font-size: 2rem;
     background-color: $brand-light-color;
     background-image: url(/assets/background.jpg);
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
-    backdrop-filter: blur(100px);
-    animation: blur-background 10s infinite cubic-bezier(0.7, 0, 0.7, 0);
+    backdrop-filter: blur(20px);
+    animation: blur-background 6s infinite cubic-bezier(0.7, 0, 0.7, 0);
     animation-iteration-count: 1
 
 }
@@ -25,17 +34,17 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 2.4em;
+    font-size: 1.8em;
     font-weight: 300;
 }
 
 h2 {
-    font-size: 1.75em;
+    font-size: 1.5em;
     font-weight: 300;
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 500;
 }
 
@@ -49,8 +58,15 @@ a {
 }
 
 button {
-    padding: 0.6em;
     border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
 
     -webkit-font-smoothing: inherit;
     -moz-osx-font-smoothing: inherit;
@@ -67,6 +83,6 @@ button {
         backdrop-filter: blur(0);
     }
     to {
-        backdrop-filter: blur(100px);
+        backdrop-filter: blur(20px);
     }
 }

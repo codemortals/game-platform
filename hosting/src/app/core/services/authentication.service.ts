@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map, mergeMap, take, tap } from 'rxjs/operators';
-
-import * as firebase from 'firebase';
 
 import { UserAccount } from '../models';
 

@@ -1,2 +1,2 @@
-export * from './entrant';
+export * from './game';
 export * from './user-account';

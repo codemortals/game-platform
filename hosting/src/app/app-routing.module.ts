@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthenticationResolve } from './core/services/authentication.resolve';
+import { AuthenticationResolve } from './core/services';
 
-import { GameComponent } from './game.component';
+import { LayoutComponent } from './layout.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { QuizComponent } from './quiz/quiz.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { GameCreateComponent } from './game/create/create.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: GameComponent,
+        component: LayoutComponent,
         resolve: { loggedIn: AuthenticationResolve },
         children: [
             {
@@ -19,8 +19,11 @@ const routes: Routes = [
                 component: WelcomeComponent,
             },
             {
-                path: 'quiz',
-                component: QuizComponent,
+                path: 'game',
+                children: [{
+                    path: 'create',
+                    component: GameCreateComponent
+                }],
             },
             {
                 path: 'leaderboard',

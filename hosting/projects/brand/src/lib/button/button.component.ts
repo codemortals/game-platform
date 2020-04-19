@@ -1,24 +1,30 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
-    selector: 'brand-button',
+    selector: 'brand-button, button[brand-button], button[brand-button-warning]',
     templateUrl: './button.component.html',
     styleUrls: [ './button.component.scss' ],
+    encapsulation: ViewEncapsulation.None,
 })
-export class BrandButtonComponent implements OnInit {
+export class BrandButtonComponent {
 
-    @Input()
-    public type: 'button' | 'submit' = 'button';
-
-    @Input()
-    public disabled = false;
+    private isDisabled = false;
 
     @HostBinding('class.brand-button')
     true;
 
-    constructor() { }
+    @HostBinding('attr.type')
+    @Input()
+    public type = 'button';
 
-    ngOnInit(): void {
+    @HostBinding('attr.disabled')
+    @Input()
+    get disabled(): string | null {
+        return this.isDisabled ? 'disabled' : null;
+    }
+    set disabled(value: string) {
+        this.isDisabled = coerceBooleanProperty(value);
     }
 
 }

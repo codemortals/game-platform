@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, FUNCTIONS_REGION } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
@@ -12,18 +12,18 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { GameComponent } from './game.component';
+import { LayoutComponent } from './layout.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { QuizComponent } from './quiz/quiz.component';
+import { GameCreateComponent } from './game/create/create.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        GameComponent,
+        LayoutComponent,
         WelcomeComponent,
+        GameCreateComponent,
         LeaderboardComponent,
-        QuizComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebase),
@@ -33,9 +33,11 @@ import { QuizComponent } from './quiz/quiz.component';
         BrowserModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        CoreModule
+        CoreModule,
     ],
-    providers: [],
+    providers: [
+        { provide: FUNCTIONS_REGION, useValue: 'europe-west2' },
+    ],
     bootstrap: [ AppComponent ],
 })
 export class AppModule {}

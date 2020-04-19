@@ -1,0 +1,8 @@
+@import '../variables';
+
+.brand-card {
+    color: $brand-light-color;
+    padding: 2em;
+    border-radius: 6px;
+    background-color: transparentize($brand-dark-color, 0.2);
+}
