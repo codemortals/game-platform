@@ -15,6 +15,9 @@
             ],
             "@widget/*": [
                 "./projects/widgets/src/lib/*"
+            ],
+            "@core/*": [
+                "./src/app/core/*"
             ]
         }
     }

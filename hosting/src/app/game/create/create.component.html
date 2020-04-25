@@ -2,8 +2,7 @@
     <h2>Create a Game</h2>
 
     <form [formGroup]="gameForm" (submit)="createGame()">
-        <label for="name">Name</label>
-        <input id="name" formControlName="name">
+        <brand-input label="Name" type="text" formControlName="name"></brand-input>
 
         <div class="actions">
             <button brand-button-warning (click)="cancel()">Cancel</button>

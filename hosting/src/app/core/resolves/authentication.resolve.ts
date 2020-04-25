@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../services';
 
 @Injectable({
     providedIn: 'root',

@@ -1,6 +1,11 @@
+import * as admin from 'firebase-admin';
+
 export interface Player {
-    id?: string;
+    uid: string;
     score: number;
-    gameId: string;
-    userId: string;
+    status: 'JOINED' | 'READY' | 'LEFT';
+    game: string;
+    user: string;
+    created: admin.firestore.Timestamp;
+    updated: admin.firestore.Timestamp;
 }

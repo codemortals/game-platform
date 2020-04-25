@@ -5,7 +5,7 @@
     margin-bottom: 1em;
 
     label + input, label + textarea {
-        margin-top: 0.25rem;
+        margin-top: 0.25em;
     }
 
     input, textarea {
@@ -13,7 +13,7 @@
         color: $brand-dark-color;
         margin: 0;
         width: 100%;
-        font-size: 1rem;
+        font-size: 1em;
         appearance: none;
         padding: $input-padding ($input-padding * 1.5);
         box-sizing: border-box;

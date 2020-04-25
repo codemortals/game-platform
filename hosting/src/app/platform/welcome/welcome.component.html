@@ -19,7 +19,7 @@
                     <span>Login</span>
                 </div>
             </a>
-            <a class="open-games__entry" [routerLink]="['/', 'game', game.id]" *ngFor="let game of gameList">
+            <a class="open-games__entry" [routerLink]="['/', 'game', 'lobby', game.uid]" *ngFor="let game of gameList">
                 <div class="container">
                     <div>
                         <fa-icon [icon]="['fas', 'gamepad']" size="3x" [fixedWidth]="true"></fa-icon>
@@ -32,6 +32,9 @@
 
     <ng-template #noGames>
         <h2>No open Games</h2>
-        <div>There are no games currently available to join, <a [routerLink]="['/', 'game', 'create']" *mortalAuthenticated="true">create a new one</a><a (click)="login()" *mortalAuthenticated="false">login to start a game</a>.</div>
+        <div>There are no games currently available to join,
+            <a [routerLink]="['/', 'game', 'create']" *mortalAuthenticated="true">create a new one</a>
+            <a (click)="login()" *mortalAuthenticated="false">login to start a game</a>.
+        </div>
     </ng-template>
 </brand-card>

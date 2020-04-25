@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { WidgetAccountComponent } from './account.component';
 import { CommonModule } from '@angular/common';
+
+import { WidgetAccountComponent } from './account.component';
 
 @NgModule({
     declarations: [

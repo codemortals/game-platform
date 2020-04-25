@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { AuthenticationService, GameService } from '../core/services';
-import { Game } from '../core/models';
+import { Game } from '@core/models';
+import { AuthenticationService, GameService } from '@core/services';
 
 @Component({
     templateUrl: './welcome.component.html',
@@ -16,12 +18,20 @@ export class WelcomeComponent implements OnDestroy, OnInit {
     private isDestroyed = new Subject();
 
     constructor(
+        private route: ActivatedRoute,
         private authenticationService: AuthenticationService,
         private gameService: GameService,
     ) { }
 
     public ngOnInit(): void {
-        this.gameService.list().subscribe((games) => this.gameList = games);
+        this.gameList = this.route.snapshot.data.gameData;
+
+        this.gameService
+            .findAll()
+            .pipe(
+                takeUntil(this.isDestroyed),
+            )
+            .subscribe((games) => this.gameList = games);
     }
 
     public ngOnDestroy(): void {

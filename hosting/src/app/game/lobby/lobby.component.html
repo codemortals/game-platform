@@ -1,0 +1,22 @@
+<brand-card>
+    <h2>{{ game.name }}</h2>
+    <div>{{ game.type }}</div>
+</brand-card>
+
+<div class="game">
+    <div class="chat">
+        <brand-card>
+            <h4>Chat ( {{ chat.length }} )</h4>
+            <widget-chat [messages]="chat" (send)="sendMessage($event)"></widget-chat>
+        </brand-card>
+    </div>
+
+    <div class="players">
+        <brand-card>
+            <h4>Players ( {{ players.length }} )</h4>
+            <div class="players__entry" *ngFor="let player of players">
+                <widget-player [player]="player"></widget-player>
+            </div>
+        </brand-card>
+    </div>
+</div>

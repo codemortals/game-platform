@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { GameService } from '../../core/services';
-import { Game } from '../../core/models';
+import { Game } from '@core/models';
+import { GameService } from '@core/services';
 
 @Component({
     templateUrl: './create.component.html',
@@ -21,24 +21,21 @@ export class GameCreateComponent implements OnInit {
 
     public ngOnInit(): void {
         this.gameForm = this.form.group({
-            name: [ undefined, [Validators.required] ],
+            name: [ undefined, [ Validators.required ] ],
         });
     }
 
     public cancel(): void {
-        this.router.navigate(['/'], { replaceUrl: true });
+        this.router.navigate([ '/' ], { replaceUrl: true });
     }
 
     public createGame(): void {
-        const formData = this.gameForm.getRawValue();
-        const game: Game = {
-            name: formData.name,
-        };
+        const gameName = this.gameForm.get('name').value;
 
         this.gameService
-            .create(game)
+            .create(gameName)
             .subscribe(
-                () => this.router.navigate([ '/' ])
+                (game: Game) => this.router.navigate([ '/', 'game', 'lobby', game.uid ]),
             );
     }
 

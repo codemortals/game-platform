@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthenticationResolve } from './core/services';
+import { AuthenticationResolve } from '@core/resolves';
 
 import { LayoutComponent } from './layout.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { GameCreateComponent } from './game/create/create.component';
 
 const routes: Routes = [
     {
@@ -16,18 +13,11 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: WelcomeComponent,
+                loadChildren: () => import('./platform/platform.module').then((m) => m.PlatformModule),
             },
             {
                 path: 'game',
-                children: [{
-                    path: 'create',
-                    component: GameCreateComponent
-                }],
-            },
-            {
-                path: 'leaderboard',
-                component: LeaderboardComponent,
+                loadChildren: () => import('./game/game.module').then((m) => m.GameModule),
             },
         ],
     },

@@ -1,12 +1,14 @@
 <header>
     <div class="title">
-        <img src="/assets/logo.png">
+        <a [routerLink]="['/']">
+            <img src="/assets/logo.png" alt="Code Mortals Logo">
+        </a>
         <div>
             <div>Code Mortals Presents</div>
             <h1>Game Night</h1>
         </div>
     </div>
-    <div class="account">
+    <div class="user">
         <widget-account *mortalAuthenticated="true" [account]="user" (logout)="logout()"></widget-account>
         <widget-login *mortalAuthenticated="false" (login)="login($event)"></widget-login>
     </div>

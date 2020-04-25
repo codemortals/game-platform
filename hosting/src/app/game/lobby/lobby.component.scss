@@ -1,0 +1,57 @@
+@import '../../../variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin: 3em auto;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em -0.5em 0;
+
+    > * {
+        margin: 0.5em;
+    }
+
+    .chat {
+        flex: 1;
+    }
+
+    .players {
+        flex: 0 0 30%;
+
+        &__entry {
+            display: flex;
+            flex-direction: column;
+
+            @media all and (min-width: $tablet-viewport) {
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                > * {
+                    flex: 1 0 50%
+                }
+            }
+
+            @media all and (min-width: $desktop-viewport) {
+                flex-direction: row;
+
+                > * {
+                    flex: 1 0 33%;
+                }
+            }
+
+            @media all and (min-width: $workstation-viewport) {
+                flex-direction: column;
+            }
+        }
+    }
+
+    @media all and (min-width: $workstation-viewport) {
+        display: flex;
+        flex-direction: row;
+    }
+}

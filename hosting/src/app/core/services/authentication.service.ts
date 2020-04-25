@@ -6,14 +6,14 @@ import * as firebase from 'firebase';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map, mergeMap, take, tap } from 'rxjs/operators';
 
-import { UserAccount } from '../models';
+import { User } from '../models';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthenticationService {
 
-    public account: BehaviorSubject<UserAccount> = new BehaviorSubject<UserAccount>(null);
+    public user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
     constructor(
         private firebaseAuthentication: AngularFireAuth,
@@ -25,7 +25,7 @@ export class AuthenticationService {
         this.firebaseAuthentication.auth.signInWithRedirect(provision);
     }
 
-    public checkLoggedIn(): Observable<UserAccount> {
+    public checkLoggedIn(): Observable<User> {
         return this.firebaseAuthentication.authState
             .pipe(
                 map((user) => {
@@ -39,14 +39,14 @@ export class AuthenticationService {
                     return { uid, alias, email, avatar };
                 }),
                 mergeMap(
-                    (account) => from(this.firestore
-                        .collection<UserAccount>('accounts')
-                        .doc<UserAccount>(account.uid)
-                        .set(account, { merge: true }))
-                        .pipe(map(() => account)),
+                    (user) => from(this.firestore
+                        .collection<User>('users')
+                        .doc<User>(user.uid)
+                        .set(user, { merge: true }))
+                        .pipe(map(() => user)),
                 ),
-                mergeMap((account) => this.firestore.collection<UserAccount>('accounts').doc<UserAccount>(account.uid).valueChanges()),
-                tap((userAccount) => this.account.next(userAccount))
+                mergeMap((user) => this.firestore.collection<User>('users').doc<User>(user.uid).valueChanges()),
+                tap((user) => this.user.next(user)),
             );
     }
 
@@ -55,7 +55,7 @@ export class AuthenticationService {
         return from(logout)
             .pipe(
                 take(1),
-                map(() => this.account.next(null)),
+                map(() => this.user.next(null)),
             );
     }
 

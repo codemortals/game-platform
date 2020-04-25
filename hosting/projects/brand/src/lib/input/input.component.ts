@@ -16,7 +16,7 @@ export class BrandInputComponent implements AfterViewInit, ControlValueAccessor,
     public currentValue: string;
     public isDisabled = false;
 
-    private destroyed = new Subject();
+    private isDestroyed = new Subject();
 
     @Input()
     public label = '';
@@ -54,15 +54,15 @@ export class BrandInputComponent implements AfterViewInit, ControlValueAccessor,
 
     public ngAfterViewInit(): void {
         this.control.changes
-            .pipe(takeUntil(this.destroyed))
+            .pipe(takeUntil(this.isDestroyed))
             .subscribe(() => this.isTouched());
 
         setTimeout(() => this.control.setValidator(this.input), 0);
     }
 
     public ngOnDestroy(): void {
-        this.destroyed.next();
-        this.destroyed.complete();
+        this.isDestroyed.next();
+        this.isDestroyed.complete();
     }
 
     public registerOnTouched(fn: () => {}): void {

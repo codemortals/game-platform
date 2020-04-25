@@ -22,13 +22,14 @@ body {
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     backdrop-filter: blur(20px);
     animation: blur-background 6s infinite cubic-bezier(0.7, 0, 0.7, 0);
     animation-iteration-count: 1
 
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     margin: 0 0 1rem;
     font-family: 'Montserrat', sans-serif;
 }
@@ -45,6 +46,10 @@ h2 {
 
 h3 {
     font-size: 1.2em;
+    font-weight: 500;
+}
+
+h3 {
     font-weight: 500;
 }
 

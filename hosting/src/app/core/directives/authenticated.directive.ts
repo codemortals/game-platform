@@ -17,9 +17,9 @@ export class AuthenticatedDirective implements OnInit {
 
     public ngOnInit(): void {
         this.authenticationService
-            .account
-            .subscribe((account) => {
-                if (this.mortalAuthenticated === !!account) {
+            .user
+            .subscribe((user) => {
+                if (this.mortalAuthenticated === !!user) {
                     this.viewContainerRef.createEmbeddedView(this.templateRef);
                 } else {
                     this.viewContainerRef.clear();
