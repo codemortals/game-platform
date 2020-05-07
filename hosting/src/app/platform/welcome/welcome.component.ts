@@ -35,8 +35,8 @@ export class WelcomeComponent implements OnDestroy, OnInit {
     }
 
     public ngOnDestroy(): void {
-        this.isDestroyed.complete();
         this.isDestroyed.next();
+        this.isDestroyed.complete();
     }
 
     public login() {

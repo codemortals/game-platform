@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../../../../../variables';
 
 .widget-chat {
 
@@ -6,7 +6,7 @@
         margin: 1em 0;
         padding: 0 0.5em;
         border: 1px solid $brand-light-color;
-        border-radius: 6px;
+        border-radius: $border-radius;
         max-height: 30em;
         overflow: scroll;
 
@@ -49,7 +49,7 @@
                 appearance: none;
                 padding: $input-padding ($input-padding * 1.5);
                 box-sizing: border-box;
-                border-radius: 6px;
+                border-radius: $border-radius;
                 border: 1px solid $brand-secondary-dark;
                 background-color: $brand-dark-color;
 

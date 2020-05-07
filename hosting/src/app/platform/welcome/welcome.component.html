@@ -19,7 +19,7 @@
                     <span>Login</span>
                 </div>
             </a>
-            <a class="open-games__entry" [routerLink]="['/', 'game', 'lobby', game.uid]" *ngFor="let game of gameList">
+            <a class="open-games__entry" [routerLink]="['/', 'game', game.uid, 'lobby']" *ngFor="let game of gameList">
                 <div class="container">
                     <div>
                         <fa-icon [icon]="['fas', 'gamepad']" size="3x" [fixedWidth]="true"></fa-icon>

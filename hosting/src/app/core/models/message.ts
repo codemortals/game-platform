@@ -1,8 +1,8 @@
-import * as firebase from 'firebase';
+import { firestore } from 'firebase/app';
 
 export interface Message<T> {
     uid: string;
     user: T;
     message: string;
-    created: firebase.firestore.FieldValue;
+    created: firestore.FieldValue;
 }

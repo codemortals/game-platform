@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
+import { firestore } from 'firebase/app';
 
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -15,20 +15,20 @@ import { UserService } from './user.service';
 export class MessageService {
 
     constructor(
-        private firestore: AngularFirestore,
+        private angularFirestore: AngularFirestore,
         private authenticationService: AuthenticationService,
         private userService: UserService,
     ) { }
 
-    public create(gameId: string, content: string): Observable<void> {
+    public create(gameId: string, content: string): Observable<string> {
         const message: Message<string> = {
-            uid: this.firestore.createId(),
+            uid: this.angularFirestore.createId(),
             user: this.authenticationService.user.getValue().uid,
             message: content,
-            created: firebase.firestore.FieldValue.serverTimestamp(),
+            created: firestore.FieldValue.serverTimestamp(),
         };
 
-        const gameRef = this.firestore
+        const gameRef = this.angularFirestore
             .collection<Game>('games')
             .doc<Game>(gameId);
 
@@ -36,14 +36,17 @@ export class MessageService {
             .collection<Message<string>>('messages')
             .doc<Message<string>>(message.uid);
 
-        return from(messageRef.set(message));
+        return from(messageRef.set(message))
+            .pipe(
+                map(() => message.uid),
+            );
     }
 
     public findAll(gameId: string): Observable<Array<Message<User>>> {
-        return this.firestore
+        return this.angularFirestore
             .collection<Game>('games')
             .doc(gameId)
-            .collection<Message<string>>('messages', (ref: firebase.firestore.Query) => ref.orderBy('created'))
+            .collection<Message<string>>('messages', (ref: firestore.Query) => ref.orderBy('created'))
             .stateChanges([ 'added' ])
             .pipe(
                 map((messages) => messages

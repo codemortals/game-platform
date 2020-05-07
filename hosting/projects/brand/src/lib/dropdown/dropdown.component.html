@@ -1,0 +1,25 @@
+<brand-overlay [open]="isOpen"></brand-overlay>
+<div class="brand-dropdown">
+    <brand-label>{{ label }}</brand-label>
+    <div class="brand-dropdown__input" [ngClass]="{ open: isOpen }">
+        <span>{{ currentValue ? currentValue.title : placeholder }}</span>
+        <fa-icon [icon]="['fas', isOpen ? 'chevron-up' : 'chevron-down' ]"></fa-icon>
+    </div>
+
+    <div class="brand-dropdown__options" [ngClass]="{ open: isOpen }">
+        <cdk-virtual-scroll-viewport class="brand-dropdown__options__view" [itemSize]="options.length">
+            <ng-container *cdkVirtualFor="let option of options">
+                <ng-template #defaultTemplate>
+                    <div class="brand-dropdown__options__default">
+                        <div>{{ option.title }}</div>
+                        <div class="caption" *ngIf="option.caption">{{ option.caption }}</div>
+                    </div>
+                </ng-template>
+                <div class="brand-dropdown__options__item" [ngClass]="{ selected: isSelected(option) }" (click)="changeSelection(option)">
+                    <ng-container [ngTemplateOutlet]="optionTemplate ? optionTemplate : defaultTemplate" [ngTemplateOutletContext]="{ option: option }"></ng-container>
+                </div>
+            </ng-container>
+            <ng-content></ng-content>
+        </cdk-virtual-scroll-viewport>
+    </div>
+</div>

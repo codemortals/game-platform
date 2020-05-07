@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
-    selector: 'brand-button, button[brand-button], button[brand-button-warning]',
+    selector: 'brand-button, button[brand-button], button[brand-button-warning], button[brand-button-plain]',
     templateUrl: './button.component.html',
     styleUrls: [ './button.component.scss' ],
     encapsulation: ViewEncapsulation.None,
@@ -20,10 +20,10 @@ export class BrandButtonComponent {
 
     @HostBinding('attr.disabled')
     @Input()
-    get disabled(): string | null {
+    get disabled(): boolean | string | null {
         return this.isDisabled ? 'disabled' : null;
     }
-    set disabled(value: string) {
+    set disabled(value: boolean | string) {
         this.isDisabled = coerceBooleanProperty(value);
     }
 

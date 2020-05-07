@@ -12,7 +12,15 @@ const routes: Routes = [
         component: GameCreateComponent,
     },
     {
-        path: 'lobby/:gameId',
+        path: ':gameId/lobby',
+        component: GameLobbyComponent,
+        resolve: {
+            gameData: GameRetrieveResolve,
+            playerJoin: PlayerJoinResolve,
+        },
+    },
+    {
+        path: ':gameId/play',
         component: GameLobbyComponent,
         resolve: {
             gameData: GameRetrieveResolve,

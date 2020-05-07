@@ -35,7 +35,7 @@ export class GameCreateComponent implements OnInit {
         this.gameService
             .create(gameName)
             .subscribe(
-                (game: Game) => this.router.navigate([ '/', 'game', 'lobby', game.uid ]),
+                (game: Game) => this.router.navigate([ '/', 'game', game.uid, 'lobby' ]),
             );
     }
 

@@ -1,9 +1,12 @@
 <div class="brand-input">
-    <label [for]="name">{{ label }}</label>
-    <ng-container *ngIf="type !== 'textarea'">
-        <input brandInput [(ngModel)]="value" [id]="name" [name]="name" [type]="type" [placeholder]="placeholder" [disabled]="isDisabled">
-    </ng-container>
-    <ng-container *ngIf="type === 'textarea'">
-        <textarea brandInput rows="6" [id]="name" [name]="name" [placeholder]="placeholder" [disabled]="isDisabled"></textarea>
-    </ng-container>
+    <brand-label [for]="name" *ngIf="label">{{ label }}</brand-label>
+    <div class="brand-input__container" [ngClass]="{ focus: hasFocus }">
+        <ng-container *ngIf="type !== 'textarea'">
+            <div class="prefix" *ngIf="prefix">{{ prefix }}</div>
+            <input brandInput [(ngModel)]="value" [id]="name" [name]="name" [type]="type" [placeholder]="placeholder" [disabled]="isDisabled">
+        </ng-container>
+        <ng-container *ngIf="type === 'textarea'">
+            <textarea brandInput rows="6" [(ngModel)]="value" [id]="name" [name]="name" [placeholder]="placeholder" [disabled]="isDisabled"></textarea>
+        </ng-container>
+    </div>
 </div>

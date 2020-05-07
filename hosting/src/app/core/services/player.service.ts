@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
+import { firestore } from 'firebase/app';
 
 import { forkJoin, Observable, of } from 'rxjs';
 import { filter, map, mergeMap } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { UserService } from './user.service';
 export class PlayerService {
 
     constructor(
-        private firestore: AngularFirestore,
+        private angularFirestore: AngularFirestore,
         private authenticationService: AuthenticationService,
         private userService: UserService,
     ) { }
@@ -25,10 +25,10 @@ export class PlayerService {
             user: this.authenticationService.user.getValue().uid,
             score: 0,
             status: 'JOINED',
-            created: firebase.firestore.FieldValue.serverTimestamp(),
+            created: firestore.FieldValue.serverTimestamp(),
         };
 
-        const gameRef = this.firestore
+        const gameRef = this.angularFirestore
             .collection<Game>('games')
             .doc<Game>(gameId);
 
@@ -44,7 +44,7 @@ export class PlayerService {
     }
 
     public findAll(gameId: string): Observable<Array<Player<User>>> {
-        return this.firestore
+        return this.angularFirestore
             .collection<Game>('games')
             .doc(gameId)
             .collection<Message<string>>('players', (ref: firebase.firestore.Query) => ref.orderBy('created'))

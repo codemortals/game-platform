@@ -25,7 +25,7 @@ export class GameService {
         const game: Game = {
             uid: this.firestore.createId(),
             name: gameName,
-            type: 'QUIZ',
+            type: 'quiz',
             host: this.authenticationService.user.getValue().uid,
             status: 'CREATED',
         };

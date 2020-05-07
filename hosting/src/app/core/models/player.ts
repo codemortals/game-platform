@@ -1,8 +1,8 @@
-import * as firebase from 'firebase';
+import { firestore } from 'firebase/app';
 
 export interface Player<T> {
     user: T;
     score: number;
     status: 'JOINED' | 'READY' | 'LEFT';
-    created: firebase.firestore.FieldValue;
+    created: firestore.FieldValue;
 }

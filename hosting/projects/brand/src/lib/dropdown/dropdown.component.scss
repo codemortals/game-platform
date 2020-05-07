@@ -1,0 +1,78 @@
+@import '../../../../../variables';
+
+.brand-dropdown {
+    position: relative;
+    margin-bottom: 1em;
+
+    label + &__input {
+        margin-top: 0.25em;
+    }
+
+    &__input {
+        display: flex;
+        cursor: pointer;
+        color: $brand-dark-color;
+        padding: $input-padding ($input-padding * 1.5);
+        border: 1px solid $input-border-color;
+        border-radius: $border-radius;
+        background-color: $input-background-color;
+
+        > * {
+            flex: 1 1 auto;
+        }
+
+        fa-icon {
+            flex: 0 0 auto;
+        }
+    }
+
+    &__options {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(#{$input-padding} * 2 + 2.75em + 2px);
+        border-radius: $border-radius;
+        border: 1px solid $input-border-color;
+        background-color: $input-background-color;
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 6px 0 rgba(0, 0, 0, 0.26);
+        z-index: 1000;
+
+        &.open {
+            display: block;
+        }
+
+        &__view {
+            min-width: 300px;
+            height: 18rem;
+        }
+
+        &__item {
+            border-radius: $border-radius;
+
+            &:hover {
+                cursor: pointer;
+                background-color: transparentize($input-highlight-color, 0.75);
+            }
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $input-border-color;
+            }
+
+            &.selected {
+                background-color: $input-highlight-color;
+            }
+        }
+
+        &__default {
+            color: $brand-dark-color;
+            padding: 0.75em;
+
+            .caption {
+                color: lighten($brand-dark-color, 20%);
+                font-size: 0.9em;
+            }
+        }
+    }
+
+}

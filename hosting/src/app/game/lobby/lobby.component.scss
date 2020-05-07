@@ -1,4 +1,4 @@
-@import '../../../variables';
+@import '../../../../variables';
 
 :host {
     display: flex;
@@ -7,51 +7,57 @@
     margin: 3em auto;
 }
 
-.game {
+.header {
     display: flex;
     flex-direction: column;
-    margin: 0.5em -0.5em 0;
+
+    > :last-child {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1em;
+
+        > * {
+            flex: 1 1 auto;
+        }
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        flex-direction: row;
+
+        > :first-child {
+            flex: 1;
+        }
+
+        > :last-child {
+            flex-direction: column;
+            flex: 0 1 240px;
+            margin-top: 0;
+        }
+    }
+}
+
+.players {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     > * {
-        margin: 0.5em;
+        flex: 1 0 100%
     }
 
-    .chat {
-        flex: 1;
+    @media all and (min-width: $tablet-viewport) {
+        > * {
+            flex: 1 0 50%
+        }
     }
 
-    .players {
-        flex: 0 0 30%;
-
-        &__entry {
-            display: flex;
-            flex-direction: column;
-
-            @media all and (min-width: $tablet-viewport) {
-                flex-direction: row;
-                flex-wrap: wrap;
-
-                > * {
-                    flex: 1 0 50%
-                }
-            }
-
-            @media all and (min-width: $desktop-viewport) {
-                flex-direction: row;
-
-                > * {
-                    flex: 1 0 33%;
-                }
-            }
-
-            @media all and (min-width: $workstation-viewport) {
-                flex-direction: column;
-            }
+    @media all and (min-width: $desktop-viewport) {
+        > * {
+            flex: 1 0 33%;
         }
     }
 
     @media all and (min-width: $workstation-viewport) {
-        display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
 }

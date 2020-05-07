@@ -10,6 +10,31 @@ service cloud.firestore {
     match /games/{gameId} {
       allow read: if true;
       allow write: if signedIn();
+
+      match /messages/{messagesId} {
+        allow read: if true;
+        allow write: if signedIn();
+      }
+
+      match /players/{playerId} {
+        allow read: if true;
+        allow write: if request.auth.uid == playerId;
+      }
+    }
+
+    match /quizzes/{quizId} {
+      allow read: if true;
+      allow write: if signedIn();
+
+      match /rounds/{roundId} {
+        allow read: if true;
+        allow write: if signedIn();
+
+        match /questions/{questionId} {
+          allow read: if true;
+          allow write: if signedIn();
+        }
+      }
     }
 
     match /users/{userId} {

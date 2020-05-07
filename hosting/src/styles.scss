@@ -1,4 +1,4 @@
-@import './variables';
+@import '../variables';
 
 html, body {
     font-family: 'Oxygen', sans-serif;
@@ -29,6 +29,12 @@ body {
 
 }
 
+section {
+    + section {
+        margin-top: 2em;
+    }
+}
+
 h1, h2, h3, h4 {
     margin: 0 0 1rem;
     font-family: 'Montserrat', sans-serif;
@@ -41,11 +47,13 @@ h1 {
 
 h2 {
     font-size: 1.5em;
+    line-height: 2;
     font-weight: 300;
 }
 
 h3 {
     font-size: 1.2em;
+    line-height: 1.6;
     font-weight: 500;
 }
 

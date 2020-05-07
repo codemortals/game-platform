@@ -1,7 +1,7 @@
 export interface Game {
-    uid?: string;
+    uid: string;
     name: string;
-    type?: 'QUIZ';
-    host?: string;
-    status?: 'CREATED' | 'OPEN' | 'IN_PROGRESS' | 'COMPLETE';
+    type: 'template' | 'quiz';
+    host: string;
+    status: 'CREATED' | 'OPEN' | 'IN_PROGRESS' | 'COMPLETE';
 }

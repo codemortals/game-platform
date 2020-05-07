@@ -14,18 +14,22 @@ import { BrandInputDirective } from '../core/directives/input.directive';
 export class BrandInputComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
 
     public currentValue: string;
+    public hasFocus = false;
     public isDisabled = false;
 
     private isDestroyed = new Subject();
 
     @Input()
-    public label = '';
+    public label: string;
 
     @Input()
     public placeholder = '';
 
     @Input()
-    public name: string;
+    public prefix: number;
+
+    @Input()
+    public name = `input-${ Math.round(Math.random() * 100000) }`;
 
     @Input()
     public type: 'text' | 'email' | 'textarea' = 'text';
@@ -56,6 +60,10 @@ export class BrandInputComponent implements AfterViewInit, ControlValueAccessor,
         this.control.changes
             .pipe(takeUntil(this.isDestroyed))
             .subscribe(() => this.isTouched());
+
+        this.control.focus
+            .pipe(takeUntil(this.isDestroyed))
+            .subscribe((focus) => this.hasFocus = focus);
 
         setTimeout(() => this.control.setValidator(this.input), 0);
     }

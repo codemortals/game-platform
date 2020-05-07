@@ -3,10 +3,25 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { BrandButtonModule, BrandCardModule, BrandInputModule } from '@brand';
-import { WidgetAccountModule, WidgetChatModule, WidgetLoginModule, WidgetPlayerModule } from '@widget';
+import {
+    BrandButtonModule,
+    BrandCardModule,
+    BrandDropdownModule,
+    BrandExpansionModule,
+    BrandInputModule,
+    BrandLabelModule,
+    BrandToggleModule,
+} from '@brand';
 
-import { AuthenticatedDirective } from './directives/authenticated.directive';
+import {
+    WidgetAccountModule,
+    WidgetChatModule,
+    WidgetLayoutModule,
+    WidgetLoginModule,
+    WidgetPlayerModule,
+} from '@widget';
+
+import { AccountDirective, AuthenticatedDirective, DynamicDirective } from './directives';
 
 import {
     fas,
@@ -21,26 +36,32 @@ import {
 
 @NgModule({
     declarations: [
+        AccountDirective,
         AuthenticatedDirective,
+        DynamicDirective,
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        BrandButtonModule,
-        BrandCardModule,
-        BrandInputModule,
     ],
     exports: [
         CommonModule,
         ReactiveFormsModule,
         FontAwesomeModule,
+        AccountDirective,
         AuthenticatedDirective,
+        DynamicDirective,
         BrandButtonModule,
         BrandCardModule,
+        BrandDropdownModule,
+        BrandExpansionModule,
         BrandInputModule,
+        BrandLabelModule,
+        BrandToggleModule,
         WidgetAccountModule,
         WidgetChatModule,
         WidgetLoginModule,
+        WidgetLayoutModule,
         WidgetPlayerModule,
     ],
 })
