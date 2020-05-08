@@ -33,7 +33,7 @@
 
                         <brand-input label="Question" type="textarea" formControlName="title"></brand-input>
 
-                        <brand-label description="Enter the available options that can be chosen to answer the question, a minimum of two options are required and a maximum of eight, of which up to half can be marked as the correct answer.">Choices</brand-label>
+                        <brand-label description="Enter the available options that can be chosen to answer the question, a minimum of two options are required and a maximum of eight.">Choices</brand-label>
                         <div formArrayName="choices" *ngFor="let option of formOptions.controls; let i = index">
                             <div class="choices" [formGroupName]="i">
                                 <brand-input [prefix]="i + 1" formControlName="option"></brand-input>

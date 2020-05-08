@@ -64,19 +64,6 @@ export class LobbyComponent implements OnInit, OnDestroy {
         for (const i of new Array(4)) {
             this.addOption();
         }
-
-        this.questionForm.get('choices')
-            .valueChanges
-            .subscribe(() => {
-                const choices = this.formOptions.controls;
-                const inactive = choices.filter((control) => !control.get('answer').value);
-
-                if (Math.floor(choices.length / 2) < inactive.length) {
-                    choices.forEach((control) => control.get('answer').enable({ emitEvent: false }));
-                } else {
-                    inactive.forEach((control) => control.get('answer').disable({ emitEvent: false }));
-                }
-            });
     }
 
     public ngOnDestroy(): void {
