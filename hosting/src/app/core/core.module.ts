@@ -10,6 +10,7 @@ import {
     BrandExpansionModule,
     BrandInputModule,
     BrandLabelModule,
+    BrandNotificationModule,
     BrandToggleModule,
 } from '@brand';
 
@@ -22,6 +23,7 @@ import {
 } from '@widget';
 
 import { AccountDirective, AuthenticatedDirective, DynamicDirective } from './directives';
+import { CountPipe } from './pipes';
 
 import {
     fas,
@@ -39,6 +41,7 @@ import {
         AccountDirective,
         AuthenticatedDirective,
         DynamicDirective,
+        CountPipe,
     ],
     imports: [
         CommonModule,
@@ -57,12 +60,14 @@ import {
         BrandExpansionModule,
         BrandInputModule,
         BrandLabelModule,
+        BrandNotificationModule,
         BrandToggleModule,
         WidgetAccountModule,
         WidgetChatModule,
         WidgetLoginModule,
         WidgetLayoutModule,
         WidgetPlayerModule,
+        CountPipe,
     ],
 })
 export class CoreModule {

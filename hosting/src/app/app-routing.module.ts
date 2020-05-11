@@ -13,11 +13,15 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren: () => import('./platform/platform.module').then((m) => m.PlatformModule),
+                loadChildren: () => import('./platform/main/main.module').then((m) => m.MainModule),
             },
             {
-                path: 'game',
-                loadChildren: () => import('./game/game.module').then((m) => m.GameModule),
+                path: 'games',
+                loadChildren: () => import('./platform/games/games.module').then((m) => m.GamesModule),
+            },
+            {
+                path: 'stats',
+                loadChildren: () => import('./platform/stats/stats.module').then((m) => m.StatsModule),
             },
         ],
     },

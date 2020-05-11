@@ -1,0 +1,63 @@
+@import '../../../../../variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 3em);
+    margin: 3em auto;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+
+    > :last-child {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1em;
+
+        > * {
+            flex: 1 1 auto;
+        }
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        flex-direction: row;
+
+        > :first-child {
+            flex: 1;
+        }
+
+        > :last-child {
+            flex-direction: column;
+            flex: 0 1 240px;
+            margin-top: 0;
+        }
+    }
+}
+
+.players {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > * {
+        flex: 1 0 100%
+    }
+
+    @media all and (min-width: $tablet-viewport) {
+        > * {
+            flex: 1 0 50%
+        }
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        > * {
+            flex: 1 0 33%;
+        }
+    }
+
+    @media all and (min-width: $workstation-viewport) {
+        flex-direction: column;
+    }
+}

@@ -7,4 +7,5 @@ export * from './lib/dropdown/dropdown.module';
 export * from './lib/expansion/expansion.module';
 export * from './lib/input/input.module';
 export * from './lib/label/label.module';
+export * from './lib/notification/notification.module';
 export * from './lib/toggle/toggle.module';

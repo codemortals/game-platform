@@ -3,7 +3,7 @@ import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore'
 import { firestore } from 'firebase/app';
 
 import { forkJoin, Observable, of } from 'rxjs';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 
 import { Game, Message, Player, User } from '../models';
 import { AuthenticationService } from './authentication.service';
@@ -38,8 +38,12 @@ export class PlayerService {
 
         return playerRef.get()
             .pipe(
-                filter((entry) => !entry.exists),
-                mergeMap(() => playerRef.set(player, { merge: true })),
+                mergeMap((entry) => {
+                    if (entry.exists) {
+                        return of(null);
+                    }
+                    return playerRef.set(player, { merge: true });
+                }),
             );
     }
 

@@ -1,0 +1,23 @@
+@import '../../../../../variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    margin: 3em 1em;
+
+    @media all and (min-width: $tablet-viewport) {
+        margin: 4em auto;
+        max-width: 500px;
+    }
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    margin: 1em -0.5em 0;
+
+    > * {
+        flex: 1 1 auto;
+        margin: 0 0.5em;
+    }
+}

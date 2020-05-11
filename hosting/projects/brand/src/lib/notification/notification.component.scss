@@ -1,0 +1,32 @@
+@import '../../../../../variables';
+
+.brand-notification {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    padding: 1em;
+    color: $brand-light-color;
+    border-radius: $border-radius;
+    border: 2px solid $brand-primary-dark;
+    background-color: transparentize($brand-primary, 0.8);
+
+    &.success {
+        border-color: $brand-secondary-dark;
+    }
+
+    &.warning {
+        border-color: $brand-warning-dark;
+    }
+
+    &.error {
+        border-color: $brand-error-dark;
+    }
+
+    &__header {
+
+    }
+
+    &__content {
+        font-size: 4em;
+    }
+}

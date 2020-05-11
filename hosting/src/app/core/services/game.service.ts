@@ -38,6 +38,14 @@ export class GameService {
             .pipe(map(() => game));
     }
 
+    public start(gameId: string): Observable<void> {
+        const gameRef = this.firestore
+            .collection<Game>('games')
+            .doc<Game>(gameId);
+
+        return from(gameRef.update({ status: 'IN_PROGRESS' }));
+    }
+
     public findAll(): Observable<Array<Game>> {
         return this.firestore
             .collection<Game>('games')
