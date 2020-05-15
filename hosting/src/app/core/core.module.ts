@@ -3,7 +3,13 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { AccountDirective, AuthenticatedDirective, DynamicDirective, HostDirective } from './directives';
+import {
+    AccountDirective,
+    AuthenticatedDirective,
+    DynamicDirective,
+    HostDirective,
+    MarkdownDirective,
+} from './directives';
 import { CountPipe } from './pipes';
 
 import {
@@ -34,6 +40,7 @@ import {
         AuthenticatedDirective,
         DynamicDirective,
         HostDirective,
+        MarkdownDirective,
         CountPipe,
     ],
     imports: [
@@ -48,6 +55,7 @@ import {
         AuthenticatedDirective,
         DynamicDirective,
         HostDirective,
+        MarkdownDirective,
         CountPipe,
 
         BrandButtonModule,

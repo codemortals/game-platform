@@ -4,7 +4,7 @@
 
         <ng-container [ngSwitch]="question.type">
             <img *ngSwitchCase="'image'" [src]="question.title" />
-            <h2 *ngSwitchDefault>{{ question.title }}</h2>
+            <h2 *ngSwitchDefault [gameMarkdown]="question.title"></h2>
         </ng-container>
     </div>
 

@@ -31,7 +31,9 @@
                             "./node_modules/normalize.css/normalize.css",
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "./node_modules/marked/lib/marked.js"
+                        ]
                     },
                     "configurations": {
                         "develop": {
@@ -142,7 +144,7 @@
                     }
                 }
             }
-        },
+        }
     },
     "defaultProject": "game-platform"
 }
