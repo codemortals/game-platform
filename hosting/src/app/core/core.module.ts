@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { AccountDirective, AuthenticatedDirective, DynamicDirective, HostDirective } from './directives';
+import { CountPipe } from './pipes';
+
 import {
     BrandButtonModule,
     BrandCardModule,
@@ -13,17 +16,6 @@ import {
     BrandNotificationModule,
     BrandToggleModule,
 } from '@brand';
-
-import {
-    WidgetAccountModule,
-    WidgetChatModule,
-    WidgetLayoutModule,
-    WidgetLoginModule,
-    WidgetPlayerModule,
-} from '@widget';
-
-import { AccountDirective, AuthenticatedDirective, DynamicDirective } from './directives';
-import { CountPipe } from './pipes';
 
 import {
     fas,
@@ -41,6 +33,7 @@ import {
         AccountDirective,
         AuthenticatedDirective,
         DynamicDirective,
+        HostDirective,
         CountPipe,
     ],
     imports: [
@@ -54,6 +47,9 @@ import {
         AccountDirective,
         AuthenticatedDirective,
         DynamicDirective,
+        HostDirective,
+        CountPipe,
+
         BrandButtonModule,
         BrandCardModule,
         BrandDropdownModule,
@@ -62,12 +58,6 @@ import {
         BrandLabelModule,
         BrandNotificationModule,
         BrandToggleModule,
-        WidgetAccountModule,
-        WidgetChatModule,
-        WidgetLoginModule,
-        WidgetLayoutModule,
-        WidgetPlayerModule,
-        CountPipe,
     ],
 })
 export class CoreModule {

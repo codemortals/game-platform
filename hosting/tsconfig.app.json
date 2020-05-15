@@ -10,11 +10,8 @@
             "@brand/*": [
                 "./projects/brand/src/lib/*"
             ],
-            "@widget": [
-                "./projects/widgets/src/public-api.ts"
-            ],
-            "@widget/*": [
-                "./projects/widgets/src/lib/*"
+            "@widgets/*": [
+                "./src/app/widgets/*"
             ],
             "@core/*": [
                 "./src/app/core/*"

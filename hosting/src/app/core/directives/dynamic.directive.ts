@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-    selector: '[mortalDynamic]',
+    selector: '[gameDynamic]',
 })
 export class DynamicDirective {
 

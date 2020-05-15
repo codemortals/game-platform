@@ -3,7 +3,7 @@
         <h2>Available Games</h2>
 
         <div class="open-games">
-            <a *mortalAuthenticated="true" class="open-games__entry" [routerLink]="['/', 'games', 'create']">
+            <a *gameAuthenticated="true" class="open-games__entry" [routerLink]="['/', 'games', 'create']">
                 <div class="container">
                     <div>
                         <fa-icon [icon]="['fas', 'plus']" size="2x" [fixedWidth]="true"></fa-icon>
@@ -11,7 +11,7 @@
                     <span>Start a Game</span>
                 </div>
             </a>
-            <a *mortalAuthenticated="false" class="open-games__entry" (click)="login()">
+            <a *gameAuthenticated="false" class="open-games__entry" (click)="login()">
                 <div class="container">
                     <div>
                         <fa-icon [icon]="['fab', 'facebook']" size="3x" [fixedWidth]="true"></fa-icon>
@@ -33,8 +33,8 @@
     <ng-template #noGames>
         <h2>No open Games</h2>
         <div>There are no games currently available to join,
-            <a [routerLink]="['/', 'games', 'create']" *mortalAuthenticated="true">create a new one</a>
-            <a (click)="login()" *mortalAuthenticated="false">login to start a game</a>.
+            <a [routerLink]="['/', 'games', 'create']" *gameAuthenticated="true">create a new one</a>
+            <a (click)="login()" *gameAuthenticated="false">login to start a game</a>.
         </div>
     </ng-template>
 </brand-card>

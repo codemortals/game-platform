@@ -1,0 +1,32 @@
+@import '../../../../../variables';
+
+.question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    margin: 1em -1em;
+    justify-content: center;
+
+    > * {
+        margin: 1em;
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        > * {
+            flex: 0 1 calc(50% - 2em);
+        }
+    }
+}

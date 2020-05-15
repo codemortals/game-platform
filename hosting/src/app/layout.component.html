@@ -9,8 +9,8 @@
         </div>
     </div>
     <div class="user">
-        <widget-account *mortalAuthenticated="true" [account]="user" (logout)="logout()"></widget-account>
-        <widget-login *mortalAuthenticated="false" (login)="login($event)"></widget-login>
+        <game-account *gameAuthenticated="true" [account]="user" (logout)="logout()"></game-account>
+        <game-login *gameAuthenticated="false" (login)="login($event)"></game-login>
     </div>
 </header>
 

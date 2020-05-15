@@ -22,8 +22,8 @@ export interface Round {
 
 export interface Quiz {
     uid: string;
-    currentRound?: number;
-    currentQuestion?: number;
+    currentRound?: string;
+    currentQuestion?: string;
     rounds?: Array<Round>;
     roundList?: Array<string> | firestore.FieldValue;
 }

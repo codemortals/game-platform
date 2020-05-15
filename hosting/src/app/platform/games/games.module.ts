@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { CoreModule } from '@core/core.module';
+import { WidgetsModule } from '@widgets/widgets.module';
 
 import { GameCreateComponent } from './create/create.component';
 import { GameLobbyComponent } from './lobby/lobby.component';
@@ -16,6 +17,7 @@ import { GamesRouting } from './games.routing';
     ],
     imports: [
         CoreModule,
+        WidgetsModule,
         GamesRouting,
     ],
 })

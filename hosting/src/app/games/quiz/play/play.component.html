@@ -1,4 +1,23 @@
-<brand-card>
-    <pre>{{ game | json }}</pre>
-    <pre>{{ quiz | json }}</pre>
-</brand-card>
+<game-layout-column>
+    <div gameColumn="one">
+        <brand-card>
+            <ng-container *ngIf="!quiz || !quiz.currentQuestion; else showQuestion">
+                <game-summary [rounds]="rounds" [currentRound]="round"></game-summary>
+            </ng-container>
+
+            <ng-template #showQuestion>
+                <game-question [round]="round" [question]="question"></game-question>
+            </ng-template>
+        </brand-card>
+
+        <div class="host" *gameHost="game.host">
+            <game-controls [quiz]="quiz" [currentRound]="round"></game-controls>
+        </div>
+    </div>
+
+    <div gameColumn="two">
+        <brand-card>
+            <game-chat [game]="game"></game-chat>
+        </brand-card>
+    </div>
+</game-layout-column>

@@ -12,7 +12,7 @@
             },
             "root": "",
             "sourceRoot": "src",
-            "prefix": "mortal",
+            "prefix": "game",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
@@ -135,38 +135,6 @@
                         "tsConfig": [
                             "projects/brand/tsconfig.lib.json",
                             "projects/brand/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
-                    }
-                }
-            }
-        },
-        "widgets": {
-            "projectType": "library",
-            "root": "projects/widgets",
-            "sourceRoot": "projects/widgets/src",
-            "prefix": "widgets",
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
-                    "options": {
-                        "tsConfig": "projects/widgets/tsconfig.lib.json",
-                        "project": "projects/widgets/ng-package.json"
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "projects/widgets/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "projects/widgets/tsconfig.lib.json",
-                            "projects/widgets/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**"

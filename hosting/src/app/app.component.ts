@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'mortal-root',
+    selector: 'game-root',
     template: '<router-outlet></router-outlet>',
 })
 export class AppComponent {

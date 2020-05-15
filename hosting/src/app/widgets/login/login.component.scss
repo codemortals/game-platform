@@ -1,0 +1,22 @@
+@import '../../../../variables';
+
+.widget-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    padding-right: 1.2em;
+
+    .facebook {
+        color: #fff;
+        padding: 0.5em 1em;
+        text-align: center;
+        border-radius: $border-radius;
+        background-color: #4267b2;
+
+        &:hover {
+            background-color: #444950;
+        }
+    }
+}

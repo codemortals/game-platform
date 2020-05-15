@@ -4,5 +4,5 @@ export interface Message<T> {
     uid: string;
     user: T;
     message: string;
-    created: firestore.FieldValue;
+    created: firestore.Timestamp | firestore.FieldValue;
 }

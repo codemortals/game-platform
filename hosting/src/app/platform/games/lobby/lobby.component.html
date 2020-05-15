@@ -5,7 +5,7 @@
                 <h2>{{ game.name }}</h2>
                 <div>{{ game.type }}</div>
             </div>
-            <div *mortalAccount="game.host">
+            <div *gameHost="game.host">
                 <button brand-button-plain (click)="toggleConfig()">
                     <span *ngIf="showConfig">Back to Lobby</span>
                     <span *ngIf="!showConfig">Edit Game</span>
@@ -22,23 +22,23 @@
 </brand-notification>
 
 <section>
-    <ng-template mortalDynamic></ng-template>
+    <ng-template gameDynamic></ng-template>
 
-    <widget-layout-column *ngIf="!showConfig">
-        <div widgetColumn="one">
+    <game-layout-column *ngIf="!showConfig">
+        <div gameColumn="one">
             <brand-card>
                 <h4>Chat ( {{ chat.length }} )</h4>
-                <widget-chat [messages]="chat" (send)="sendMessage($event)"></widget-chat>
+                <game-chat [game]="game"></game-chat>
             </brand-card>
         </div>
 
-        <div widgetColumn="two">
+        <div gameColumn="two">
             <brand-card>
                 <h4>Players ( {{ players.length }} )</h4>
                 <div class="players" *ngFor="let player of players">
-                    <widget-player [player]="player"></widget-player>
+                    <game-player [player]="player"></game-player>
                 </div>
             </brand-card>
         </div>
-    </widget-layout-column>
+    </game-layout-column>
 </section>

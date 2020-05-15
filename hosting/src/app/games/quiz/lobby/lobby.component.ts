@@ -7,12 +7,17 @@ import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { Question, Round } from '../quiz';
-import { QuizService } from '../quiz.service';
+
+import { RoundService } from '../round.service';
+import { QuestionService } from '../question.service';
 
 @Component({
     templateUrl: './lobby.component.html',
     styleUrls: [ './lobby.component.scss' ],
-    providers: [ QuizService ],
+    providers: [
+        RoundService,
+        QuestionService
+    ]
 })
 export class LobbyComponent implements OnInit, OnDestroy {
 
@@ -29,12 +34,13 @@ export class LobbyComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private forms: FormBuilder,
-        private quizService: QuizService,
+        private roundService: RoundService,
+        private questionService: QuestionService,
     ) { }
 
     public ngOnInit(): void {
-        this.quizService
-            .findRounds(this.route.snapshot.params.gameId)
+        this.roundService
+            .findAll(this.route.snapshot.params.gameId)
             .pipe(takeUntil(this.isDestroyed))
             .subscribe((rounds) => {
                 this.rounds = [
@@ -107,8 +113,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
         const gameId = this.route.snapshot.params.gameId;
         const round = this.roundForm.getRawValue();
 
-        this.quizService
-            .createRound(gameId, round.title, round.description)
+        this.roundService
+            .create(gameId, round.title, round.description)
             .subscribe(
                 () => this.roundForm.reset(),
             );
@@ -119,8 +125,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
         const question = this.questionForm.getRawValue();
         const roundId = question.round.id;
 
-        this.quizService
-            .createQuestion(gameId, roundId, question.title, question.type.id, question.choices)
+        this.questionService
+            .create(gameId, roundId, question.title, question.type.id, question.choices)
             .subscribe(
                 () => this.questionForm.reset({ type: question.type }),
             );
@@ -129,7 +135,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     public loadQuestions(round: Round): void {
         const gameId = this.route.snapshot.params.gameId;
 
-        this.quizService.findQuestions(gameId, round.uid)
+        this.questionService.findAll(gameId, round.uid)
             .pipe(
                 take(1),
             )

@@ -1,0 +1,8 @@
+<div class="widget-layout-column" [ngClass]="{ reverse: reverse }">
+    <div class="col1">
+        <ng-content select="[gameColumn=one]"></ng-content>
+    </div>
+    <div class="col2">
+        <ng-content select="[gameColumn=two]"></ng-content>
+    </div>
+</div>

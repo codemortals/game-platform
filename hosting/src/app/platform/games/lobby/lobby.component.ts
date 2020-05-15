@@ -6,7 +6,7 @@ import { filter, map, takeUntil, tap } from 'rxjs/operators';
 
 import { DynamicDirective } from '@core/directives';
 import { Game, Message, Player, User } from '@core/models';
-import { GameService, MessageService, PlayerService } from '@core/services';
+import { GameService, PlayerService } from '@core/services';
 
 @Component({
     templateUrl: './lobby.component.html',
@@ -31,7 +31,6 @@ export class GameLobbyComponent implements OnDestroy, OnInit {
         private router: Router,
         private gameService: GameService,
         private playerService: PlayerService,
-        private messageService: MessageService,
         private componentFactoryResolver: ComponentFactoryResolver,
     ) { }
 
@@ -54,22 +53,11 @@ export class GameLobbyComponent implements OnDestroy, OnInit {
             .findAll(this.route.snapshot.params.gameId)
             .pipe(takeUntil(this.isDestroyed))
             .subscribe((players) => this.players = [ ...this.players, ...players ]);
-
-        this.messageService
-            .findAll(this.route.snapshot.params.gameId)
-            .pipe(takeUntil(this.isDestroyed))
-            .subscribe((messages) => this.chat = [ ...this.chat, ...messages ]);
     }
 
     public ngOnDestroy(): void {
         this.isDestroyed.next();
         this.isDestroyed.complete();
-    }
-
-    public sendMessage(message: string): void {
-        this.messageService
-            .create(this.game.uid, message)
-            .subscribe();
     }
 
     public async toggleConfig(): Promise<void> {

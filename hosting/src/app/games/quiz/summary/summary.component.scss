@@ -1,0 +1,35 @@
+@import '../../../../../variables';
+
+.holding {
+    margin: 2em;
+    font-size: 2em;
+    text-align: center;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 1em 0;
+
+        .prefix {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1em;
+            width: 40px;
+            height: 40px;
+            color: $brand-dark-color;
+            border-radius: 50%;
+            background-color: $brand-primary;
+        }
+
+        h4 {
+            margin: 0;
+        }
+    }
+}

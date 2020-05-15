@@ -2,12 +2,12 @@ import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angula
 import { AuthenticationService } from '../services';
 
 @Directive({
-    selector: '[mortalAccount]',
+    selector: '[gameAccount]',
 })
 export class AccountDirective implements OnInit {
 
     @Input()
-    public mortalAccount: string;
+    public gameAccount: string;
 
     constructor(
         private templateRef: TemplateRef<any>,
@@ -19,7 +19,7 @@ export class AccountDirective implements OnInit {
         this.authenticationService
             .user
             .subscribe((user) => {
-                if (this.mortalAccount === user.uid) {
+                if (this.gameAccount === user.uid) {
                     this.viewContainerRef.createEmbeddedView(this.templateRef);
                 } else {
                     this.viewContainerRef.clear();

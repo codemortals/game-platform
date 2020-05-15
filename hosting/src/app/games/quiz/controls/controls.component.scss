@@ -1,0 +1,13 @@
+.controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__overview {
+        flex: 1;
+    }
+
+    &__actions {
+        flex: 0 1 auto;
+    }
+}

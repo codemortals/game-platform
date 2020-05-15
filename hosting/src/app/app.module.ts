@@ -7,6 +7,7 @@ import { AngularFireFunctionsModule, FUNCTIONS_REGION } from '@angular/fire/func
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { CoreModule } from '@core/core.module';
+import { WidgetsModule } from '@widgets/widgets.module';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout.component';
@@ -28,6 +29,7 @@ import { environment } from '../environments/environment';
         BrowserAnimationsModule,
         AppRoutingModule,
         CoreModule,
+        WidgetsModule,
     ],
     providers: [
         { provide: FUNCTIONS_REGION, useValue: 'europe-west2' },

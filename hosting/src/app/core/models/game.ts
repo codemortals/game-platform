@@ -1,7 +1,9 @@
+import { firestore } from 'firebase/app';
+
 export interface Game {
     uid: string;
     name: string;
     type: 'template' | 'quiz';
-    host: string;
+    host: Array<string> | firestore.FieldValue;
     status: 'CREATED' | 'OPEN' | 'IN_PROGRESS' | 'COMPLETE';
 }
