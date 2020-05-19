@@ -3,24 +3,6 @@
         <div class="manage">
             <div class="manage__row">
                 <brand-card>
-                    <h2>Create Round</h2>
-
-                    <form [formGroup]="roundForm" (submit)="saveRound()">
-
-                        <brand-input label="Round name" formControlName="title"></brand-input>
-
-                        <brand-input label="Description" type="textarea" formControlName="description"></brand-input>
-
-                        <div class="actions">
-                            <button brand-button type="submit" [disabled]="this.roundForm.pristine || this.roundForm.invalid">Create Round</button>
-                        </div>
-
-                    </form>
-                </brand-card>
-            </div>
-
-            <div class="manage__row">
-                <brand-card>
                     <h2>Create Question</h2>
 
                     <form [formGroup]="questionForm" *ngIf="availableRounds.length; else noRounds" (submit)="saveQuestion()">
@@ -34,8 +16,8 @@
                         <brand-label description="Enter the available options that can be chosen to answer the question, a minimum of two options are required and a maximum of eight.">Choices</brand-label>
                         <div formArrayName="choices" *ngFor="let option of formOptions.controls; let i = index">
                             <div class="choices" [formGroupName]="i">
-                                <brand-input [prefix]="i + 1" formControlName="option"></brand-input>
-                                <brand-toggle formControlName="answer"></brand-toggle>
+                                <brand-input [prefix]="i + 1" formControlName="text"></brand-input>
+                                <brand-toggle formControlName="correct"></brand-toggle>
                                 <div>
                                     <button brand-button-warning (click)="removeOption(i)" [disabled]="formOptions.length <= 2">
                                         <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
@@ -52,6 +34,24 @@
                     </form>
 
                     <ng-template #noRounds>Please create one or more rounds to enable adding questions.</ng-template>
+                </brand-card>
+            </div>
+
+            <div class="manage__row">
+                <brand-card>
+                    <h2>Create Round</h2>
+
+                    <form [formGroup]="roundForm" (submit)="saveRound()">
+
+                        <brand-input label="Round name" formControlName="title"></brand-input>
+
+                        <brand-input label="Description" type="textarea" formControlName="description"></brand-input>
+
+                        <div class="actions">
+                            <button brand-button type="submit" [disabled]="this.roundForm.pristine || this.roundForm.invalid">Create Round</button>
+                        </div>
+
+                    </form>
                 </brand-card>
             </div>
         </div>

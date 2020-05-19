@@ -5,7 +5,7 @@ import { firestore } from 'firebase/app';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Question, Quiz, Round } from './quiz';
+import { Choice, Question, Quiz, Round } from './quiz.model';
 
 @Injectable()
 export class QuestionService {
@@ -14,10 +14,13 @@ export class QuestionService {
         private angularFirestore: AngularFirestore,
     ) { }
 
-    public create(quizId: string, roundId: string, title: string, type: string, choices: Array<{ option: string, answer: boolean }>): Observable<string> {
+    public create(quizId: string, roundId: string, title: string, type: string, choiceData: Array<{ text: string, answer: boolean }>): Observable<string> {
+        const choices: Array<Choice> = choiceData.map((choice) => ({ uid: this.angularFirestore.createId(), ...choice }));
+        const choiceList = choices.map((choice) => ({ uid: choice.uid, text: choice.text }));
+
         const question: Question = {
             uid: this.angularFirestore.createId(),
-            title, type, choices,
+            title, type, choiceList,
             created: firestore.FieldValue.serverTimestamp(),
         };
 
@@ -37,6 +40,14 @@ export class QuestionService {
 
         batch.update(roundDoc.ref, { questionList: firestore.FieldValue.arrayUnion(question.uid) });
         batch.set(questionDoc.ref, question);
+
+        choices.map((choice) => {
+            const choiceDoc = questionDoc
+                .collection<Choice>('choices')
+                .doc<Choice>(choice.uid);
+
+            batch.set(choiceDoc.ref, choice);
+        });
 
         return from(batch.commit())
             .pipe(

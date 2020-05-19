@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { from, Observable } from 'rxjs';
 
-import { Quiz } from './quiz';
+import { Quiz } from './quiz.model';
 
 @Injectable()
 export class QuizService {

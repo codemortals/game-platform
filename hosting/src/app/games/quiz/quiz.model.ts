@@ -1,13 +1,24 @@
 import { firestore } from 'firebase/app';
 
+export interface Answer {
+    userId: string;
+    response: Array<string>;
+    created: firestore.Timestamp | firestore.FieldValue;
+}
+
+export interface Choice {
+    uid: string;
+    text: string;
+    correct?: boolean;
+}
+
 export interface Question {
     uid: string;
     title: string;
     type: string;
-    choices: Array<{
-        option: string;
-        answer: boolean;
-    }>;
+    choices?: Array<Choice>;
+    choiceList: Array<Choice>;
+    answers?: Array<Answer>;
     created: firestore.Timestamp | firestore.FieldValue;
 }
 

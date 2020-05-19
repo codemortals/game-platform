@@ -33,6 +33,16 @@ service cloud.firestore {
         match /questions/{questionId} {
           allow read: if true;
           allow write: if signedIn();
+
+          match /choices/{choiceId} {
+            allow read: if true;
+            allow write: if signedIn();
+          }
+
+          match /answers/{answerId} {
+            allow read: if true;
+            allow write: if signedIn();
+          }
         }
       }
     }

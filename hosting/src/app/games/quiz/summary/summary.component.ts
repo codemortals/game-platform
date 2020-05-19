@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Round } from '../quiz';
+
+import { Round } from '../quiz.model';
 
 @Component({
     selector: 'game-summary',

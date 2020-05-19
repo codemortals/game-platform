@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { QuizService } from '../quiz.service';
-import { Quiz, Round } from '../quiz';
+import { Quiz, Round } from '../quiz.model';
 
 @Component({
     selector: 'game-controls',

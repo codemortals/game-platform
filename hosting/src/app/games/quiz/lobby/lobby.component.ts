@@ -6,7 +6,7 @@ import { DropdownOption } from '@brand/dropdown/dropdown-option';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { Question, Round } from '../quiz';
+import { Question, Round } from '../quiz.model';
 
 import { RoundService } from '../round.service';
 import { QuestionService } from '../question.service';
@@ -95,14 +95,14 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
     public createOption(): FormGroup {
         return this.forms.group({
-            option: [ undefined, [ Validators.required ] ],
-            answer: [ { value: false, disabled: false }, [] ],
+            text: [ undefined, [ Validators.required ] ],
+            correct: [ { value: false, disabled: false }, [] ],
         });
     }
 
     private checkQuestion(control: AbstractControl) {
         const choices = control.get('choices').value;
-        const valid = choices.reduce((isValid, choice) => isValid || choice.answer, false);
+        const valid = choices.reduce((isValid, choice) => isValid || choice.correct, false);
 
         if (!valid) {
             control.get('choices').setErrors({ answer: true });

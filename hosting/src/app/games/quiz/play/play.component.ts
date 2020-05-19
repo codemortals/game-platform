@@ -6,7 +6,7 @@ import { filter, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
 
 import { Game } from '@core/models';
 
-import { Question, Quiz, Round } from '../quiz';
+import { Question, Quiz, Round } from '../quiz.model';
 
 import { QuizService } from '../quiz.service';
 import { RoundService } from '../round.service';

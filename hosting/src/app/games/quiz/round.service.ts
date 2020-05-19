@@ -5,7 +5,7 @@ import { firestore } from 'firebase/app';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Quiz, Round } from './quiz';
+import { Quiz, Round } from './quiz.model';
 
 @Injectable()
 export class RoundService {

@@ -9,8 +9,13 @@
     </div>
 
     <div class="choices">
-        <div *ngFor="let choice of question.choices">
-            <button brand-button>{{ choice.option }}</button>
+        <div *ngFor="let choice of question.choiceList">
+            <button [ngClass]="{ selected: isSelected(choice) }" (click)="toggleChoice(choice)">{{ choice.text }}</button>
         </div>
     </div>
+
+    <button brand-button (click)="saveAnswer()" [disabled]="!response.length || saved">
+        <span *ngIf="!saved">Save Answer</span>
+        <span *ngIf="saved">Saved</span>
+    </button>
 </ng-container>
