@@ -4,6 +4,6 @@ export interface Game {
     uid: string;
     name: string;
     type: 'template' | 'quiz';
-    host: Array<string> | firestore.FieldValue;
+    hosts: Array<string> | firestore.FieldValue;
     status: 'CREATED' | 'OPEN' | 'IN_PROGRESS' | 'COMPLETE';
 }

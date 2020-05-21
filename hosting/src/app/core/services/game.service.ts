@@ -27,7 +27,7 @@ export class GameService {
             uid: this.angularFirestore.createId(),
             name: gameName,
             type: 'quiz',
-            host: firestore.FieldValue.arrayUnion(this.authenticationService.user.getValue().uid),
+            hosts: firestore.FieldValue.arrayUnion(this.authenticationService.user.getValue().uid),
             status: 'CREATED',
         };
 

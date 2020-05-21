@@ -14,13 +14,13 @@ export class QuestionService {
         private angularFirestore: AngularFirestore,
     ) { }
 
-    public create(quizId: string, roundId: string, title: string, type: string, choiceData: Array<{ text: string, answer: boolean }>): Observable<string> {
+    public create(quizId: string, roundId: string, text: string, type: string, choiceData: Array<{ text: string, answer: boolean }>): Observable<string> {
         const choices: Array<Choice> = choiceData.map((choice) => ({ uid: this.angularFirestore.createId(), ...choice }));
         const choiceList = choices.map((choice) => ({ uid: choice.uid, text: choice.text }));
 
         const question: Question = {
             uid: this.angularFirestore.createId(),
-            title, type, choiceList,
+            text, type, choiceList,
             created: firestore.FieldValue.serverTimestamp(),
         };
 

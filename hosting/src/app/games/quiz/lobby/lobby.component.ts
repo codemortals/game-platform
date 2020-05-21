@@ -56,14 +56,14 @@ export class LobbyComponent implements OnInit, OnDestroy {
         ];
 
         this.roundForm = this.forms.group({
-            title: [ undefined, [ Validators.required, Validators.maxLength(80) ] ],
+            title: [ undefined, [ Validators.required, Validators.maxLength(24) ] ],
             description: [ undefined, [ Validators.maxLength(240) ] ],
         });
 
         this.questionForm = this.forms.group({
             round: [ undefined, [ Validators.required ] ],
             type: [ this.availableTypes[ 0 ], [ Validators.required ] ],
-            title: [ undefined, [ Validators.required, Validators.maxLength(500) ] ],
+            text: [ undefined, [ Validators.required, Validators.maxLength(500) ] ],
             choices: this.forms.array([]),
         }, { validator: this.checkQuestion });
 
@@ -126,7 +126,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         const roundId = question.round.id;
 
         this.questionService
-            .create(gameId, roundId, question.title, question.type.id, question.choices)
+            .create(gameId, roundId, question.text, question.type.id, question.choices)
             .subscribe(
                 () => this.questionForm.reset({ type: question.type }),
             );

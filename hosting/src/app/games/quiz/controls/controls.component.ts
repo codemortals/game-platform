@@ -13,6 +13,8 @@ import { Quiz, Round } from '../quiz.model';
 })
 export class ControlsComponent {
 
+    public waiting = false;
+
     @Input()
     public quiz: Quiz;
 
@@ -23,49 +25,49 @@ export class ControlsComponent {
         private quizService: QuizService,
     ) { }
 
-    public nextQuestion(): void {
-        if (!this.currentRound) {
-            this.goto(this.quiz.roundList[0]);
-            return;
+    get next(): 'START' | 'QUESTION' | 'ROUND' | 'FINISH' {
+        if (!this.currentRound && (<Array<string>> this.quiz.roundList).length > 0) {
+            return 'START';
         }
 
         const questionIds = (<Array<string>> this.currentRound.questionList);
         const questionIdx = questionIds.indexOf(this.quiz.currentQuestion) + 1;
 
-        // First question in the round, but make sure there are questions in the round....
-        if (questionIdx === 0 && questionIds.length > 0) {
-            this.goto(this.currentRound.uid, this.currentRound.questionList[0]);
-            return;
+        if (questionIdx === 0 && questionIds.length > 0 || questionIdx < questionIds.length) {
+            return 'QUESTION';
         }
 
-        // Go to next round, if no questions in the round or the last question
         if (questionIdx === 0 || questionIdx === questionIds.length) {
             const roundIds = (<Array<string>> this.quiz.roundList);
             const roundIdx = roundIds.indexOf(this.currentRound.uid) + 1;
 
-            // Can this happen?
-            if (roundIdx === 0) {
-                console.log('ERROR THIS SHOULD NOT BE POSSIBLE');
-                return;
+            if (roundIdx === 0 && roundIds.length > 0 || roundIdx < roundIds.length) {
+                return 'ROUND';
             }
-
-            // Last round should end the game... need an end screen
-            if (roundIdx === roundIds.length) {
-                console.log('END OF GAME');
-                return;
-            }
-
-            // Go to the next round
-            this.goto(roundIds[roundIdx]);
-            return;
         }
 
-        // Default is to show the next question in the round
-        this.goto(this.currentRound.uid, questionIds[questionIdx]);
+        return 'FINISH';
     }
 
-    private goto(roundId, questionId = null) {
-        this.quizService.nextQuestion(this.quiz.uid, roundId, questionId).subscribe();
+    public startQuiz(): void {
+        this.quizService.nextQuestion(this.quiz.uid, this.quiz.roundList[0]).subscribe();
+    }
+
+    public nextQuestion(): void {
+        const questionIds = (<Array<string>> this.currentRound.questionList);
+        const questionIdx = questionIds.indexOf(this.quiz.currentQuestion) + 1;
+        this.quizService.nextQuestion(this.quiz.uid, this.currentRound.uid, questionIds[questionIdx]).subscribe();
+    }
+
+    public nextRound(): void {
+        this.waiting = true;
+        this.quizService
+            .endRound(this.quiz.uid, this.currentRound.uid)
+            .subscribe(() => this.waiting = false);
+    }
+
+    public endQuiz(): void {
+        console.log('END THE QUIZ');
     }
 
 }

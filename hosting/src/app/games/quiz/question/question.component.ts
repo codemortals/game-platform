@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
-import { timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { Choice, Question, Quiz, Round } from '../quiz.model';
 import { AnswerService } from '../answer.service';
@@ -37,8 +36,11 @@ export class QuestionComponent implements OnChanges {
 
         this.answerService
             .findOne(this.quiz.uid, this.round.uid, this.question.uid)
+            .pipe(
+                tap((answer) => this.saved = !!answer)
+            )
             .subscribe(
-                (answer) => this.response = answer.response || []
+                (answer) => this.response = answer ? answer.response : []
             );
     }
 
@@ -62,11 +64,7 @@ export class QuestionComponent implements OnChanges {
             .pipe(
                 map(() => this.saved = true),
             )
-            .subscribe(
-                () => {
-                    timer(2000).subscribe(() => this.saved = false);
-                },
-            );
+            .subscribe();
     }
 
 }

@@ -14,7 +14,7 @@ export interface Choice {
 
 export interface Question {
     uid: string;
-    title: string;
+    text: string;
     type: string;
     choices?: Array<Choice>;
     choiceList: Array<Choice>;

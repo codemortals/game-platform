@@ -1,11 +1,11 @@
 <ng-container *ngIf="question">
-    <div class="question">
+    <div class="question" [ngClass]="{ saved: saved }">
         <h4>{{ round.title }}</h4>
 
-        <ng-container [ngSwitch]="question.type">
-            <img *ngSwitchCase="'image'" [src]="question.title" />
-            <h2 *ngSwitchDefault [gameMarkdown]="question.title"></h2>
-        </ng-container>
+        <div class="question__text" [ngSwitch]="question.type">
+            <img *ngSwitchCase="'image'" [src]="question.text" />
+            <h2 *ngSwitchDefault [gameMarkdown]="question.text"></h2>
+        </div>
     </div>
 
     <div class="choices">
@@ -14,8 +14,8 @@
         </div>
     </div>
 
-    <button brand-button (click)="saveAnswer()" [disabled]="!response.length || saved">
+    <button brand-button (click)="saveAnswer()" [disabled]="!response.length">
+        <span *ngIf="saved">Update Answer</span>
         <span *ngIf="!saved">Save Answer</span>
-        <span *ngIf="saved">Saved</span>
     </button>
 </ng-container>
