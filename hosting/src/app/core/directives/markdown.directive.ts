@@ -23,7 +23,7 @@ export class MarkdownDirective implements OnChanges {
     ngOnChanges(): void {
         this.marked.setOptions({
             gfm: true,
-            sanitize: true,
+            breaks: true,
             highlight: this.highlight,
         });
 

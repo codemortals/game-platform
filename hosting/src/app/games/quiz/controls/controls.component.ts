@@ -26,7 +26,7 @@ export class ControlsComponent {
     ) { }
 
     get next(): 'START' | 'QUESTION' | 'ROUND' | 'FINISH' {
-        if (!this.currentRound && (<Array<string>> this.quiz.roundList).length > 0) {
+        if (!this.quiz || !this.currentRound && (<Array<string>> this.quiz.roundList).length > 0) {
             return 'START';
         }
 
