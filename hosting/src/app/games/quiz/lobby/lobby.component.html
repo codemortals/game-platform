@@ -11,7 +11,7 @@
 
                         <brand-dropdown label="Type" placeholder="Select an option" formControlName="type" [options]="availableTypes"></brand-dropdown>
 
-                        <brand-input label="Question" type="textarea" formControlName="title"></brand-input>
+                        <brand-input label="Question" type="textarea" formControlName="text"></brand-input>
 
                         <brand-label description="Enter the available options that can be chosen to answer the question, a minimum of two options are required and a maximum of eight.">Choices</brand-label>
                         <div formArrayName="choices" *ngFor="let option of formOptions.controls; let i = index">
@@ -66,7 +66,7 @@
                     <brand-expansion label="{{ round.title }} ({{ round.questionList | count }})" (onToggle)="loadQuestions(round)">
                         <ng-container *ngIf="round.questions; else noQuestions">
                             <div class="question" *ngFor="let question of round.questions">
-                                <div>{{ question.title | slice: 0 : 30 }}</div>
+                                <div>{{ question.text | slice: 0 : 30 }}</div>
                             </div>
                         </ng-container>
                         <ng-template #noQuestions>No questions</ng-template>

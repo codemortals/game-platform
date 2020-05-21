@@ -5,7 +5,7 @@
                 <h2>{{ game.name }}</h2>
                 <div>{{ game.type }}</div>
             </div>
-            <div *gameHost="game.host">
+            <div *gameHost="game.hosts">
                 <button brand-button-plain (click)="toggleConfig()">
                     <span *ngIf="showConfig">Back to Lobby</span>
                     <span *ngIf="!showConfig">Edit Game</span>
