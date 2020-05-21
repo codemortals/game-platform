@@ -30,6 +30,10 @@ service cloud.firestore {
         allow read: if true;
         allow write: if signedIn();
 
+        match /results/{resultId} {
+          allow read: if true;
+        }
+
         match /questions/{questionId} {
           allow read: if true;
           allow write: if signedIn();

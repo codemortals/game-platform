@@ -16,6 +16,9 @@ import { StatsRouting } from './stats.routing';
         WidgetsModule,
         StatsRouting,
     ],
+    exports: [
+        LeaderboardComponent,
+    ],
 })
 export class StatsModule {
 }

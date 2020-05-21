@@ -19,7 +19,7 @@ export class QuizService {
         return endRound({ quizId, roundId });
     }
 
-    public nextQuestion(quizId: string, currentRound: string, currentQuestion: string = null): Observable<void> {
+    public changeQuestion(quizId: string, currentRound: string, currentQuestion: string = null): Observable<void> {
         const quizRef = this.angularFirestore
             .collection<Quiz>('quizzes')
             .doc<Quiz>(quizId);

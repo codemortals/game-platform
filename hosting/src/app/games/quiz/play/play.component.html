@@ -1,13 +1,17 @@
 <game-layout-column>
     <div gameColumn="one">
         <brand-card>
-            <ng-container *ngIf="!quiz || !quiz.currentQuestion; else showQuestion">
+            <ng-container *ngIf="!quiz || !quiz.currentQuestion">
                 <game-summary [rounds]="rounds" [currentRound]="round"></game-summary>
             </ng-container>
 
-            <ng-template #showQuestion>
+            <ng-container *ngIf="quiz && isCompleted">
+                <game-leaderboard [quiz]="quiz" [round]="round"></game-leaderboard>
+            </ng-container>
+
+            <ng-container *ngIf="quiz && quiz.currentQuestion && !isCompleted">
                 <game-question [quiz]="quiz" [round]="round" [question]="question"></game-question>
-            </ng-template>
+            </ng-container>
         </brand-card>
 
         <div class="host-controls" *gameHost="game.hosts">

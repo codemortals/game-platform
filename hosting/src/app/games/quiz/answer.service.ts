@@ -18,7 +18,7 @@ export class AnswerService {
 
     public create(quizId: string, roundId: string, questionId: string, response: Array<string>): Observable<void> {
         const answer: Answer = {
-            userId: this.authenticationService.user.getValue().uid,
+            user: this.authenticationService.user.getValue().uid,
             response,
             created: firestore.FieldValue.serverTimestamp()
         };
@@ -37,7 +37,7 @@ export class AnswerService {
 
         const answerDoc = questionDoc
             .collection<Answer>('answers')
-            .doc<Answer>(answer.userId);
+            .doc<Answer>(answer.user);
 
         return from(answerDoc.set(answer));
     }

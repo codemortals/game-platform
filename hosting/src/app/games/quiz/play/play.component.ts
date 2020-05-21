@@ -6,7 +6,7 @@ import { filter, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
 
 import { Game } from '@core/models';
 
-import { Question, Quiz, Round } from '../quiz.model';
+import { Question, Quiz, Round, RoundSummary } from '../quiz.model';
 
 import { QuizService } from '../quiz.service';
 import { RoundService } from '../round.service';
@@ -41,6 +41,9 @@ export class PlayComponent implements OnInit, OnDestroy {
         this.game = this.route.snapshot.data.gameData;
 
         this.roundService.findAll(this.game.uid)
+            .pipe(
+                takeUntil(this.isDestroyed),
+            )
             .subscribe((rounds) => this.rounds = rounds);
 
         this.quizService
@@ -74,6 +77,15 @@ export class PlayComponent implements OnInit, OnDestroy {
             return undefined;
         }
         return this.rounds.find((round) => round.uid === this.quiz.currentRound);
+    }
+
+    get isCompleted(): boolean {
+        if (!this.quiz.currentRound) {
+            return false;
+        }
+
+        const rounds = <Array<RoundSummary>> this.quiz.roundList;
+        return rounds.find((round) => round.uid === this.quiz.currentRound).status === 'COMPLETED';
     }
 
 }

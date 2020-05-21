@@ -1,7 +1,7 @@
 import { firestore } from 'firebase/app';
 
 export interface Answer {
-    userId: string;
+    user: string;
     response: Array<string>;
     created: firestore.Timestamp | firestore.FieldValue;
 }
@@ -22,19 +22,34 @@ export interface Question {
     created: firestore.Timestamp | firestore.FieldValue;
 }
 
+export interface QuestionSummary {
+    uid: string;
+}
+
+export interface RoundResult<T> {
+    user: T;
+    score: number;
+}
+
 export interface Round {
     uid: string;
     title: string;
     description?: string;
     questions?: Array<Question>;
-    questionList?: Array<string> | firestore.FieldValue;
+    questionList?: Array<QuestionSummary> | firestore.FieldValue;
     created: firestore.Timestamp | firestore.FieldValue;
+}
+
+export interface RoundSummary {
+    uid: string;
+    status: 'CREATED' | 'COMPLETED';
 }
 
 export interface Quiz {
     uid: string;
     currentRound?: string;
     currentQuestion?: string;
+    showResults?: boolean;
     rounds?: Array<Round>;
-    roundList?: Array<string> | firestore.FieldValue;
+    roundList?: Array<RoundSummary> | firestore.FieldValue;
 }

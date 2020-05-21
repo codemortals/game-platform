@@ -14,12 +14,16 @@
                     <button brand-button (click)="nextQuestion()">Next Question</button>
                 </ng-container>
 
+                <ng-container *ngSwitchCase="'CALCULATE'">
+                    <button brand-button (click)="endRound()" [disabled]="waiting">End Round</button>
+                </ng-container>
+
                 <ng-container *ngSwitchCase="'ROUND'">
                     <button brand-button (click)="nextRound()" [disabled]="waiting">Next Round</button>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'FINISH'">
-                    <button brand-button (click)="endQuiz()" [disabled]="waiting">End</button>
+                    <button brand-button (click)="endQuiz()" [disabled]="waiting">End Quiz</button>
                 </ng-container>
             </ng-container>
         </div>

@@ -1,0 +1,15 @@
+<div class="leaderboard">
+    <h4>{{ round.title }}</h4>
+
+    <h2>Round Leaderboard</h2>
+</div>
+
+<ul class="results">
+    <li *ngFor="let leader of results">
+        <img [src]="leader.user.avatar">
+        <div>
+            <h4>{{ leader.user.alias }}</h4>
+            <div>Score: {{ leader.score }}</div>
+        </div>
+    </li>
+</ul>

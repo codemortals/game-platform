@@ -31,7 +31,7 @@ export class RoundService {
             .collection<Round>('rounds')
             .doc<Round>(round.uid);
 
-        batch.set(quizRef.ref, { uid: quizId, roundList: firestore.FieldValue.arrayUnion(round.uid) }, { merge: true });
+        batch.set(quizRef.ref, { uid: quizId, roundList: firestore.FieldValue.arrayUnion({ uid: round.uid, status: 'CREATED' }) }, { merge: true });
         batch.set(roundRef.ref, round);
 
         return from(batch.commit())

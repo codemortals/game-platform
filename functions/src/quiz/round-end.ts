@@ -42,12 +42,13 @@ export const QuizRoundEnd = functions
         // Perform updates
         const batch = admin.firestore().batch();
 
-        // Set to next round (unless no more rounds)
-        const roundIdx = quizData.roundList.indexOf(data.roundId) + 1;
-
-        if (quizData.roundList.length > roundIdx) {
-            batch.update(quizRef, { currentRound: quizData.roundList[ roundIdx ], currentQuestion: null });
-        }
+        const roundList = quizData.roundList.map((round: any) => {
+            if (round.uid === data.roundId) {
+                round.status = 'COMPLETED';
+            }
+            return round;
+        });
+        batch.update(quizRef, { roundList });
 
         // Calculate player scores
         const leaderboard: any = {};
@@ -75,14 +76,14 @@ export const QuizRoundEnd = functions
 
                 const checkedAnswers = validAnswers.reduce((matches, valid) => {
                     if (answerData.response.includes(valid)) {
-                        return [...matches, valid];
+                        return [ ...matches, valid ];
                     }
                     return matches;
                 }, []);
 
                 if (validAnswers.length === checkedAnswers.length) {
-                    const userId = answer.data().userId;
-                    leaderboard[ userId ] = { userId, score: leaderboard[ userId ] ? ++leaderboard[ userId ].score : 1 };
+                    const user = answer.data().user;
+                    leaderboard[ user ] = { user, score: leaderboard[ user ] ? ++leaderboard[ user ].score : 1 };
                 }
             });
         }));
@@ -96,5 +97,9 @@ export const QuizRoundEnd = functions
             batch.set(resultRef, leaderboard[ key ]);
         });
 
-        await batch.commit();
+        try {
+            await batch.commit();
+        } catch (error) {
+            throw new HttpsError('data-loss', error.message);
+        }
     });
