@@ -1,6 +1,6 @@
 <ng-container *ngIf="question">
     <div class="question" [ngClass]="{ saved: saved }">
-        <h4>{{ round.title }}</h4>
+        <h4>{{ getRoundProgress() }}.{{ getQuestionProgress() }}: {{ round.title }}</h4>
 
         <div class="question__text" [ngSwitch]="question.type">
             <img *ngSwitchCase="'image'" [src]="question.text" />

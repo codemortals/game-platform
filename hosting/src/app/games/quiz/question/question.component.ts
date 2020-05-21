@@ -67,4 +67,11 @@ export class QuestionComponent implements OnChanges {
             .subscribe();
     }
 
+    public getRoundProgress(): number {
+        return (<Array<string>> this.quiz.roundList).findIndex((roundUid) => this.round.uid === roundUid) + 1;
+    }
+
+    public getQuestionProgress(): number {
+        return (<Array<string>> this.round.questionList).findIndex((questionUid) => this.question.uid === questionUid) + 1;
+    }
 }
