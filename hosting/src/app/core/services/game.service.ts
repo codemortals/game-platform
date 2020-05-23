@@ -31,20 +31,20 @@ export class GameService {
             status: 'CREATED',
         };
 
-        const gameRef = this.angularFirestore
+        const gameDoc = this.angularFirestore
             .collection<Game>('games')
             .doc<Game>(game.uid);
 
-        return from(gameRef.set(game))
+        return from(gameDoc.set(game))
             .pipe(map(() => game));
     }
 
     public start(gameId: string): Observable<void> {
-        const gameRef = this.angularFirestore
+        const gameDoc = this.angularFirestore
             .collection<Game>('games')
             .doc<Game>(gameId);
 
-        return from(gameRef.update({ status: 'IN_PROGRESS' }));
+        return from(gameDoc.update({ status: 'IN_PROGRESS' }));
     }
 
     public findAll(): Observable<Array<Game>> {

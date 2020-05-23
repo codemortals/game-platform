@@ -23,16 +23,16 @@ export class RoundService {
             created: firestore.FieldValue.serverTimestamp(),
         };
 
-        const quizRef = this.angularFirestore
+        const quizDoc = this.angularFirestore
             .collection<Quiz>('quizzes')
             .doc<Quiz>(quizId);
 
-        const roundRef = quizRef
+        const roundDoc = quizDoc
             .collection<Round>('rounds')
             .doc<Round>(round.uid);
 
-        batch.set(quizRef.ref, { uid: quizId, roundList: firestore.FieldValue.arrayUnion({ uid: round.uid, status: 'CREATED' }) }, { merge: true });
-        batch.set(roundRef.ref, round);
+        batch.set(quizDoc.ref, { uid: quizId, roundList: firestore.FieldValue.arrayUnion({ uid: round.uid, status: 'CREATED' }) }, { merge: true });
+        batch.set(roundDoc.ref, round);
 
         return from(batch.commit())
             .pipe(
@@ -41,22 +41,22 @@ export class RoundService {
     }
 
     public findOne(quizId: string, roundId: string): Observable<Round> {
-        const quizRef = this.angularFirestore
+        const quizDoc = this.angularFirestore
             .collection<Quiz>('quizzes')
             .doc<Quiz>(quizId);
 
-        return quizRef
+        return quizDoc
             .collection<Round>('rounds')
             .doc<Round>(roundId)
             .valueChanges();
     }
 
     public findAll(quizId: string): Observable<Array<Round>> {
-        const quizRef = this.angularFirestore
+        const quizDoc = this.angularFirestore
             .collection<Quiz>('quizzes')
             .doc<Quiz>(quizId);
 
-        return quizRef
+        return quizDoc
             .collection<Round>('rounds', (ref: firestore.Query) => ref.orderBy('created'))
             .stateChanges([ 'added' ])
             .pipe(

@@ -28,15 +28,15 @@ export class MessageService {
             created: firestore.FieldValue.serverTimestamp(),
         };
 
-        const gameRef = this.angularFirestore
+        const gameDoc = this.angularFirestore
             .collection<Game>('games')
             .doc<Game>(gameId);
 
-        const messageRef = gameRef
+        const messageDoc = gameDoc
             .collection<Message<string>>('messages')
             .doc<Message<string>>(message.uid);
 
-        return from(messageRef.set(message))
+        return from(messageDoc.set(message))
             .pipe(
                 map(() => message.uid),
             );

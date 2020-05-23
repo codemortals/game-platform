@@ -38,7 +38,7 @@ export class QuestionService {
             .collection<Question>('questions')
             .doc<Question>(question.uid);
 
-        batch.update(roundDoc.ref, { questionList: firestore.FieldValue.arrayUnion(question.uid) });
+        batch.update(roundDoc.ref, { questionList: firestore.FieldValue.arrayUnion({ uid: question.uid }) });
         batch.set(questionDoc.ref, question);
 
         choices.map((choice) => {
@@ -68,7 +68,6 @@ export class QuestionService {
             .collection<Question>('questions')
             .doc<Question>(questionId)
             .valueChanges();
-
     }
 
     public findAll(quizId: string, roundId: string): Observable<Array<Question>> {

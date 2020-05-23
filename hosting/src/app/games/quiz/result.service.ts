@@ -18,15 +18,15 @@ export class ResultService {
     ) { }
 
     findAll(quizId: string, roundId: string): Observable<Array<RoundResult<User>>> {
-        const quizRef = this.angularFirestore
+        const quizDoc = this.angularFirestore
             .collection<Quiz>('quizzes')
             .doc<Quiz>(quizId);
 
-        const roundRef = quizRef
+        const roundDoc = quizDoc
             .collection<Round>('rounds')
             .doc<Round>(roundId);
 
-        return roundRef
+        return roundDoc
             .collection<RoundResult<string>>('results', (ref: firebase.firestore.Query) => ref.orderBy('score', 'desc').limit(10))
             .stateChanges([ 'added' ])
             .pipe(

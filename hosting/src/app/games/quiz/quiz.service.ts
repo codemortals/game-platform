@@ -20,19 +20,19 @@ export class QuizService {
     }
 
     public changeQuestion(quizId: string, currentRound: string, currentQuestion: string = null): Observable<void> {
-        const quizRef = this.angularFirestore
+        const quizDoc = this.angularFirestore
             .collection<Quiz>('quizzes')
             .doc<Quiz>(quizId);
 
-        return from(quizRef.update({ currentRound, currentQuestion }));
+        return from(quizDoc.update({ currentRound, currentQuestion }));
     }
 
     public findOne(quizId: string): Observable<Quiz> {
-        const quizRef = this.angularFirestore
+        const quizDoc = this.angularFirestore
             .collection<Quiz>('quizzes')
             .doc<Quiz>(quizId);
 
-        return quizRef.valueChanges();
+        return quizDoc.valueChanges();
     }
 
 }

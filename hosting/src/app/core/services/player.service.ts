@@ -28,21 +28,21 @@ export class PlayerService {
             created: firestore.FieldValue.serverTimestamp(),
         };
 
-        const gameRef = this.angularFirestore
+        const gameDoc = this.angularFirestore
             .collection<Game>('games')
             .doc<Game>(gameId);
 
-        const playerRef = gameRef
+        const playerDoc = gameDoc
             .collection<Player<string>>('players')
             .doc<Player<string>>(player.user);
 
-        return playerRef.get()
+        return playerDoc.get()
             .pipe(
                 mergeMap((entry) => {
                     if (entry.exists) {
                         return of(null);
                     }
-                    return playerRef.set(player, { merge: true });
+                    return playerDoc.set(player, { merge: true });
                 }),
             );
     }
