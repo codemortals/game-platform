@@ -1,6 +1,11 @@
 <ng-container *ngIf="question">
-    <div class="question" [ngClass]="{ saved: saved }">
-        <h4>{{ getRoundProgress() }}.{{ getQuestionProgress() }}: {{ round.title }}</h4>
+    <div class="header">
+        <span class="header__number">{{ progress }}</span>
+        <div class="header__saved" *ngIf="saved">ANSWERED</div>
+    </div>
+
+    <div class="question">
+        <h4 class="question__round">{{ round.title }}</h4>
 
         <div class="question__text" [ngSwitch]="question.type">
             <img *ngSwitchCase="'image'" [src]="question.text" />
@@ -14,8 +19,11 @@
         </div>
     </div>
 
-    <button brand-button (click)="saveAnswer()" [disabled]="!response.length">
-        <span *ngIf="saved">Update Answer</span>
-        <span *ngIf="!saved">Save Answer</span>
+    <button brand-button (click)="saveAnswer()" [disabled]="!response.length || saving">
+        <span *ngIf="saving">Saving</span>
+        <ng-container *ngIf="!saving">
+            <span *ngIf="saved">Update Answer</span>
+            <span *ngIf="!saved">Save Answer</span>
+        </ng-container>
     </button>
 </ng-container>
