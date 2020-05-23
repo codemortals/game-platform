@@ -27,7 +27,7 @@ export class ResultService {
             .doc<Round>(roundId);
 
         return roundRef
-            .collection<RoundResult<string>>('results', (ref: firebase.firestore.Query) => ref.orderBy('score').limit(10))
+            .collection<RoundResult<string>>('results', (ref: firebase.firestore.Query) => ref.orderBy('score', 'desc').limit(10))
             .stateChanges([ 'added' ])
             .pipe(
                 map((results) => results
