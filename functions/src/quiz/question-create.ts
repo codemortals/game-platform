@@ -16,7 +16,7 @@ export const QuizQuestionCreate = functions
             .collection('quizzes')
             .doc(context.params.quizId);
 
-        batch.update(gameRef, { status: 'READY' });
+        batch.update(gameRef, { status: 'OPEN' });
 
         // TODO: Possible functions can be called multiple times, so the increment needs to be idempotent
         batch.update(quizRef, { totalQuestions: admin.firestore.FieldValue.increment(1) });
