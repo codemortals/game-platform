@@ -32,6 +32,10 @@
                 flex: 1 0 auto;
                 align-items: center;
             }
+
+            &__status {
+                color: $brand-light-color;
+            }
         }
 
         &:hover {

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireFunctions } from '@angular/fire/functions';
 import { firestore } from 'firebase/app';
 
 import { from, Observable } from 'rxjs';
@@ -8,7 +7,6 @@ import { map } from 'rxjs/operators';
 
 import { Game } from '../models';
 import { AuthenticationService } from './authentication.service';
-import { PlayerService } from './player.service';
 
 @Injectable({
     providedIn: 'root',
@@ -17,8 +15,6 @@ export class GameService {
 
     constructor(
         private angularFirestore: AngularFirestore,
-        private fireFunctions: AngularFireFunctions,
-        private playerService: PlayerService,
         private authenticationService: AuthenticationService,
     ) { }
 
@@ -29,6 +25,7 @@ export class GameService {
             type: 'quiz',
             hosts: firestore.FieldValue.arrayUnion(this.authenticationService.user.getValue().uid),
             status: 'CREATED',
+            created: firestore.FieldValue.serverTimestamp(),
         };
 
         const gameDoc = this.angularFirestore
@@ -49,7 +46,7 @@ export class GameService {
 
     public findAll(): Observable<Array<Game>> {
         return this.angularFirestore
-            .collection<Game>('games')
+            .collection<Game>('games', (ref) => ref.orderBy('created', 'desc'))
             .valueChanges();
     }
 

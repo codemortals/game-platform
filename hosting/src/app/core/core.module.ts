@@ -10,7 +10,7 @@ import {
     HostDirective,
     MarkdownDirective,
 } from './directives';
-import { CountPipe } from './pipes';
+import { CountPipe, StatusPipe } from './pipes';
 
 import {
     BrandButtonModule,
@@ -42,6 +42,7 @@ import {
         HostDirective,
         MarkdownDirective,
         CountPipe,
+        StatusPipe,
     ],
     imports: [
         CommonModule,
@@ -57,6 +58,7 @@ import {
         HostDirective,
         MarkdownDirective,
         CountPipe,
+        StatusPipe,
 
         BrandButtonModule,
         BrandCardModule,

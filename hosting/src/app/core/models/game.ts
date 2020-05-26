@@ -6,4 +6,5 @@ export interface Game {
     type: 'template' | 'quiz';
     hosts: Array<string> | firestore.FieldValue;
     status: 'CREATED' | 'OPEN' | 'IN_PROGRESS' | 'COMPLETE';
+    created: firestore.Timestamp | firestore.FieldValue;
 }
