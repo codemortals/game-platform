@@ -19,10 +19,6 @@
         margin: 0.875em 0;
         counter-increment: result;
 
-        img {
-            margin-right: 1em;
-        }
-
         &:before {
             display: flex;
             align-items: center;

@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
-    selector: 'brand-button, button[brand-button], button[brand-button-warning], button[brand-button-plain]',
+    selector: 'brand-button, [brand-button], [brand-button-warning], [brand-button-plain]',
     templateUrl: './button.component.html',
     styleUrls: [ './button.component.scss' ],
     encapsulation: ViewEncapsulation.None,

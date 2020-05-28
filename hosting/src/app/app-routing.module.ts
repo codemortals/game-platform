@@ -16,6 +16,10 @@ const routes: Routes = [
                 loadChildren: () => import('./platform/main/main.module').then((m) => m.MainModule),
             },
             {
+                path: 'account',
+                loadChildren: () => import('./platform/account/account.module').then((m) => m.AccountModule),
+            },
+            {
                 path: 'games',
                 loadChildren: () => import('./platform/games/games.module').then((m) => m.GamesModule),
             },

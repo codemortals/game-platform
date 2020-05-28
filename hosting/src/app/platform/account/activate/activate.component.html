@@ -1,0 +1,35 @@
+<div class="activate">
+    <div class="activate__content">
+        <brand-notification *ngIf="state === 'PENDING'">
+            <div brandNotificationHeader>Validating</div>
+            <div brandNotificationMessage>
+                <p>Please wait a moment while we validate you account.</p>
+            </div>
+        </brand-notification>
+
+        <brand-notification *ngIf="state === 'SUCCESS' || state === 'ALREADY_ACTIVE'" severity="success">
+            <div brandNotificationHeader>Account Verified</div>
+            <div brandNotificationMessage>
+                <p>Your account is verified, you can use all available features.</p>
+                <p>We will automatically redirect you back to the main page, or <a [routerLink]="['/']" [replaceUrl]="true">click here</a> to view now</p>
+            </div>
+        </brand-notification>
+
+        <brand-notification *ngIf="state === 'FAILED'" severity="error">
+            <div brandNotificationHeader>Verification Failed</div>
+            <div brandNotificationMessage>
+                <p>We were not able to verify your email address.</p>
+                <p>Possible reasons are;</p>
+                <ul>
+                    <li>The email link has expired,
+                        <span *gameAuthenticated="true"><a (click)="resendVerification()">request a new one</a></span>
+                        <span *gameAuthenticated="false">login and request a new code</span>.
+                    </li>
+                    <li>You have already activated your account with this code.</li>
+                    <li>The link provided does not contain a valid activation code.</li>
+                </ul>
+                <p style="text-align: center">Still having problems? Get in touch with us.</p>
+            </div>
+        </brand-notification>
+    </div>
+</div>

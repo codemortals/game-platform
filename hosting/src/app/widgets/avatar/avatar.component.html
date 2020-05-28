@@ -1,0 +1,4 @@
+<div class="widget-avatar">
+    <img *ngIf="user.avatar" [src]="user.avatar">
+    <fa-icon *ngIf="!user.avatar" [icon]="['fas', 'user']"></fa-icon>
+</div>

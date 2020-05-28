@@ -1,0 +1,19 @@
+<div class="recover">
+    <div class="recover__content">
+        <brand-card>
+            <h2>Reset your password</h2>
+
+            <p style="font-size: 0.8em">Note, minimum password length is 8 characters.</p>
+
+            <form [formGroup]="recoverForm" (submit)="resetPassword()">
+                <brand-input label="New Password" name="password" type="password" formControlName="password"></brand-input>
+
+                <button brand-button type="submit" [disabled]="recoverForm.pristine || recoverForm.invalid || sending">Reset Password</button>
+            </form>
+
+            <brand-notification *ngIf="error" severity="error">
+                <div brandNotificationMessage>{{ error }}</div>
+            </brand-notification>
+        </brand-card>
+    </div>
+</div>

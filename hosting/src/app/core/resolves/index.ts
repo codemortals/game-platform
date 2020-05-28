@@ -1,3 +1,4 @@
+export * from './account-action.resolve';
 export * from './authentication.resolve';
 export * from './game-join.resolve';
 export * from './game-list.resolve';

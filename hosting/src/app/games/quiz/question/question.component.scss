@@ -74,7 +74,7 @@
         position: relative;
         height: 100%;
         min-height: 4em;
-        width: calc(100% - (1ch + 0.75em + 4px));
+        width: calc(100% - 1ch - 0.75em - 4px);
         padding: 0.5em 1em;
         margin-left: calc(1ch + 0.75em + 4px);
         border: 2px solid $brand-primary;

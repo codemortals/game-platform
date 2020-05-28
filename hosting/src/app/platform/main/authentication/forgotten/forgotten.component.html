@@ -1,0 +1,19 @@
+<h2>Password recovery</h2>
+
+<form [formGroup]="forgottenForm" (submit)="recoverAccount()" autocomplete="off">
+    <brand-input label="Username (Email)" name="email" type="email" formControlName="email"></brand-input>
+
+    <button brand-button type="submit" [disabled]="forgottenForm.pristine || forgottenForm.invalid || sending">Submit</button>
+</form>
+
+<brand-notification *ngIf="sent" severity="information">
+    <div brandNotificationMessage>Check your email for further instructions.</div>
+</brand-notification>
+
+<brand-notification *ngIf="error" severity="error">
+    <div brandNotificationMessage>{{ error }}</div>
+</brand-notification>
+
+<div class="actions">
+    <a [routerLink]="['/', 'auth', 'login']">return to login</a>
+</div>

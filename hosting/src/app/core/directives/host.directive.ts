@@ -19,7 +19,7 @@ export class HostDirective implements OnInit {
         this.authenticationService
             .user
             .subscribe((user) => {
-                if (this.gameHost.includes(user.uid)) {
+                if (user && this.gameHost.includes(user.uid)) {
                     this.viewContainerRef.createEmbeddedView(this.templateRef);
                 } else {
                     this.viewContainerRef.clear();

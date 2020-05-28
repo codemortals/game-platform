@@ -1,0 +1,11 @@
+@import '../../../../variables';
+
+.widget-verify {
+    text-align: center;
+    padding: 0.25em 0;
+    background-color: $brand-warning;
+
+    a {
+        color: $brand-warning-dark;
+    }
+}

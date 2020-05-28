@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { WidgetAvatarModule } from '@widgets/avatar/avatar.module';
+
 import { WidgetChatComponent } from './chat.component';
 import { WidgetChatDirective } from './chat.directive';
 
@@ -20,6 +22,7 @@ import {
         CommonModule,
         ReactiveFormsModule,
         FontAwesomeModule,
+        WidgetAvatarModule,
     ],
     exports: [
         WidgetChatComponent,

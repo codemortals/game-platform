@@ -12,10 +12,11 @@
     flex-wrap: wrap;
     margin: 0 -1em;
 
-    &__entry {
+    &__login, &__entry {
         display: flex;
         flex: 0 1 calc(50% - 2em);
         margin: 1em;
+        align-items: center;
         border-radius: $border-radius;
         background-color: $brand-primary-dark;
         text-decoration: none;
@@ -26,12 +27,6 @@
             padding: 0.5em;
             width: 100%;
             align-items: center;
-
-            > :first-child {
-                display: flex;
-                flex: 1 0 auto;
-                align-items: center;
-            }
         }
 
         &:hover {
@@ -45,6 +40,12 @@
 
         @media all and (min-width: $desktop-viewport) {
             flex: 0 1 calc(25% - 2em);
+        }
+    }
+
+    &__login {
+        :nth-child(2) {
+            font-size: 0.8em;
         }
     }
 }
