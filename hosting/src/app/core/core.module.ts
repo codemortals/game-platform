@@ -11,7 +11,7 @@ import {
     MarkdownDirective,
     VerifiedDirective,
 } from './directives';
-import { CountPipe } from './pipes';
+import { CountPipe, StatusPipe } from './pipes';
 
 import {
     BrandButtonModule,
@@ -47,6 +47,7 @@ import {
         MarkdownDirective,
         VerifiedDirective,
         CountPipe,
+        StatusPipe,
     ],
     imports: [
         CommonModule,
@@ -63,6 +64,7 @@ import {
         MarkdownDirective,
         VerifiedDirective,
         CountPipe,
+        StatusPipe,
 
         BrandButtonModule,
         BrandCardModule,

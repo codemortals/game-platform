@@ -20,10 +20,11 @@
             </a>
             <a class="open-games__entry" [routerLink]="['/', 'games', game.uid, 'lobby']" *ngFor="let game of gameList">
                 <div class="container">
+                    <span>{{ game.name }}</span>
                     <div>
                         <fa-icon [icon]="['fas', 'gamepad']" size="3x" [fixedWidth]="true"></fa-icon>
                     </div>
-                    <span>{{ game.name }}</span>
+                    <span>{{ game.status | status }}</span>
                 </div>
             </a>
         </div>
