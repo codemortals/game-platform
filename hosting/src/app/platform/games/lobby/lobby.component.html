@@ -1,5 +1,5 @@
 <section>
-    <brand-card>
+    <brand-card *ngIf="!countdown">
         <div class="header">
             <div>
                 <h2>{{ game.name }}</h2>
@@ -14,12 +14,12 @@
             </div>
         </div>
     </brand-card>
-</section>
 
-<brand-notification severity="information" align="center" *ngIf="countdown">
-    <div brandNotificationHeader>Game Starting In...</div>
-    <div brandNotificationMessage>{{ countdown }}</div>
-</brand-notification>
+    <brand-notification *ngIf="countdown" severity="information" align="center">
+        <div brandNotificationHeader>Game Starting In...</div>
+        <div brandNotificationCountdown>{{ countdown }}</div>
+    </brand-notification>
+</section>
 
 <section>
     <ng-template gameDynamic></ng-template>

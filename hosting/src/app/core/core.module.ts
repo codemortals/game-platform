@@ -9,6 +9,7 @@ import {
     DynamicDirective,
     HostDirective,
     MarkdownDirective,
+    VerifiedDirective,
 } from './directives';
 import { CountPipe, StatusPipe } from './pipes';
 
@@ -31,7 +32,10 @@ import {
 
 import {
     fab,
+    faGoogle,
     faFacebook,
+    faTwitter,
+    faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 
 @NgModule({
@@ -41,6 +45,7 @@ import {
         DynamicDirective,
         HostDirective,
         MarkdownDirective,
+        VerifiedDirective,
         CountPipe,
         StatusPipe,
     ],
@@ -57,6 +62,7 @@ import {
         DynamicDirective,
         HostDirective,
         MarkdownDirective,
+        VerifiedDirective,
         CountPipe,
         StatusPipe,
 
@@ -76,7 +82,10 @@ export class CoreModule {
         library.addIcons(
             faPlus,
             faGamepad,
+            faGoogle,
             faFacebook,
+            faTwitter,
+            faGithub,
         );
     }
 }

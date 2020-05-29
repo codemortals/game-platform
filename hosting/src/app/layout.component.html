@@ -9,9 +9,11 @@
         </div>
     </div>
     <div class="user">
-        <game-account *gameAuthenticated="true" [account]="user" (logout)="logout()"></game-account>
-        <game-login *gameAuthenticated="false" (login)="login($event)"></game-login>
+        <game-account *gameAuthenticated="true"></game-account>
+        <a brand-button *gameAuthenticated="false" [routerLink]="['/', 'auth', 'login']">Sign Up / Login</a>
     </div>
 </header>
+
+<game-verify *gameVerified="false"></game-verify>
 
 <router-outlet></router-outlet>

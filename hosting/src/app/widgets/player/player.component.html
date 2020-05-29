@@ -1,5 +1,5 @@
 <div class="widget-player">
-    <img [src]="player.user.avatar + '?height=36'">
+    <game-avatar [user]="player.user"></game-avatar>
     <div class="user">
         <h4>{{ player.user.alias }}</h4>
         <div>{{ player.user.level ? player.user.level.display : 'Rookie' }}</div>

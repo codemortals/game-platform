@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Game } from '@core/models';
-import { AuthenticationService, GameService } from '@core/services';
+import { GameService } from '@core/services';
 
 @Component({
     templateUrl: './welcome.component.html',
@@ -19,7 +19,6 @@ export class WelcomeComponent implements OnDestroy, OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private authenticationService: AuthenticationService,
         private gameService: GameService,
     ) { }
 
@@ -37,10 +36,6 @@ export class WelcomeComponent implements OnDestroy, OnInit {
     public ngOnDestroy(): void {
         this.isDestroyed.next();
         this.isDestroyed.complete();
-    }
-
-    public login() {
-        this.authenticationService.login('facebook');
     }
 
 }

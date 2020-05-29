@@ -5,13 +5,11 @@ export class StatusPipe implements PipeTransform {
     transform(value: string): string {
         switch (value) {
             case 'CREATED':
-                return 'Not ready';
+                return 'Preparing';
             case 'OPEN':
-                return 'Waiting for players';
+                return 'Starting soon';
             case 'IN_PROGRESS':
-                return 'Started';
-            case 'COMPLETED':
-                return 'FINSHED';
+                return 'In Progress';
             default:
                 return 'unknown';
         }

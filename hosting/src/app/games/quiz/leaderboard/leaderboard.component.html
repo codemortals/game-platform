@@ -6,7 +6,7 @@
 
 <ul class="results">
     <li *ngFor="let leader of results">
-        <img [src]="leader.user.avatar">
+        <game-avatar [user]="leader.user"></game-avatar>
         <div>
             <h4>{{ leader.user.alias }}</h4>
             <div>Score: {{ leader.score }}</div>

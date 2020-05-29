@@ -1,0 +1,94 @@
+@import '../../../../../variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 2rem;
+}
+
+.wrapper {
+    > * {
+        margin-bottom: 2em;
+    }
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    max-width: 820px;
+    border-radius: $border-radius;
+
+    > * {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 50%;
+    }
+
+    &__custom, &__socials {
+        padding: 1em;
+    }
+
+    &__socials {
+        border-top: 1px dotted $brand-primary-dark;
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1.25em;
+        }
+
+        button {
+            padding: 0.5em 1em;
+            margin: 0.5em 0;
+            text-align: center;
+            border-radius: $border-radius;
+
+            fa-icon {
+                margin-left: 0.5em;
+            }
+
+            &:hover {
+                color: $brand-light-color;
+                background-color: #444950;
+            }
+        }
+
+        @media all and (min-width: $desktop-viewport) {
+            border-top: none;
+            border-left: 1px dotted $brand-primary-dark;
+        }
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        flex-direction: row;
+    }
+}
+
+.google {
+    color: $brand-light-color;
+    background-color: #4285F4;
+}
+
+.twitter {
+    color: $brand-light-color;
+    background-color: #794bc4;
+}
+
+.facebook {
+    color: $brand-light-color;
+    background-color: #4267b2;
+}
+
+.github {
+    border: 1px solid $brand-dark-color;
+    color: $brand-dark-color;
+    background-color: #F8F0EE;
+}
+
+.faq {
+    li {
+        margin: 1.5em 0;
+    }
+}

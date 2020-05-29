@@ -7,6 +7,14 @@
     border-radius: $border-radius;
     background: linear-gradient(to bottom, lighten($brand-primary-dark, 5%) 1%, $brand-primary-dark 50%);
     width: 100%;
+    text-decoration: none;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+
+    &:hover {
+        text-decoration: none;
+    }
 
     &:hover:not([disabled]) {
         background: linear-gradient(to top, lighten($brand-primary-dark, 5%) 10%, $brand-primary-dark 50%);

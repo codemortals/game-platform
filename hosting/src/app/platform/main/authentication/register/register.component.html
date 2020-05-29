@@ -1,0 +1,17 @@
+<h2>Create account</h2>
+
+<p style="font-size: 0.8em">Note, minimum password length is 8 characters.</p>
+
+<form [formGroup]="registerForm" (submit)="createAccount()" autocomplete="off">
+    <brand-input label="Username (Email)" name="email" type="email" formControlName="email"></brand-input>
+
+    <brand-input label="Display Name / Alias" name="displayName" type="text" formControlName="displayName"></brand-input>
+
+    <brand-input label="Password" name="password" type="password" formControlName="password"></brand-input>
+
+    <button brand-button type="submit" [disabled]="registerForm.pristine || registerForm.invalid || sending">Register</button>
+</form>
+
+<div class="actions">
+    <a [routerLink]="['/', 'auth', 'login']">return to login</a>
+</div>

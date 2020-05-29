@@ -46,7 +46,11 @@ export class GameService {
 
     public findAll(): Observable<Array<Game>> {
         return this.angularFirestore
-            .collection<Game>('games', (ref) => ref.orderBy('created', 'desc'))
+            .collection<Game>('games', (ref) =>
+                ref
+                    .where('status', 'in', ['CREATED', 'OPEN', 'IN_PROGRESS'])
+                    .orderBy('created', 'desc')
+            )
             .valueChanges();
     }
 

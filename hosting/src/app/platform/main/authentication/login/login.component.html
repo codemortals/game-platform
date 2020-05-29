@@ -1,0 +1,18 @@
+<h2>Login</h2>
+
+<form [formGroup]="loginForm" (submit)="login()">
+    <brand-input label="Username (Email)" name="email" type="email" formControlName="email"></brand-input>
+
+    <brand-input label="Password" name="password" type="password" formControlName="password"></brand-input>
+
+    <button brand-button type="submit" [disabled]="loginForm.pristine || loginForm.invalid || sending">Login</button>
+
+    <brand-notification *ngIf="error" severity="error">
+        <div brandNotificationMessage>{{ error }}</div>
+    </brand-notification>
+</form>
+
+<div class="actions">
+    <a [routerLink]="['/', 'auth', 'register']">create account</a>
+    <a [routerLink]="['/', 'auth', 'forgotten']">reset password</a>
+</div>

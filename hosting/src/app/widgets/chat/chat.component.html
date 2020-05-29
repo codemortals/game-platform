@@ -2,9 +2,7 @@
     <div gameChat class="messages">
         <div class="messages__none" *ngIf="!messages.length">No messages, be the first to say hello</div>
         <div class="messages__entry" *ngFor="let chat of messages">
-            <div>
-                <img [src]="chat.user.avatar">
-            </div>
+            <game-avatar [user]="chat.user"></game-avatar>
             <div>
                 <h4>{{ chat.user.alias }} ( {{ chat.created.toDate() | date: 'HH:mm' }} )</h4>
                 <div>{{ chat.message }}</div>

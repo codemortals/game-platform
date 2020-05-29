@@ -3,6 +3,7 @@ export interface User {
     alias: string;
     email: string;
     avatar: string;
+    verified: boolean;
     level?: {
         display: number;
         experience: number;
