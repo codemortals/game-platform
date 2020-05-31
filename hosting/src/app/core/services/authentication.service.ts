@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentSnapshot } from '@angular/fire/firestore';
 import { auth, User as fireUser } from 'firebase/app';
 
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
@@ -49,7 +49,7 @@ export class AuthenticationService {
                 map((credentials) => credentials.user),
                 map((user: fireUser) => this.convertToUser(user)),
                 tap(() => this.router.navigate([ '/' ])),
-                map((user) => this.user.next(user)),
+                map((account) => this.user.next(account)),
             );
     }
 
@@ -61,7 +61,7 @@ export class AuthenticationService {
                 mergeMap((user: fireUser) => this.sendVerification().pipe(map(() => user))),
                 map((user: fireUser) => this.convertToUser(user)),
                 mergeMap((user: User) => this.updateUser(user)),
-                tap((user) => this.user.next(user)),
+                tap((account) => this.user.next(account)),
             );
     }
 
@@ -71,13 +71,15 @@ export class AuthenticationService {
     }
 
     public verify(code: string): Observable<User> {
+        const user = this.angularFireAuth.auth.currentUser;
+        const userDoc = this.angularFirestore.collection<User>('users').doc<User>(user.uid);
+
         return from(this.angularFireAuth.auth.applyActionCode(code))
             .pipe(
-                map(() => this.angularFireAuth.auth.currentUser),
-                map((user: fireUser) => this.convertToUser(user)),
-                map((user: User) => ({ ...user, verified: true })),
-                mergeMap((user) => this.updateUser(user)),
-                tap((user) => this.user.next(user)),
+                mergeMap(() => userDoc.update({ verified: true })),
+                mergeMap(() => userDoc.get()),
+                map((snapshot: DocumentSnapshot<User>) => snapshot.data()),
+                tap((account) => this.user.next(account)),
             );
     }
 
@@ -98,15 +100,27 @@ export class AuthenticationService {
             );
     }
 
-    public checkLoggedIn(update = true): Observable<User> {
+    public checkLoggedIn(): Observable<User> {
         return this.angularFireAuth.authState
             .pipe(
-                map((user: fireUser) => this.convertToUser(user)),
-                mergeMap((user: User) => update ? this.updateUser(user) : of(user)),
-                mergeMap((user: User) => this.angularFirestore.collection<User>('users').doc<User>(user.uid).valueChanges()),
-                map((user) => {
-                    this.user.next(user);
-                    return user;
+                mergeMap((user: fireUser) => this.angularFirestore.collection<User>('users').doc<User>(user.uid).get()),
+                mergeMap((snapshot: DocumentSnapshot<User>) => {
+                    if (snapshot.exists) {
+                        return of(snapshot.data());
+                    } else {
+                        const currentUser: fireUser = this.angularFireAuth.auth.currentUser;
+                        const isVerified = currentUser.emailVerified;
+                        const chain = isVerified ? of(null) : this.sendVerification();
+                        return chain
+                            .pipe(
+                                map(() => this.convertToUser(currentUser)),
+                                mergeMap((user: User) => this.updateUser(user)),
+                            );
+                    }
+                }),
+                map((account) => {
+                    this.user.next(account);
+                    return account;
                 }),
             );
     }
