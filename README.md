@@ -21,6 +21,8 @@ This is a game platform developed using Angular framework with Node and Firestor
 
 ### Local development for Functions (Firebase)
 
+**prerequisite** [Firebase CLI](https://firebase.google.com/docs/cli)
+
 - 2b. Navigate from the project directory in the **functions** directory with `cd functions`
 - 3b. Install sub project dependencies with `npm install`
 - 4b. ...
