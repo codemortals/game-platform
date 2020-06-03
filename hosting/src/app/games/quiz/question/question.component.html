@@ -1,7 +1,7 @@
 <ng-container *ngIf="question">
     <div class="header">
         <span class="header__number">{{ progress }}</span>
-        <div class="header__saved" *ngIf="saved">ANSWERED</div>
+        <div class="header__saved" *ngIf="currentResponse.length">ANSWERED</div>
     </div>
 
     <div class="question">
@@ -18,12 +18,4 @@
             <button [ngClass]="{ selected: isSelected(choice) }" (click)="toggleChoice(choice)">{{ choice.text }}</button>
         </div>
     </div>
-
-    <button brand-button (click)="saveAnswer()" [disabled]="!response.length || saving">
-        <span *ngIf="saving">Saving</span>
-        <ng-container *ngIf="!saving">
-            <span *ngIf="saved">Update Answer</span>
-            <span *ngIf="!saved">Save Answer</span>
-        </ng-container>
-    </button>
 </ng-container>
