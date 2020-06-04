@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
 import { Choice, Question, QuestionSummary, Quiz, Round } from '../quiz.model';
 
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { AnswerService } from '../answer.service';
-import { delay, map, tap } from 'rxjs/operators';
+import { debounceTime, filter, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'game-question',
@@ -13,13 +13,12 @@ import { delay, map, tap } from 'rxjs/operators';
     styleUrls: [ './question.component.scss' ],
     providers: [ AnswerService ],
 })
-export class QuestionComponent implements OnChanges {
+export class QuestionComponent implements OnChanges, OnDestroy, OnInit {
 
-    public saved = false;
-    public saving = false;
-    public response: Array<string> = [];
+    public answer: Subject<{ quizId: string, roundId: string, questionId: string, response: Array<string> }> = new Subject();
+    public currentResponse: Array<string> = [];
 
-    private subscription: Subscription;
+    public isDestroyed = new Subject();
 
     @Input()
     public quiz: Quiz;
@@ -37,7 +36,18 @@ export class QuestionComponent implements OnChanges {
     get progress(): string {
         const list = (<Array<QuestionSummary>> this.round.questionList);
         const current = list.findIndex((question) => question.uid === this.question.uid) + 1;
-        return `${current} / ${list.length}`;
+        return `${ current } / ${ list.length }`;
+    }
+
+    public ngOnInit(): void {
+        this.answer
+            .pipe(
+                takeUntil(this.isDestroyed),
+                debounceTime(1000),
+            )
+            .subscribe(
+                (answer) => this.answerService.create(answer.quizId, answer.roundId, answer.questionId, answer.response),
+            );
     }
 
     public ngOnChanges(): void {
@@ -45,43 +55,40 @@ export class QuestionComponent implements OnChanges {
             return;
         }
 
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-
-        this.subscription = this.answerService
+        this.answerService
             .findOne(this.quiz.uid, this.round.uid, this.question.uid)
             .pipe(
-                tap((answer) => this.saved = !!answer)
+                // TODO: Consider not using take but takeUntil,
+                //  however there can be an interesting user experience,
+                //  but this would help sync across multiple inputs
+                take(1),
+                tap(() => this.currentResponse = []),
+                filter((answer) => !!answer),
             )
             .subscribe(
-                (answer) => this.response = answer ? answer.response : []
+                (answer) => this.currentResponse = answer.response,
             );
     }
 
+    public ngOnDestroy(): void {
+        this.isDestroyed.next();
+        this.isDestroyed.complete();
+    }
+
     public isSelected(choice: Choice): boolean {
-        return this.response.indexOf(choice.uid) >= 0;
+        return this.currentResponse.indexOf(choice.uid) >= 0;
     }
 
     public toggleChoice(choice: Choice): void {
-        const idx = this.response.indexOf(choice.uid);
+        const idx = this.currentResponse.indexOf(choice.uid);
 
         if (idx >= 0) {
-            this.response.splice(idx, 1);
+            this.currentResponse.splice(idx, 1);
         } else {
-            this.response = [ ...this.response, choice.uid ];
+            this.currentResponse = [ ...this.currentResponse, choice.uid ];
         }
-    }
 
-    public saveAnswer(): void {
-        this.answerService.create(this.quiz.uid, this.round.uid, this.question.uid, this.response)
-            .pipe(
-                map(() => this.saving = true),
-                delay(800),
-                map(() => this.saved = true),
-                map(() => this.saving = false),
-            )
-            .subscribe();
+        this.answer.next({ quizId: this.quiz.uid, roundId: this.round.uid, questionId: this.question.uid, response: this.currentResponse });
     }
 
 }
