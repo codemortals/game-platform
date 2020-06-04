@@ -41,7 +41,6 @@ export class QuestionComponent implements OnChanges, OnDestroy, OnInit {
         this.answer
             .pipe(
                 debounceTime(1000),
-                tap((answer) => this.currentResponse = answer.response),
             )
             .subscribe(
                 (answer) => this.answerService.create(answer.quizId, answer.roundId, answer.questionId, answer.response)
