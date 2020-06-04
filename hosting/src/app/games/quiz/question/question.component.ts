@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
 import { Choice, Question, QuestionSummary, Quiz, Round } from '../quiz.model';
 
@@ -13,9 +13,9 @@ import { debounceTime, filter, take, tap } from 'rxjs/operators';
     styleUrls: [ './question.component.scss' ],
     providers: [ AnswerService ],
 })
-export class QuestionComponent implements OnChanges, OnInit {
+export class QuestionComponent implements OnChanges, OnDestroy, OnInit {
 
-    public response: Subject<Array<string>> = new Subject();
+    public answer: Subject<{ quizId: string, roundId: string, questionId: string, response: Array<string> }> = new Subject();
     public currentResponse: Array<string> = [];
 
     @Input()
@@ -38,13 +38,13 @@ export class QuestionComponent implements OnChanges, OnInit {
     }
 
     public ngOnInit(): void {
-        this.response
+        this.answer
             .pipe(
-                debounceTime(200),
-                tap((response) => this.currentResponse = response),
+                debounceTime(1000),
+                tap((answer) => this.currentResponse = answer.response),
             )
             .subscribe(
-                (response) => this.answerService.create(this.quiz.uid, this.round.uid, this.question.uid, response)
+                (answer) => this.answerService.create(answer.quizId, answer.roundId, answer.questionId, answer.response)
             );
     }
 
@@ -65,6 +65,11 @@ export class QuestionComponent implements OnChanges, OnInit {
             );
     }
 
+    public ngOnDestroy(): void {
+        this.answer.next();
+        this.answer.complete();
+    }
+
     public isSelected(choice: Choice): boolean {
         return this.currentResponse.indexOf(choice.uid) >= 0;
     }
@@ -78,7 +83,7 @@ export class QuestionComponent implements OnChanges, OnInit {
             this.currentResponse = [ ...this.currentResponse, choice.uid ];
         }
 
-        this.response.next(this.currentResponse);
+        this.answer.next({ quizId: this.quiz.uid, roundId: this.round.uid, questionId: this.question.uid, response: this.currentResponse });
     }
 
 }
