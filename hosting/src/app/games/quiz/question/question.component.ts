@@ -5,7 +5,7 @@ import { Choice, Question, QuestionSummary, Quiz, Round } from '../quiz.model';
 import { Subject } from 'rxjs';
 
 import { AnswerService } from '../answer.service';
-import { debounceTime, filter, take, tap } from 'rxjs/operators';
+import { debounceTime, filter, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'game-question',
@@ -17,6 +17,8 @@ export class QuestionComponent implements OnChanges, OnDestroy, OnInit {
 
     public answer: Subject<{ quizId: string, roundId: string, questionId: string, response: Array<string> }> = new Subject();
     public currentResponse: Array<string> = [];
+
+    public isDestroyed = new Subject();
 
     @Input()
     public quiz: Quiz;
@@ -40,10 +42,11 @@ export class QuestionComponent implements OnChanges, OnDestroy, OnInit {
     public ngOnInit(): void {
         this.answer
             .pipe(
+                takeUntil(this.isDestroyed),
                 debounceTime(1000),
             )
             .subscribe(
-                (answer) => this.answerService.create(answer.quizId, answer.roundId, answer.questionId, answer.response)
+                (answer) => this.answerService.create(answer.quizId, answer.roundId, answer.questionId, answer.response),
             );
     }
 
@@ -55,6 +58,9 @@ export class QuestionComponent implements OnChanges, OnDestroy, OnInit {
         this.answerService
             .findOne(this.quiz.uid, this.round.uid, this.question.uid)
             .pipe(
+                // TODO: Consider not using take but takeUntil,
+                //  however there can be an interesting user experience,
+                //  but this would help sync across multiple inputs
                 take(1),
                 tap(() => this.currentResponse = []),
                 filter((answer) => !!answer),
@@ -65,8 +71,8 @@ export class QuestionComponent implements OnChanges, OnDestroy, OnInit {
     }
 
     public ngOnDestroy(): void {
-        this.answer.next();
-        this.answer.complete();
+        this.isDestroyed.next();
+        this.isDestroyed.complete();
     }
 
     public isSelected(choice: Choice): boolean {
