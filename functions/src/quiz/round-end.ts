@@ -21,6 +21,11 @@ export const QuizRoundEnd = functions
             throw new HttpsError('permission-denied', 'User is not a game host');
         }
 
+        const playerRef = gameRef
+            .collection('players');
+
+        const players = await playerRef.get();
+
         const quizRef = admin.firestore()
             .collection('quizzes')
             .doc(data.quizId);
@@ -28,32 +33,36 @@ export const QuizRoundEnd = functions
         const quizData = (await quizRef.get()).data();
 
         if (!quizData) {
-            throw new HttpsError('not-found', 'Not Found');
+            throw new HttpsError('not-found', 'No Quiz Found');
         }
 
         const roundRef = quizRef
             .collection('rounds')
             .doc(data.roundId);
 
-        const questions = await roundRef
-            .collection('questions')
-            .listDocuments();
+        const round = (await roundRef.get()).data();
+
+        // Build leaderboard
+        const leaderboard = players.docs.reduce((leaders, doc) => {
+            const player = doc.data();
+            leaders[ player.user ] = { answers: Array(round.questionList.length).fill(null), score: 0 };
+            return leaders;
+        }, <any> {});
 
         // Perform updates
         const batch = admin.firestore().batch();
 
-        const roundList = quizData.roundList.map((round: any) => {
-            if (round.uid === data.roundId) {
-                round.status = 'COMPLETED';
+        const roundList = quizData.roundList.map((entry: any) => {
+            if (entry.uid === data.roundId) {
+                entry.status = 'COMPLETED';
             }
-            return round;
+            return entry;
         });
         batch.update(quizRef, { roundList });
 
         // Calculate player scores
-        const leaderboard: any = {};
-
-        await Promise.all(questions.map(async (questionRef): Promise<void> => {
+        await Promise.all(round.questionList.map(async (question, questionIdx): Promise<void> => {
+            const questionRef = roundRef.collection('questions').doc(question.uid);
             const choices = await questionRef.collection('choices').get();
             const validAnswers = choices.docs
                 .map((choice) => choice.data())
@@ -70,7 +79,11 @@ export const QuizRoundEnd = functions
                     return;
                 }
 
+                const user = answerData.user;
+                const player = leaderboard[ user ];
+
                 if (validAnswers.length !== answerData.response.length) {
+                    player.answers[ questionIdx ] = false;
                     return;
                 }
 
@@ -82,9 +95,12 @@ export const QuizRoundEnd = functions
                 }, []);
 
                 if (validAnswers.length === checkedAnswers.length) {
-                    const user = answer.data().user;
-                    leaderboard[ user ] = { user, score: leaderboard[ user ] ? ++leaderboard[ user ].score : 1 };
+                    player.score++;
+                    player.answers[ questionIdx ] = true;
+                } else {
+                    player.answers[ questionIdx ] = false;
                 }
+                leaderboard[ user ] = player;
             });
         }));
 

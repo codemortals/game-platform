@@ -1,6 +1,11 @@
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
+/lib
+
+## Testing
+/.coverage
+/.nyc_output
 
 # Typescript v1 declaration files
 typings/
