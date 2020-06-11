@@ -1,9 +1,7 @@
 name: Production
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
+
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
@@ -16,9 +14,38 @@ env:
   FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
 
 jobs:
+  test:
+    name: Test API
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Setup Tools
+        run: |
+          npm install -g firebase-tools
+      - name: Build Functions
+          run: |
+            cd functions
+            npm install
+            npm run test:build
+      - name: Run tests with emulator
+          run: |
+            cd functions
+            npm run test:ci
+
   deploy:
     name: Deploy
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
+    needs: test
 
     steps:
       - uses: actions/checkout@v2
