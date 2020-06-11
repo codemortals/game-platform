@@ -1,4 +1,4 @@
-name: Production
+name: Build, Test and Deploy
 
 on: [push]
 
@@ -32,14 +32,14 @@ jobs:
         run: |
           npm install -g firebase-tools
       - name: Build Functions
-          run: |
-            cd functions
-            npm install
-            npm run test:build
+        run: |
+          cd functions
+          npm install
+          npm run test:build
       - name: Run tests with emulator
-          run: |
-            cd functions
-            npm run test:ci
+        run: |
+          cd functions
+          npm run test:ci
 
   deploy:
     name: Deploy
