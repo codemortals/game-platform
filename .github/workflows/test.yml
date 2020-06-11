@@ -27,4 +27,5 @@ jobs:
           npm run test:build
       - name: Run tests with emulator
         run: |
+          cd functions
           npm run test:ci
