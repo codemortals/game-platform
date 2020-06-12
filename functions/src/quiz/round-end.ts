@@ -47,7 +47,7 @@ export const QuizRoundEnd = functions
             const player = doc.data();
             leaders[ player.user ] = { answers: Array(round.questionList.length).fill(null), score: 0 };
             return leaders;
-        }, <any> {});
+        }, {});
 
         // Perform updates
         const batch = admin.firestore().batch();

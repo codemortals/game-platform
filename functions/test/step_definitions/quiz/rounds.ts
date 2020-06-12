@@ -1,5 +1,4 @@
 import { Given } from 'cucumber';
-
 import { date, random } from 'faker';
 
 Given(/^there is a quiz with (\d+) round(?:s)?$/, async function (roundCount) {
