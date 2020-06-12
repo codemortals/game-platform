@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireFunctionsModule, FUNCTIONS_REGION } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { CoreModule } from '@core/core.module';
@@ -32,7 +32,7 @@ import { environment } from '../environments/environment';
         WidgetsModule,
     ],
     providers: [
-        { provide: FUNCTIONS_REGION, useValue: 'europe-west2' },
+        { provide: REGION, useValue: 'europe-west2' },
     ],
     bootstrap: [ AppComponent ],
 })
