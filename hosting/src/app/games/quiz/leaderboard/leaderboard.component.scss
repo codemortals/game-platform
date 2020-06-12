@@ -47,4 +47,33 @@
             }
         }
     }
+
+    .answers {
+        display: flex;
+        flex-direction: row;
+        counter-reset: answer;
+
+        &__answer:before {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5em;
+            width: 2em;
+            height: 2em;
+            font-size: 0.8em;
+            border-radius: 50%;
+            border: 2px solid $brand-primary-dark;
+            counter-increment: answer;
+            content: counter(answer);
+        }
+
+        &__correct:before {
+            background-color: $brand-primary-dark;
+        }
+
+        &__wrong:before {
+            border-color: $brand-warning-dark;
+            background-color: $brand-warning-dark;
+        }
+    }
 }

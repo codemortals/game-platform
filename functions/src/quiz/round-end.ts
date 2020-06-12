@@ -45,7 +45,7 @@ export const QuizRoundEnd = functions
         // Build leaderboard
         const leaderboard = players.docs.reduce((leaders, doc) => {
             const player = doc.data();
-            leaders[ player.user ] = { answers: Array(round.questionList.length).fill(null), score: 0 };
+            leaders[ player.user ] = { user: player.user, answers: Array(round.questionList.length).fill(null), score: 0 };
             return leaders;
         }, {});
 

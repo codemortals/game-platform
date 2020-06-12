@@ -27,8 +27,9 @@ export interface QuestionSummary {
 }
 
 export interface RoundResult<T> {
-    user: T;
+    answers: Array<boolean>;
     score: number;
+    user: T;
 }
 
 export interface Round {

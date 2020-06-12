@@ -24,11 +24,13 @@ Feature:
         And there is a sub-collection "rounds" with document "{{ quiz.rounds[1].uid }}"
         And there is a sub-collection "results" with document "{{ game.players[1].uid }}"
         And the document contains:
-            | score   | 2                           |
             | answers | [ true, false, null, true ] |
+            | score   | 2                           |
+            | user    | {{ game.players[1].uid }}   |
         Then there is a collection "quizzes" with document "{{ quiz.uid }}"
         And there is a sub-collection "rounds" with document "{{ quiz.rounds[1].uid }}"
         And there is a sub-collection "results" with document "{{ game.players[2].uid }}"
         And the document contains:
-            | score   | 0                          |
             | answers | [ null, null, null, null ] |
+            | score   | 0                          |
+            | user    | {{ game.players[2].uid }}  |
