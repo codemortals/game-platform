@@ -26,7 +26,7 @@ Feature:
         And the document contains:
             | answers | [ true, false, null, true ] |
             | score   | 2                           |
-            | user    | {{ game.players[1].uid }}  |
+            | user    | {{ game.players[1].uid }}   |
         Then there is a collection "quizzes" with document "{{ quiz.uid }}"
         And there is a sub-collection "rounds" with document "{{ quiz.rounds[1].uid }}"
         And there is a sub-collection "results" with document "{{ game.players[2].uid }}"
