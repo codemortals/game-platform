@@ -40,11 +40,11 @@ export class AuthenticationService {
                 break;
         }
 
-        this.angularFireAuth.auth.signInWithRedirect(provision);
+        this.angularFireAuth.signInWithRedirect(provision);
     }
 
     public signIn(email: string, password: string): Observable<void> {
-        return from(this.angularFireAuth.auth.signInWithEmailAndPassword(email, password))
+        return from(this.angularFireAuth.signInWithEmailAndPassword(email, password))
             .pipe(
                 map((credentials) => credentials.user),
                 map((user: fireUser) => this.convertToUser(user)),
@@ -54,7 +54,7 @@ export class AuthenticationService {
     }
 
     public register(displayName: string, email: string, password: string): Observable<User> {
-        return from(this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password))
+        return from(this.angularFireAuth.createUserWithEmailAndPassword(email, password))
             .pipe(
                 map((credentials) => credentials.user),
                 mergeMap((user: fireUser) => from(user.updateProfile({ displayName })).pipe(map(() => user))),
@@ -66,32 +66,35 @@ export class AuthenticationService {
     }
 
     public sendVerification(): Observable<void> {
-        const user = this.angularFireAuth.auth.currentUser;
-        return from(user.sendEmailVerification());
+        return from(this.angularFireAuth.currentUser)
+            .pipe(mergeMap((user) => user.sendEmailVerification()));
     }
 
     public verify(code: string): Observable<User> {
-        const user = this.angularFireAuth.auth.currentUser;
-        const userDoc = this.angularFirestore.collection<User>('users').doc<User>(user.uid);
-
-        return from(this.angularFireAuth.auth.applyActionCode(code))
+        return from(this.angularFireAuth.currentUser)
             .pipe(
-                mergeMap(() => userDoc.update({ verified: true })),
-                mergeMap(() => userDoc.get()),
+                map((user) => this.angularFirestore.collection<User>('users').doc<User>(user.uid)),
+                mergeMap(
+                    (userDoc) => from(this.angularFireAuth.applyActionCode(code))
+                        .pipe(
+                            mergeMap(() => userDoc.update({ verified: true })),
+                            mergeMap(() => userDoc.get()),
+                        ),
+                ),
                 map((snapshot: DocumentSnapshot<User>) => snapshot.data()),
                 tap((account) => this.user.next(account)),
             );
     }
 
     public sendReset(email: string): Observable<void> {
-        return from(this.angularFireAuth.auth.sendPasswordResetEmail(email));
+        return from(this.angularFireAuth.sendPasswordResetEmail(email));
     }
 
     public resetPassword(password: string, code: string): Observable<void> {
-        return from(this.angularFireAuth.auth.verifyPasswordResetCode(code))
+        return from(this.angularFireAuth.verifyPasswordResetCode(code))
             .pipe(
                 mergeMap((email) => {
-                    return from(this.angularFireAuth.auth.confirmPasswordReset(code, password))
+                    return from(this.angularFireAuth.confirmPasswordReset(code, password))
                         .pipe(
                             map(() => email),
                         );
@@ -108,12 +111,10 @@ export class AuthenticationService {
                     if (snapshot.exists) {
                         return of(snapshot.data());
                     } else {
-                        const currentUser: fireUser = this.angularFireAuth.auth.currentUser;
-                        const isVerified = currentUser.emailVerified;
-                        const chain = isVerified ? of(null) : this.sendVerification();
-                        return chain
+                        return from(this.angularFireAuth.currentUser)
                             .pipe(
-                                map(() => this.convertToUser(currentUser)),
+                                mergeMap((currentUser) => currentUser.emailVerified ? of(currentUser) : this.sendVerification().pipe(map(() => currentUser))),
+                                map((currentUser) => this.convertToUser(currentUser)),
                                 mergeMap((user: User) => this.updateUser(user)),
                             );
                     }
@@ -126,7 +127,7 @@ export class AuthenticationService {
     }
 
     public logout(): Observable<void> {
-        const logout = this.angularFireAuth.auth.signOut();
+        const logout = this.angularFireAuth.signOut();
         return from(logout)
             .pipe(
                 take(1),
