@@ -10,7 +10,7 @@
         <div>
             <h4>{{ leader.user.alias }} ( {{ leader.score }} )</h4>
             <div class="answers">
-                <ng-container *ngFor="let answer of leader.answers" [ngSwitch]="answer">
+                <ng-container *ngFor="let answer of leader.questions" [ngSwitch]="answer">
                     <div class="answers__answer answers__correct" *ngSwitchCase="true"></div>
                     <div class="answers__answer answers__wrong" *ngSwitchCase="false"></div>
                     <div class="answers__answer answers__missed" *ngSwitchDefault></div>

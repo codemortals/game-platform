@@ -45,7 +45,7 @@ export const QuizRoundEnd = functions
         // Build leaderboard
         const leaderboard = players.docs.reduce((leaders, doc) => {
             const player = doc.data();
-            leaders[ player.user ] = { user: player.user, answers: Array(round.questionList.length).fill(null), score: 0 };
+            leaders[ player.user ] = { user: player.user, questions: Array(round.questionList.length).fill(null), score: 0 };
             return leaders;
         }, {});
 
@@ -83,7 +83,7 @@ export const QuizRoundEnd = functions
                 const player = leaderboard[ user ];
 
                 if (validAnswers.length !== answerData.response.length) {
-                    player.answers[ questionIdx ] = false;
+                    player.questions[ questionIdx ] = false;
                     return;
                 }
 
@@ -96,9 +96,9 @@ export const QuizRoundEnd = functions
 
                 if (validAnswers.length === checkedAnswers.length) {
                     player.score++;
-                    player.answers[ questionIdx ] = true;
+                    player.questions[ questionIdx ] = true;
                 } else {
-                    player.answers[ questionIdx ] = false;
+                    player.questions[ questionIdx ] = false;
                 }
                 leaderboard[ user ] = player;
             });
