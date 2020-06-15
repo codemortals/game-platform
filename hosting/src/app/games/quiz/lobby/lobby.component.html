@@ -11,7 +11,8 @@
 
                         <brand-dropdown label="Type" placeholder="Select an option" formControlName="type" [options]="availableTypes"></brand-dropdown>
 
-                        <brand-input label="Question" type="textarea" formControlName="text"></brand-input>
+                        <brand-input *ngIf="questionForm.get('type').value.id =='image'; else standardQuestion" label="Image URL (image should include any text for the question)" type="text" formControlName="text" placeholder="http://url-of-the-image"></brand-input>
+                        <ng-template #standardQuestion><brand-input  label="Question" type="textarea" formControlName="text"></brand-input></ng-template>
 
                         <brand-label description="Enter the available options that can be chosen to answer the question, a minimum of two options are required and a maximum of eight.">Choices</brand-label>
                         <div formArrayName="choices" *ngFor="let option of formOptions.controls; let i = index">
