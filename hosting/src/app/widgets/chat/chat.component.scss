@@ -1,0 +1,82 @@
+@import '../../../../variables';
+
+.widget-chat {
+
+    .messages {
+        margin: 1em 0;
+        padding: 0 0.5em;
+        border: 1px solid $brand-light-color;
+        border-radius: $border-radius;
+        max-height: 30em;
+        overflow: scroll;
+
+        &__none {
+            padding: 2em 0.75em;
+        }
+
+        &__entry {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0.75em;
+
+            &:not(:last-of-type) {
+                border-bottom: 1px dashed transparentize($brand-light-color, 0.8);
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: row;
+
+        .input {
+            display: flex;
+            flex: 1;
+            position: relative;
+
+            input {
+                display: inline-block;
+                flex: 1;
+                color: $brand-light-color;
+                margin: 0;
+                font-size: 1em;
+                appearance: none;
+                padding: $input-padding ($input-padding * 1.5);
+                box-sizing: border-box;
+                border-radius: $border-radius;
+                border: 1px solid $brand-secondary-dark;
+                background-color: $brand-dark-color;
+
+                &:focus, &:active {
+                    outline: none;
+                }
+            }
+
+            .hint {
+                position: absolute;
+                color: $brand-light-color;
+                right: 0.5em;
+                font-size: 0.8em;
+                line-height: 3;
+
+                &.invalid {
+                    color: $brand-warning-dark;
+                }
+            }
+        }
+
+        button {
+            padding: 0 1em;
+
+            &:not([disabled]):hover {
+                color: $brand-primary;
+            }
+
+            &[disabled] {
+                cursor: default;
+                opacity: 0.3;
+            }
+        }
+    }
+}

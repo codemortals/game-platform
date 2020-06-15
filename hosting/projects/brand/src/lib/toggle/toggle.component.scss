@@ -1,0 +1,68 @@
+@import '../../../../../variables';
+
+.brand-toggle {
+    .switch {
+        position: relative;
+        display: inline-block;
+
+        .state {
+            position: absolute;
+            display: flex;
+            color: $brand-dark-color;
+            top: 0;
+            right: 0.75em;
+            height: 100%;
+            align-items: center;
+        }
+
+        .slide {
+            display: block;
+            position: absolute;
+            top: $input-padding * 3/2;
+            left: $input-padding;
+            min-width: calc(2em - 8px);
+            min-height: calc(100% - #{$input-padding * 3});
+            border-radius: $border-radius;
+            background-color: $brand-primary-dark;
+            content: ' ';
+        }
+
+        .background {
+            width: 5em;
+            height: calc(#{$input-padding * 2} + 1.25em + 8px);
+            border-radius: $border-radius;
+            background-color: $input-background-color;
+        }
+    }
+
+    &.active {
+        .switch {
+            .state {
+                right: unset;
+                left: 0.75em;
+            }
+
+            .slide {
+                left: unset;
+                right: $input-padding;
+                background-color: $input-highlight-color;
+            }
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.disabled {
+        &:hover {
+            cursor: initial;
+        }
+
+        .switch {
+            .slide {
+                background-color: $input-disabled;
+            }
+        }
+    }
+}

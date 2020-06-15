@@ -1,0 +1,21 @@
+<ng-container *ngIf="question">
+    <div class="header">
+        <span class="header__number">{{ progress }}</span>
+        <div class="header__saved" *ngIf="currentResponse.length">ANSWERED</div>
+    </div>
+
+    <div class="question">
+        <h4 class="question__round">{{ round.title }}</h4>
+
+        <div class="question__text" [ngSwitch]="question.type">
+            <img *ngSwitchCase="'image'" [src]="question.text" />
+            <h2 *ngSwitchDefault [gameMarkdown]="question.text"></h2>
+        </div>
+    </div>
+
+    <div class="choices">
+        <div *ngFor="let choice of question.choiceList">
+            <button [ngClass]="{ selected: isSelected(choice) }" (click)="toggleChoice(choice)">{{ choice.text }}</button>
+        </div>
+    </div>
+</ng-container>

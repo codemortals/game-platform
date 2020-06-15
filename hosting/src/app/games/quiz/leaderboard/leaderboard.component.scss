@@ -1,0 +1,79 @@
+@import '../../../../../variables';
+
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 6em;
+}
+
+.results {
+    counter-reset: result;
+    list-style: none;
+    padding: 0;
+
+    li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0.875em 0;
+        counter-increment: result;
+
+        &:before {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2em;
+            height: 2em;
+            margin-right: 1.5em;
+            font-weight: 700;
+            content: counter(result);
+            color: $brand-secondary-dark;
+            border: 2px dotted $brand-secondary-dark;
+            border-radius: 50%;
+        }
+
+        &:nth-child(2), &:nth-child(3) {
+            &:before {
+                color: $brand-primary-dark;
+                border: 2px dotted $brand-primary-dark;
+            }
+        }
+
+        &:nth-child(1) {
+            &:before {
+                color: $brand-primary-dark;
+                border: 3px solid $brand-primary-dark;
+            }
+        }
+    }
+
+    .answers {
+        display: flex;
+        flex-direction: row;
+        counter-reset: answer;
+
+        &__answer:before {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5em;
+            width: 2em;
+            height: 2em;
+            font-size: 0.8em;
+            border-radius: 50%;
+            border: 2px solid $brand-primary-dark;
+            counter-increment: answer;
+            content: counter(answer);
+        }
+
+        &__correct:before {
+            background-color: $brand-primary-dark;
+        }
+
+        &__wrong:before {
+            border-color: $brand-warning-dark;
+            background-color: $brand-warning-dark;
+        }
+    }
+}

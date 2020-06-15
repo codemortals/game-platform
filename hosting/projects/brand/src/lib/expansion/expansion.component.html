@@ -1,0 +1,12 @@
+<div class="brand-expansion" [ngClass]="{ open: !collapsed }">
+    <button type="button" (click)="toggle()">
+        <span class="brand-expansion__label">{{ label }}</span>
+        <span class="brand-expansion__icon">
+            <fa-icon *ngIf="!collapsed" icon="chevron-up"></fa-icon>
+            <fa-icon *ngIf="collapsed" icon="chevron-down"></fa-icon>
+        </span>
+    </button>
+    <div class="brand-expansion__content" [ngClass]="{ expanded: !collapsed }" [@fade]="collapsed ? 'closed' : 'open'">
+        <ng-content></ng-content>
+    </div>
+</div>

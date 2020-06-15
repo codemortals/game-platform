@@ -1,0 +1,28 @@
+$brand-dark-color: #322e2d;
+$brand-light-color: #f8f0ee;
+
+$brand-primary: #8ce8ff;
+$brand-primary-dark: #009eaf;
+
+$brand-secondary: #fff3cf;
+$brand-secondary-dark: #997b4e;
+
+$brand-warning: #ffc4ab;
+$brand-warning-dark: #d64b4b;
+
+$brand-error: #ffc4ab;
+$brand-error-dark: #d64b4b;
+
+$tablet-viewport: 520px;
+$desktop-viewport: 780px;
+$workstation-viewport: 1040px;
+
+$border-radius: 0.5em;
+
+$input-padding: 0.375em;
+$input-background-color: lighten($brand-primary, 30%);
+$input-border-color: $input-background-color;
+$input-border-color-focus: $brand-primary-dark;
+$input-border-color-error: $brand-warning-dark;
+$input-highlight-color: darken($input-background-color, 30%);
+$input-disabled: lighten($brand-dark-color, 40);

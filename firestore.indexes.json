@@ -1,4 +1,19 @@
 {
-  "indexes": [],
-  "fieldOverrides": []
+    "indexes": [
+        {
+            "collectionGroup": "games",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "status",
+                    "mode": "ASCENDING"
+                },
+                {
+                    "fieldPath": "created",
+                    "mode": "DESCENDING"
+                }
+            ]
+        }
+    ],
+    "fieldOverrides": []
 }

@@ -1,25 +1,117 @@
+@import '../variables';
+
 html, body {
     font-family: 'Oxygen', sans-serif;
-    font-size: 16px;
-    color: #322E2D;
+    font-size: 7px;
+    color: $brand-dark-color;
+    height: 100vh;
+
+    @media all and (min-width: $tablet-viewport) {
+        font-size: 8px;
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        font-size: 9px;
+    }
+
+    @media all and (min-width: $workstation-viewport) {
+        font-size: 10px;
+    }
 }
 
-h1, h2, h3 {
-    margin: 0;
+body {
+    font-size: 2rem;
+    background-color: $brand-light-color;
+    background-image: url(/assets/background.jpg);
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    backdrop-filter: blur(20px);
+    animation: blur-background 6s infinite cubic-bezier(0.7, 0, 0.7, 0);
+    animation-iteration-count: 1
+
+}
+
+section {
+    + section {
+        margin-top: 2em;
+    }
+}
+
+h1, h2, h3, h4 {
+    margin: 0 0 0.5em;
     font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 300;
 }
 
 h2 {
-    font-size: 1.6em;
+    font-size: 1.5em;
+    line-height: 1.2;
     font-weight: 300;
 }
 
 h3 {
-    font-size: 1.4em;
+    font-size: 1.2em;
+    line-height: 1.1;
     font-weight: 500;
+}
+
+h4 {
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1;
+}
+
+a {
+    color: $brand-primary;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+p {
+    margin: 0.5em 0;
+}
+
+button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+blockquote {
+    margin: 0.5em 0;
+    padding-left: 0.5em;
+    border-left: 4px solid $brand-primary;
+}
+
+/* ANIMATIONS */
+@keyframes blur-background {
+    from {
+        backdrop-filter: blur(0);
+    }
+    to {
+        backdrop-filter: blur(20px);
+    }
 }

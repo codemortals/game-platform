@@ -1,0 +1,51 @@
+@import '../../../../../variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 2rem;
+}
+
+.open-games {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -1em;
+
+    &__login, &__entry {
+        display: flex;
+        flex: 0 1 calc(50% - 2em);
+        margin: 1em;
+        align-items: center;
+        border-radius: $border-radius;
+        background-color: $brand-primary-dark;
+        text-decoration: none;
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em;
+            width: 100%;
+            align-items: center;
+        }
+
+        &:hover {
+            color: $brand-dark-color;
+            background-color: $brand-primary;
+        }
+
+        @media all and (min-width: $tablet-viewport) {
+            flex: 0 1 calc(33.33% - 2em);
+        }
+
+        @media all and (min-width: $desktop-viewport) {
+            flex: 0 1 calc(25% - 2em);
+        }
+    }
+
+    &__login {
+        :nth-child(2) {
+            font-size: 0.8em;
+        }
+    }
+}

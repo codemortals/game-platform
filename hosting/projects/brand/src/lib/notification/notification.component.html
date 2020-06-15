@@ -1,0 +1,11 @@
+<div class="brand-notification" [ngClass]="severity" [style.alignItems]="position">
+    <div class="brand-notification__header">
+        <ng-content select="[brandNotificationHeader]"></ng-content>
+    </div>
+    <div class="brand-notification__countdown">
+        <ng-content select="[brandNotificationCountdown]"></ng-content>
+    </div>
+    <div class="brand-notification__content">
+        <ng-content select="[brandNotificationMessage]"></ng-content>
+    </div>
+</div>

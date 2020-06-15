@@ -1,0 +1,40 @@
+<brand-card>
+    <ng-container *ngIf="gameList.length; else noGames">
+        <h2>Available Games</h2>
+
+        <div class="open-games">
+            <a *gameAuthenticated="true" class="open-games__entry" [routerLink]="['/', 'games', 'create']">
+                <div class="container">
+                    <div>
+                        <fa-icon [icon]="['fas', 'plus']" size="2x" [fixedWidth]="true"></fa-icon>
+                    </div>
+                    <span>Start a Game</span>
+                </div>
+            </a>
+            <a *gameAuthenticated="false" class="open-games__login" [routerLink]="['/', 'auth', 'login']">
+                <div class="container">
+                    <div>Sign Up</div>
+                    <div>or</div>
+                    <div>Login</div>
+                </div>
+            </a>
+            <a class="open-games__entry" [routerLink]="['/', 'games', game.uid, 'lobby']" *ngFor="let game of gameList">
+                <div class="container">
+                    <span>{{ game.name }}</span>
+                    <div>
+                        <fa-icon [icon]="['fas', 'gamepad']" size="3x" [fixedWidth]="true"></fa-icon>
+                    </div>
+                    <span>{{ game.status | status }}</span>
+                </div>
+            </a>
+        </div>
+    </ng-container>
+
+    <ng-template #noGames>
+        <h2>No open Games</h2>
+        <div>There are no games currently available to join,
+            <a [routerLink]="['/', 'games', 'create']" *gameAuthenticated="true">create a new one</a>
+            <a [routerLink]="['/', 'auth', 'login']" *gameAuthenticated="false">login to start a game</a>.
+        </div>
+    </ng-template>
+</brand-card>

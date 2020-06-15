@@ -1,0 +1,16 @@
+@import '../../../../../variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.brand-card {
+    flex: 1;
+    color: $brand-light-color;
+    padding: 1em;
+    overflow: hidden;
+    border-radius: $border-radius;
+    background-color: transparentize($brand-dark-color, 0.2);
+}

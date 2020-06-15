@@ -1,30 +1,38 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { QuestionComponent } from './question/question.component';
-import { QuizComponent } from './quiz/quiz.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { AuthenticationResolve } from '@core/resolves';
 
-const routes: Routes = [{
-  path: '',
-  component: WelcomeComponent,
-},
-{
-  path: 'quiz',
-  component: QuizComponent,
-},
-{
-  path: 'question',
-  component: QuestionComponent,
-},
-{
-  path: 'leaderboard',
-  component: LeaderboardComponent,
-}];
+import { LayoutComponent } from './layout.component';
+
+const routes: Routes = [
+    {
+        path: '',
+        component: LayoutComponent,
+        resolve: { loggedIn: AuthenticationResolve },
+        children: [
+            {
+                path: '',
+                loadChildren: () => import('./platform/main/main.module').then((m) => m.MainModule),
+            },
+            {
+                path: 'account',
+                loadChildren: () => import('./platform/account/account.module').then((m) => m.AccountModule),
+            },
+            {
+                path: 'games',
+                loadChildren: () => import('./platform/games/games.module').then((m) => m.GamesModule),
+            },
+            {
+                path: 'stats',
+                loadChildren: () => import('./platform/stats/stats.module').then((m) => m.StatsModule),
+            },
+        ],
+    },
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [ RouterModule.forRoot(routes) ],
+    exports: [ RouterModule ],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

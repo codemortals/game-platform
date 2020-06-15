@@ -14,18 +14,22 @@ import { BrandInputDirective } from '../core/directives/input.directive';
 export class BrandInputComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
 
     public currentValue: string;
+    public hasFocus = false;
     public isDisabled = false;
 
-    private destroyed = new Subject();
+    private isDestroyed = new Subject();
 
     @Input()
-    public label = '';
+    public label: string;
 
     @Input()
     public placeholder = '';
 
     @Input()
-    public name: string;
+    public prefix: number;
+
+    @Input()
+    public name = `input-${ Math.round(Math.random() * 100000) }`;
 
     @Input()
     public type: 'text' | 'email' | 'textarea' = 'text';
@@ -41,6 +45,7 @@ export class BrandInputComponent implements AfterViewInit, ControlValueAccessor,
         this.hasChange(this.currentValue);
         this.isTouched();
     }
+
     get value(): string {
         return this.currentValue;
     }
@@ -53,15 +58,19 @@ export class BrandInputComponent implements AfterViewInit, ControlValueAccessor,
 
     public ngAfterViewInit(): void {
         this.control.changes
-            .pipe(takeUntil(this.destroyed))
+            .pipe(takeUntil(this.isDestroyed))
             .subscribe(() => this.isTouched());
+
+        this.control.focus
+            .pipe(takeUntil(this.isDestroyed))
+            .subscribe((focus) => this.hasFocus = focus);
 
         setTimeout(() => this.control.setValidator(this.input), 0);
     }
 
     public ngOnDestroy(): void {
-        this.destroyed.next();
-        this.destroyed.complete();
+        this.isDestroyed.next();
+        this.isDestroyed.complete();
     }
 
     public registerOnTouched(fn: () => {}): void {

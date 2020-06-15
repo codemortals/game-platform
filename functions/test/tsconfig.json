@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "sourceMap": true,
+        "target": "es2017"
+    },
+    "compileOnSave": true,
+    "include": [
+        "step_definitions",
+        "support"
+    ]
+}

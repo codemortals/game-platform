@@ -1,0 +1,113 @@
+@import '../../../../../variables';
+
+.header {
+    position: relative;
+    height: 0.675em;
+    margin-bottom: 1em;
+    width: 100%;
+
+    &__number, &__saved {
+        position: absolute;
+        top: -1em;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1em;
+        min-width: 4em;
+        color: $brand-secondary-dark;
+        transform-origin: 0 0;
+        border: 3px solid $brand-secondary-dark;
+        border-top: 0;
+        background-color: $brand-secondary;
+    }
+
+    &__number {
+        left: -1em;
+        transform: skew(-25deg);
+    }
+
+    &__saved {
+        right: -1em;
+        transform: skew(25deg);
+    }
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 6em;
+
+    &__round {
+        width: 100%;
+        padding-bottom: 0.5em;
+        border-bottom: 1px dashed $brand-secondary-dark;
+    }
+
+    &__text {
+        margin: 1em 0;
+        width: 100%;
+
+        img {
+            display: block;
+            margin: auto;
+            width: 100%;
+            max-width: 480px;
+            max-height: 480px;
+        }
+    }
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    margin: 1em -1em;
+    justify-content: center;
+    counter-reset: choices;
+
+    > * {
+        margin: 1em;
+    }
+
+    button {
+        position: relative;
+        height: 100%;
+        min-height: 4em;
+        width: calc(100% - 1ch - 0.75em - 4px);
+        padding: 0.5em 1em;
+        margin-left: calc(1ch + 0.75em + 4px);
+        border: 2px solid $brand-primary;
+        border-radius: $border-radius;
+
+        &.selected {
+            background-color: $brand-primary-dark;
+        }
+
+        &:before {
+            position: absolute;
+            display: flex;
+            top: $border-radius / 2;
+            bottom: $border-radius / 2;
+            left: calc(-1ch + -0.75em + -4px);
+            padding: 0 0.375em;
+            width: 1ch;
+            align-items: center;
+            color: $brand-primary;
+            border: 2px solid $brand-primary;
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+            content: counter(choices, upper-alpha);
+            counter-increment: choices;
+        }
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        > * {
+            flex: 0 1 calc(50% - 2em);
+        }
+    }
+}

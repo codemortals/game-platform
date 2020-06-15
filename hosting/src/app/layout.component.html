@@ -1,0 +1,19 @@
+<header>
+    <div class="title">
+        <a [routerLink]="['/']">
+            <img src="/assets/logo.png" alt="Code Mortals Logo">
+        </a>
+        <div>
+            <div>Code Mortals Presents</div>
+            <h1>Game Night</h1>
+        </div>
+    </div>
+    <div class="user">
+        <game-account *gameAuthenticated="true"></game-account>
+        <a brand-button *gameAuthenticated="false" [routerLink]="['/', 'auth', 'login']">Sign Up / Login</a>
+    </div>
+</header>
+
+<game-verify *gameVerified="false"></game-verify>
+
+<router-outlet></router-outlet>

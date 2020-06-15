@@ -1,0 +1,41 @@
+@import '../../../../../variables';
+
+.brand-notification {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1em;
+    padding: 1em;
+    color: $brand-light-color;
+    border-radius: $border-radius;
+    border: 4px solid $brand-primary-dark;
+    background-color: transparentize($brand-primary-dark, 0.2);
+
+    &.success {
+        border-color: $brand-secondary-dark;
+        background-color: transparentize($brand-secondary-dark, 0.2);
+    }
+
+    &.warning {
+        border-color: $brand-warning-dark;
+        background-color: transparentize($brand-warning-dark, 0.2);
+    }
+
+    &.error {
+        border-color: $brand-error-dark;
+        background-color: transparentize($brand-error-dark, 0.2);
+    }
+
+    &__header {
+        font-size: 1.4em;
+        font-weight: 700;
+    }
+
+    &__countdown {
+        font-size: 4em;
+    }
+
+    &__content {
+        font-size: 1em;
+        width: 100%;
+    }
+}

@@ -1,0 +1,8 @@
+<div class="widget-account">
+    <div class="user">
+        <div>{{ user.alias }}</div>
+        <a (click)="performLogout()">Logout</a>
+    </div>
+    <img *ngIf="user.avatar" [src]="user.avatar">
+    <fa-icon *ngIf="!user.avatar" [icon]="['fas', 'user']" size="2x"></fa-icon>
+</div>

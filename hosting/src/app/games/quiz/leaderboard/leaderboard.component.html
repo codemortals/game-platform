@@ -1,0 +1,21 @@
+<div class="leaderboard">
+    <h4>{{ round.title }}</h4>
+
+    <h2>Round Leaderboard</h2>
+</div>
+
+<ul class="results">
+    <li *ngFor="let leader of results">
+        <game-avatar [user]="leader.user"></game-avatar>
+        <div>
+            <h4>{{ leader.user.alias }} ( {{ leader.score }} )</h4>
+            <div class="answers">
+                <ng-container *ngFor="let answer of leader.questions" [ngSwitch]="answer">
+                    <div class="answers__answer answers__correct" *ngSwitchCase="true"></div>
+                    <div class="answers__answer answers__wrong" *ngSwitchCase="false"></div>
+                    <div class="answers__answer answers__missed" *ngSwitchDefault></div>
+                </ng-container>
+            </div>
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,25 @@
+<div class="holding" *ngIf="currentRound; else showOverview">
+    <h1>{{ currentRound.title }}</h1>
+    <p>{{ currentRound.description }}</p>
+</div>
+
+<ng-template #showOverview>
+    <h1>Quiz Rounds</h1>
+
+    <ul>
+        <li *ngFor="let round of rounds; let i = index">
+            <div class="prefix">{{ i + 1 }}</div>
+            <div>
+                <h4>
+                    {{ round.title }}
+                    <span [ngSwitch]="round.questionList.length">
+                    <ng-container *ngSwitchCase="0">( No questions )</ng-container>
+                    <ng-container *ngSwitchCase="1">( {{ round.questionList.length }} question )</ng-container>
+                    <ng-container *ngSwitchDefault>( {{ round.questionList.length }} questions )</ng-container>
+                </span>
+                </h4>
+                <p>{{ round.description }}</p>
+            </div>
+        </li>
+    </ul>
+</ng-template>

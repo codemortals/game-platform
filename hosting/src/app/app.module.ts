@@ -1,37 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-import { environment } from '../environments/environment.local';
+import { CoreModule } from '@core/core.module';
+import { WidgetsModule } from '@widgets/widgets.module';
 
-import { BrandInputModule } from '@brand';
+import { AppComponent } from './app.component';
+import { LayoutComponent } from './layout.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { QuestionComponent } from './question/question.component';
-import { QuizComponent } from './quiz/quiz.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WelcomeComponent,
-    LeaderboardComponent,
-    QuestionComponent,
-    QuizComponent,
-  ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireFunctionsModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    BrandInputModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LayoutComponent,
+    ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFireFunctionsModule,
+        AngularFirestoreModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        CoreModule,
+        WidgetsModule,
+    ],
+    providers: [
+        { provide: REGION, useValue: 'europe-west2' },
+    ],
+    bootstrap: [ AppComponent ],
 })
-export class AppModule { }
+export class AppModule {}

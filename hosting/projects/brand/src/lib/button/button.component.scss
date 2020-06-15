@@ -1,0 +1,44 @@
+@import '../../../../../variables';
+
+.brand-button {
+    font-size: 1em;
+    padding: calc(#{$input-padding} + 2px + 0.125em) ($input-padding * 2);
+    color: $brand-light-color;
+    border-radius: $border-radius;
+    background: linear-gradient(to bottom, lighten($brand-primary-dark, 5%) 1%, $brand-primary-dark 50%);
+    width: 100%;
+    text-decoration: none;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:hover:not([disabled]) {
+        background: linear-gradient(to top, lighten($brand-primary-dark, 5%) 10%, $brand-primary-dark 50%);
+    }
+
+    &[brand-button-warning] {
+        background: linear-gradient(to bottom, lighten($brand-warning-dark, 5%) 1%, $brand-warning-dark 50%);
+
+        &:hover:not([disabled]) {
+            background: linear-gradient(to top, lighten($brand-warning-dark, 5%) 10%, $brand-warning-dark 50%);
+        }
+    }
+
+    &[brand-button-plain] {
+        background: none;
+
+        &:hover:not([disabled]) {
+            color: $brand-primary;
+            background: none;
+        }
+    }
+
+    &[disabled] {
+        cursor: default;
+        background: $input-disabled;
+    }
+}

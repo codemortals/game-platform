@@ -14,6 +14,7 @@ import { BrandInputControl } from './input.control';
 export class BrandInputDirective {
 
     public changes: Subject<void> = new Subject<void>();
+    public focus: Subject<boolean> = new Subject<boolean>();
 
     constructor(
         @Optional() @Self() public ngControl: NgControl,
@@ -24,9 +25,15 @@ export class BrandInputDirective {
         this.ngControl.control.updateValueAndValidity();
     }
 
+    @HostListener('focus')
+    public triggerFocus(): void {
+        this.focus.next(true);
+    }
+
     @HostListener('blur')
     public triggerBlur(): void {
         this.changes.next();
+        this.focus.next(false);
     }
 
 }

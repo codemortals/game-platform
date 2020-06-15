@@ -1,0 +1,50 @@
+@import '../../../../../variables';
+
+.brand-expansion {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    button {
+        display: flex;
+        padding: 0.375em 0.875em;
+        border-radius: $border-radius;
+
+        &:hover {
+            color: $brand-dark-color;
+            background-color: $brand-primary;
+        }
+    }
+
+    &__label {
+        flex: 1 1 auto;
+        text-align: start;
+    }
+
+    &__icon {
+        flex: 0 0 auto;
+        padding-left: 1em;
+    }
+
+    &__content {
+        display: none;
+        padding: 0.875em;
+        border-top: 1px dashed $brand-dark-color;
+
+        &.expanded {
+            display: block;
+        }
+    }
+
+    &.open {
+        background-color: $brand-primary-dark;
+        border-radius: $border-radius;
+
+        button {
+            &:hover {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+}

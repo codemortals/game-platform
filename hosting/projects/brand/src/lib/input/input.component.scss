@@ -1,17 +1,52 @@
+@import '../../../../../variables';
+
 .brand-input {
     position: relative;
-    margin-bottom: 1em;
+    margin-bottom: 1.375em;
+
+    &__container {
+        display: flex;
+        border: 4px solid $input-border-color;
+        border-radius: $border-radius;
+
+        .prefix {
+            font-size: 1em;
+            color: $brand-dark-color;
+            padding: $input-padding;
+            width: 1ch * 3;
+            max-width: 1ch * 3;
+            text-align: center;
+            border-top-left-radius: $border-radius / 2;
+            border-bottom-left-radius: $border-radius / 2;
+            background-color: darken($input-background-color, 20%);
+
+            + input {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+
+        &:last-child {
+            flex: 1;
+        }
+
+        &.focus {
+            border-color: $input-border-color-focus;
+        }
+    }
 
     input, textarea {
         display: inline-block;
-        color: #322E2D;
         margin: 0;
         width: 100%;
-        font-size: 1rem;
+        font-size: 1em;
         appearance: none;
-        padding: 0.5em 0.75em;
         box-sizing: border-box;
-        border: 1px solid;
+        color: $brand-dark-color;
+        padding: $input-padding ($input-padding * 1.5);
+        border: none;
+        border-radius: $border-radius / 2;
+        background-color: $input-background-color;
 
         &[disabled]:hover {
             cursor: default;

@@ -1,0 +1,78 @@
+<game-layout-column [reverse]="true">
+    <div gameColumn="one">
+        <div class="manage">
+            <div class="manage__row">
+                <brand-card>
+                    <h2>Create Question</h2>
+
+                    <form [formGroup]="questionForm" *ngIf="availableRounds.length; else noRounds" (submit)="saveQuestion()">
+
+                        <brand-dropdown label="Round" placeholder="Select a round" formControlName="round" [options]="availableRounds"></brand-dropdown>
+
+                        <brand-dropdown label="Type" placeholder="Select an option" formControlName="type" [options]="availableTypes"></brand-dropdown>
+
+                        <brand-input label="Question" type="textarea" formControlName="text"></brand-input>
+
+                        <brand-label description="Enter the available options that can be chosen to answer the question, a minimum of two options are required and a maximum of eight.">Choices</brand-label>
+                        <div formArrayName="choices" *ngFor="let option of formOptions.controls; let i = index">
+                            <div class="choices" [formGroupName]="i">
+                                <brand-input [prefix]="i + 1" formControlName="text"></brand-input>
+                                <brand-toggle formControlName="correct"></brand-toggle>
+                                <div>
+                                    <button brand-button-warning (click)="removeOption(i)" [disabled]="formOptions.length <= 2">
+                                        <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button brand-button-plain type="button" (click)="addOption()" [disabled]="formOptions.length >= 8">Add Choice</button>
+                            <button brand-button type="submit" [disabled]="this.questionForm.pristine || this.questionForm.invalid">Save Question</button>
+                        </div>
+
+                    </form>
+
+                    <ng-template #noRounds>Please create one or more rounds to enable adding questions.</ng-template>
+                </brand-card>
+            </div>
+
+            <div class="manage__row">
+                <brand-card>
+                    <h2>Create Round</h2>
+
+                    <form [formGroup]="roundForm" (submit)="saveRound()">
+
+                        <brand-input label="Round name" formControlName="title"></brand-input>
+
+                        <brand-input label="Description" type="textarea" formControlName="description"></brand-input>
+
+                        <div class="actions">
+                            <button brand-button type="submit" [disabled]="this.roundForm.pristine || this.roundForm.invalid">Create Round</button>
+                        </div>
+
+                    </form>
+                </brand-card>
+            </div>
+        </div>
+    </div>
+
+    <div gameColumn="two">
+        <brand-card>
+            <h2>Quiz Overview</h2>
+
+            <div class="round-list" *ngFor="let round of rounds">
+                <div class="round-list__item">
+                    <brand-expansion label="{{ round.title }} ({{ round.questionList | count }})" (onToggle)="loadQuestions(round)">
+                        <ng-container *ngIf="round.questions; else noQuestions">
+                            <div class="question" *ngFor="let question of round.questions">
+                                <div>{{ question.text | slice: 0 : 30 }}</div>
+                            </div>
+                        </ng-container>
+                        <ng-template #noQuestions>No questions</ng-template>
+                    </brand-expansion>
+                </div>
+            </div>
+        </brand-card>
+    </div>
+</game-layout-column>

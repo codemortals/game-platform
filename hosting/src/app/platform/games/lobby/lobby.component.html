@@ -1,0 +1,44 @@
+<section>
+    <brand-card *ngIf="!countdown">
+        <div class="header">
+            <div>
+                <h2>{{ game.name }}</h2>
+                <div>{{ game.type }}</div>
+            </div>
+            <div *gameHost="game.hosts">
+                <button brand-button-plain (click)="toggleConfig()">
+                    <span *ngIf="showConfig">Back to Lobby</span>
+                    <span *ngIf="!showConfig">Edit Game</span>
+                </button>
+                <button brand-button (click)="startGame()" [disabled]="game.status === 'CREATED' || !!countdown">Start Game</button>
+            </div>
+        </div>
+    </brand-card>
+
+    <brand-notification *ngIf="countdown" severity="information" align="center">
+        <div brandNotificationHeader>Game Starting In...</div>
+        <div brandNotificationCountdown>{{ countdown }}</div>
+    </brand-notification>
+</section>
+
+<section>
+    <ng-template gameDynamic></ng-template>
+
+    <game-layout-column *ngIf="!showConfig">
+        <div gameColumn="one">
+            <brand-card>
+                <h4>Chat ( {{ chat.length }} )</h4>
+                <game-chat [game]="game"></game-chat>
+            </brand-card>
+        </div>
+
+        <div gameColumn="two">
+            <brand-card>
+                <h4>Players ( {{ players.length }} )</h4>
+                <div class="players" *ngFor="let player of players">
+                    <game-player [player]="player"></game-player>
+                </div>
+            </brand-card>
+        </div>
+    </game-layout-column>
+</section>

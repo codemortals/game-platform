@@ -1,0 +1,33 @@
+@import '../../../../variables';
+
+.widget-account {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+
+    fa-icon {
+        color: $brand-light-color;
+        padding: 0.25em;
+    }
+
+    fa-icon, img {
+        border: 4px solid $brand-light-color;
+        border-radius: 10%;
+        transform: skewX(10deg);
+        margin: 0.5em 1.5em;
+        max-height: 3em;
+        max-width: 3em;
+    }
+
+    .user {
+        display: none;
+
+        @media all and (min-width: $tablet-viewport) {
+            display: block;
+            color: $brand-light-color;
+            text-align: end;
+            justify-content: center;
+        }
+    }
+}

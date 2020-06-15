@@ -1,0 +1,47 @@
+@import '../../variables';
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 5em;
+    background-color: transparentize($brand-dark-color, 0.2);
+    box-shadow: 0 0 2px 2px transparentize($brand-dark-color, 0.2);
+
+    > :first-child {
+        flex: 1;
+        margin-left: 1em;
+    }
+
+    .title {
+        display: flex;
+        flex-direction: row;
+        color: $brand-light-color;
+        align-items: center;
+        text-shadow: -2px -2px 0.01em $brand-dark-color;
+
+        a {
+            line-height: 1;
+
+            img {
+                height: 2.5em;
+                margin-right: 1em;
+            }
+        }
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    .user {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        align-items: center;
+
+        a {
+            margin-right: 1em;
+        }
+    }
+}

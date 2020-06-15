@@ -1,0 +1,41 @@
+@import '../../../../../variables';
+
+.manage {
+    &__row:not(:last-child) {
+        margin-bottom: 2em;
+    }
+}
+
+.round-list {
+    &__item {
+        margin-bottom: 1em;
+    }
+
+    .question {
+        margin: 0.25em 0;
+        padding-left: 0.25em;
+        border-left: 4px solid $brand-primary;
+    }
+}
+
+.choices {
+    display: flex;
+    flex-direction: row;
+
+    :first-child {
+        flex: 1;
+    }
+
+    > * + * {
+        margin-left: 1em;
+    }
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+
+    > button + button {
+        margin-left: 1em;
+    }
+}

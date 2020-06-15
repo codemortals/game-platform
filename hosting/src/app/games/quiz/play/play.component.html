@@ -1,0 +1,27 @@
+<game-layout-column>
+    <div gameColumn="one">
+        <brand-card>
+            <ng-container *ngIf="!quiz || !quiz.currentQuestion">
+                <game-summary [rounds]="rounds" [currentRound]="round"></game-summary>
+            </ng-container>
+
+            <ng-container *ngIf="quiz && isCompleted">
+                <game-leaderboard [quiz]="quiz" [round]="round"></game-leaderboard>
+            </ng-container>
+
+            <ng-container *ngIf="quiz && quiz.currentQuestion && !isCompleted">
+                <game-question [quiz]="quiz" [round]="round" [question]="question"></game-question>
+            </ng-container>
+        </brand-card>
+
+        <div class="host-controls" *gameHost="game.hosts">
+            <game-controls [quiz]="quiz" [currentRound]="round"></game-controls>
+        </div>
+    </div>
+
+    <div gameColumn="two">
+        <brand-card>
+            <game-chat [game]="game"></game-chat>
+        </brand-card>
+    </div>
+</game-layout-column>

@@ -1,0 +1,31 @@
+<brand-card>
+    <h2>Host Controls</h2>
+    <div class="controls">
+        <div class="controls__overview">
+            <div>Insights, coming soon....</div>
+        </div>
+        <div class="controls__actions">
+            <ng-container [ngSwitch]="next">
+                <ng-container *ngSwitchCase="'START'">
+                    <button brand-button (click)="startQuiz()">Begin</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'QUESTION'">
+                    <button brand-button (click)="nextQuestion()">Next Question</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'CALCULATE'">
+                    <button brand-button (click)="endRound()" [disabled]="waiting">End Round</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'ROUND'">
+                    <button brand-button (click)="nextRound()" [disabled]="waiting">Next Round</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'FINISH'">
+                    <button brand-button (click)="endQuiz()" [disabled]="waiting">End Quiz</button>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</brand-card>

@@ -1,0 +1,10 @@
+.activate {
+    display: flex;
+    justify-content: center;
+    margin: 2em 1em;
+
+    &__content {
+        width: 100%;
+        max-width: 800px;
+    }
+}

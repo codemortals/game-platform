@@ -1,0 +1,57 @@
+<div class="wrapper">
+    <brand-card>
+        <div class="login">
+            <div class="login__custom">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="login__socials">
+                <h2>or social sign-in</h2>
+
+                <div class="links">
+                    <button class="google" type="button" (click)="login('google')">
+                        <span>Google</span>
+                        <fa-icon [icon]="['fab', 'google']" size="lg"></fa-icon>
+                    </button>
+
+                    <button class="twitter" type="button" (click)="login('twitter')">
+                        <span>Twitter</span>
+                        <fa-icon [icon]="['fab', 'twitter']" size="lg"></fa-icon>
+                    </button>
+
+                    <button class="facebook" type="button" (click)="login('facebook')">
+                        <span>Facebook</span>
+                        <fa-icon [icon]="['fab', 'facebook']" size="lg"></fa-icon>
+                    </button>
+
+                    <button class="github" type="button" (click)="login('github')">
+                        <span>GitHub</span>
+                        <fa-icon [icon]="['fab', 'github']" size="lg"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </brand-card>
+
+    <brand-card>
+        <h2>Frequently asked questions</h2>
+
+        <ul class="faq">
+            <li>
+                <h4>I cannot login?</h4>
+                <div>You may have already registered with a social media account, try using the options available.</div>
+            </li>
+            <li>
+                <h4>When I login my account details are missing</h4>
+                <div>You may have already registered with another email address.</div>
+            </li>
+            <li>
+                <h4>Error message: There is no user record corresponding to this identifier. The user may have been deleted.</h4>
+                <div>There is no active account for the email address given, this may be because a different email address was used or an account was never created.</div>
+            </li>
+            <li>
+                <h4>Error message: The password is invalid or the user does not have a password.</h4>
+                <div>This may be due to having created your account using a social media platform.</div>
+            </li>
+        </ul>
+    </brand-card>
+</div>

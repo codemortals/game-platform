@@ -1,0 +1,78 @@
+name: Build, Test and Deploy
+
+on: [push]
+
+env:
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+  FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+  FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+  FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
+  FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.FIREBASE_MESSAGE_SENDER_ID }}
+  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+  FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+  FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+
+jobs:
+  test:
+    name: Test API
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Setup Tools
+        run: |
+          npm install -g firebase-tools
+      - name: Build Functions
+        run: |
+          cd functions
+          npm install
+          npm run test:build
+      - name: Run tests with emulator
+        run: |
+          cd functions
+          npm run test:ci
+
+  deploy:
+    name: Deploy
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Setup Tools
+        run: |
+          npm install -g firebase-tools
+      - name: Build UI
+        run: |
+          cd hosting
+          npm install
+          sed -i 's|{{ FIREBASE_API_KEY }}|'${FIREBASE_API_KEY}'|g' src/environments/environment.prod.ts
+          sed -i 's|{{ FIREBASE_APP_ID }}|'${FIREBASE_APP_ID}'|g' src/environments/environment.prod.ts
+          sed -i 's|{{ FIREBASE_AUTH_DOMAIN }}|'${FIREBASE_AUTH_DOMAIN}'|g' src/environments/environment.prod.ts
+          sed -i 's|{{ FIREBASE_DATABASE_URL }}|'${FIREBASE_DATABASE_URL}'|g' src/environments/environment.prod.ts
+          sed -i 's|{{ FIREBASE_MESSAGE_SENDER_ID }}|'${FIREBASE_MESSAGE_SENDER_ID}'|g' src/environments/environment.prod.ts
+          sed -i 's|{{ FIREBASE_PROJECT_ID }}|'${FIREBASE_PROJECT_ID}'|g' src/environments/environment.prod.ts
+          sed -i 's|{{ FIREBASE_STORAGE_BUCKET }}|'${FIREBASE_STORAGE_BUCKET}'|g' src/environments/environment.prod.ts
+          sed -i 's|{{ FIREBASE_MEASUREMENT_ID }}|'${FIREBASE_MEASUREMENT_ID}'|g' src/environments/environment.prod.ts
+          npm run build
+      - name: Build Functions
+        run: |
+          cd functions
+          npm install
+      - name: Deploy
+        run: |
+          firebase deploy --project ${FIREBASE_PROJECT_ID} --token ${FIREBASE_TOKEN}
