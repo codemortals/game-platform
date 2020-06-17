@@ -7,7 +7,7 @@
 
                     <form [formGroup]="questionForm" *ngIf="availableRounds.length; else noRounds" (submit)="saveQuestion()">
 
-                        <brand-dropdown label="Round" placeholder="Select a round" formControlName="round" [options]="availableRounds"></brand-dropdown>
+                        <brand-dropdown label="Round"  formControlName="round" [options]="availableRounds"></brand-dropdown>
 
                         <brand-dropdown label="Type" placeholder="Select an option" formControlName="type" [options]="availableTypes"></brand-dropdown>
 
@@ -65,8 +65,8 @@
                 <div class="round-list__item">
                     <brand-expansion label="{{ round.title }} ({{ round.questionList | count }})" (onToggle)="loadQuestions(round)">
                         <ng-container *ngIf="round.questions; else noQuestions">
-                            <div class="question" *ngFor="let question of round.questions">
-                                <div>{{ question.text | slice: 0 : 30 }}</div>
+                            <div class="question" *ngFor="let question of round.questions; index as i">
+                                <div><span class="qNumber">{{i+1}}</span> {{question.text | slice: 0 : 29 }}</div>
                             </div>
                         </ng-container>
                         <ng-template #noQuestions>No questions</ng-template>
