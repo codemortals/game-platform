@@ -6,7 +6,7 @@ import { DropdownOption } from '@brand/dropdown/dropdown-option';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { Question, Round } from '../quiz.model';
+import { Question, Round, QuestionSummary } from '../quiz.model';
 
 import { RoundService } from '../round.service';
 import { QuestionService } from '../question.service';
@@ -22,7 +22,7 @@ import { QuestionService } from '../question.service';
 export class LobbyComponent implements OnInit, OnDestroy {
 
     public rounds: Array<Round> = [];
-    public questions: Array<Question> = [];
+    //public questions: Array<Question> = [];
 
     public roundForm: FormGroup;
     public questionForm: FormGroup;
@@ -48,6 +48,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
                     ...rounds,
                 ];
                 this.availableRounds = this.rounds.map((round) => ({ id: round.uid, title: round.title }));
+                let roundNumber = this.availableRounds.length;
+                this.questionForm.controls[ 'round' ].setValue(roundNumber > 0 ? this.availableRounds[roundNumber-1] : undefined);
             });
 
         this.availableTypes = [
@@ -71,7 +73,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
             this.addOption();
         }
     }
-
+    
     public ngOnDestroy(): void {
         this.isDestroyed.next();
         this.isDestroyed.complete();
@@ -86,20 +88,20 @@ export class LobbyComponent implements OnInit, OnDestroy {
             this.formOptions.push(this.createOption());
         }
     }
-
+    
     public removeOption(index: number): void {
         if (this.formOptions.length > 1) {
             this.formOptions.removeAt(index);
         }
     }
-
+    
     public createOption(): FormGroup {
         return this.forms.group({
             text: [ undefined, [ Validators.required ] ],
             correct: [ { value: false, disabled: false }, [] ],
         });
     }
-
+    
     private checkQuestion(control: AbstractControl) {
         const choices = control.get('choices').value;
         const valid = choices.reduce((isValid, choice) => isValid || choice.correct, false);
@@ -108,30 +110,32 @@ export class LobbyComponent implements OnInit, OnDestroy {
             control.get('choices').setErrors({ answer: true });
         }
     }
-
+    
     public saveRound(): void {
         const gameId = this.route.snapshot.params.gameId;
         const round = this.roundForm.getRawValue();
-
+        
         this.roundService
-            .create(gameId, round.title, round.description)
-            .subscribe(
-                () => this.roundForm.reset(),
+        .create(gameId, round.title, round.description)
+        .subscribe(
+            () => this.roundForm.reset(),
             );
     }
-
+        
     public saveQuestion(): void {
         const gameId = this.route.snapshot.params.gameId;
         const question = this.questionForm.getRawValue();
         const roundId = question.round.id;
-
+        
         this.questionService
-            .create(gameId, roundId, question.text, question.type.id, question.choices)
-            .subscribe(
-                () => this.questionForm.reset({ type: question.type }),
-            );
+        .create(gameId, roundId, question.text, question.type.id, question.choices)
+        .subscribe(
+            (questionUid) => {
+                this.questionForm.reset({ type: question.type, round: question.round });
+            }
+        );
     }
-
+            
     public loadQuestions(round: Round): void {
         const gameId = this.route.snapshot.params.gameId;
 
