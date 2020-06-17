@@ -1,4 +1,4 @@
-@import '../../../../../variables';
+@import "../../../../../variables";
 
 .manage {
     &__row:not(:last-child) {
@@ -15,6 +15,9 @@
         margin: 0.25em 0;
         padding-left: 0.25em;
         border-left: 4px solid $brand-primary;
+        .qNumber {
+            color: $brand-primary;
+        }
     }
 }
 
