@@ -29,5 +29,5 @@ Then(/^the document contains:$/, async function (tableData) {
     const document = (await this.storage.documentRef.get()).data();
     const expectedData = this.parseObjectData(tableData.rowsHash());
 
-    expect(document).deep.equals(expectedData);
+    expect(document).deep.include(expectedData);
 });

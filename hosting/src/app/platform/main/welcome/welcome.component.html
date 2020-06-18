@@ -18,7 +18,7 @@
                     <div>Login</div>
                 </div>
             </a>
-            <a class="open-games__entry" [routerLink]="['/', 'games', game.uid, 'lobby']" *ngFor="let game of gameList">
+            <a class="open-games__entry" [routerLink]="['/', 'games', game.uid]" *ngFor="let game of gameList">
                 <div class="container">
                     <span>{{ game.name }}</span>
                     <div>
