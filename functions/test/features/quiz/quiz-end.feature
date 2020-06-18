@@ -42,15 +42,15 @@ Feature:
             | roundId | {{ quiz.rounds[2].uid }} |
         And I call the "QuizEnd" endpoint with:
             | quizId | {{ game.uid }} |
-        Then there is a collection "quizzes" with document "{{ quiz.uid }}"
-        And there is a sub-collection "results" with document "{{ game.players[1].uid }}"
+        Then there is a collection "games" with document "{{ game.uid }}"
+        And there is a sub-collection "players" with document "{{ game.players[1].uid }}"
         And the document contains:
-            | rounds | [ 3,3 ]                   |
-            | score  | 6                         |
-            | user   | {{ game.players[1].uid }} |
-        Then there is a collection "quizzes" with document "{{ quiz.uid }}"
-        And there is a sub-collection "results" with document "{{ game.players[2].uid }}"
+            | message | Quiz Round Scores: 3, 3   |
+            | score   | 6                         |
+            | user    | {{ game.players[1].uid }} |
+        Then there is a collection "games" with document "{{ game.uid }}"
+        And there is a sub-collection "players" with document "{{ game.players[2].uid }}"
         And the document contains:
-            | rounds | [ 1,2 ]                   |
-            | score  | 3                         |
-            | user   | {{ game.players[2].uid }} |
+            | message | Quiz Round Scores: 1, 2   |
+            | score   | 3                         |
+            | user    | {{ game.players[2].uid }} |

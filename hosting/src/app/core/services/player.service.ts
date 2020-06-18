@@ -23,8 +23,6 @@ export class PlayerService {
     public create(gameId: string): Observable<void> {
         const player: Player<string> = {
             user: this.authenticationService.user.getValue().uid,
-            score: 0,
-            status: 'JOINED',
             created: firestore.FieldValue.serverTimestamp(),
         };
 
@@ -47,11 +45,11 @@ export class PlayerService {
             );
     }
 
-    public findAll(gameId: string): Observable<Array<Player<User>>> {
+    public findAll(gameId: string, order = 'created'): Observable<Array<Player<User>>> {
         return this.angularFirestore
             .collection<Game>('games')
             .doc(gameId)
-            .collection<Message<string>>('players', (ref: firebase.firestore.Query) => ref.orderBy('created'))
+            .collection<Message<string>>('players', (ref: firebase.firestore.Query) => ref.orderBy(order, 'desc'))
             .stateChanges([ 'added' ])
             .pipe(
                 map((messages) => messages

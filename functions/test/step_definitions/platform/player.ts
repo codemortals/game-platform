@@ -14,8 +14,6 @@ Given(/^there (?:is|are) (\d+) player[s]?$/, async function (playerCount: number
 
         const player = {
             user: user.uid,
-            score: 0,
-            status: 'JOINED',
             created: date.recent(),
         };
 

@@ -36,37 +36,24 @@ export const QuizEnd = functions
             throw new HttpsError('not-found', 'No Quiz Found');
         }
 
-        // Build leaderboard
-        let leaderboard = players.docs.map((doc) => {
-            const player = doc.data();
-            return { user: player.user, rounds: Array(quizData.roundList.length).fill(null), score: 0 };
-        });
-
         // Perform updates
         const batch = admin.firestore().batch();
 
-        batch.update(quizRef, { status: 'COMPLETED' });
+        batch.update(gameRef, { status: 'COMPLETE' });
 
-        // Calculate player scores
-        await Promise.all(quizData.roundList.map(async (round, idx) => {
-            const roundRef = quizRef.collection('rounds').doc(round.uid);
-                leaderboard = await Promise.all(leaderboard.map(async (player) => {
-                    const result = await roundRef.collection('results').doc(player.user).get();
-                    const score = result.data().score;
-                    player.rounds[idx] = score;
-                    player.score += score;
-                    return player;
-                }));
+        // Update player scores for the game
+        await Promise.all(players.docs.map(async (doc) => {
+            const player = doc.data();
+            const score = { total: 0, message: [] };
+
+            for (const round of quizData.roundList) {
+                const roundRef = quizRef.collection('rounds').doc(round.uid);
+                const result = (await roundRef.collection('results').doc(player.user).get()).data();
+                score.total += result.score;
+                score.message = [ ...score.message, result.score ];
+            }
+            batch.update(doc.ref, { score: score.total, message: `Quiz Round Scores: ${ score.message.join(', ') }` });
         }));
-
-        // Set player results for the round
-        leaderboard.map((player) => {
-            const resultRef = quizRef
-                .collection('results')
-                .doc(player.user);
-
-            batch.set(resultRef, player);
-        });
 
         try {
             await batch.commit();
