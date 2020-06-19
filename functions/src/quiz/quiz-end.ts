@@ -48,9 +48,14 @@ export const QuizEnd = functions
 
             for (const round of quizData.roundList) {
                 const roundRef = quizRef.collection('rounds').doc(round.uid);
-                const result = (await roundRef.collection('results').doc(player.user).get()).data();
-                score.total += result.score;
-                score.message = [ ...score.message, result.score ];
+                const result = await roundRef.collection('results').doc(player.user).get();
+                if (result.exists) {
+                    const resultData = result.data();
+                    score.total += resultData.score;
+                    score.message = [ ...score.message, resultData.score ];
+                } else {
+                    score.message = [ ...score.message, 0 ];
+                }
             }
             batch.update(doc.ref, { score: score.total, message: `Quiz Round Scores: ${ score.message.join(', ') }` });
         }));

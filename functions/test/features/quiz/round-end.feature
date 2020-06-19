@@ -7,7 +7,7 @@ Feature:
     @HappyPath
     Scenario: Calculating scores will give results for all players
         Given there is a game created
-        And there are 2 players
+        And there are 2 players in the game
         And there is a quiz with 1 round
         And in round 1 of the quiz there are 4 questions
         And for question 1 of round 1 in the quiz there are 4 choices, the correct answer is choice 1
