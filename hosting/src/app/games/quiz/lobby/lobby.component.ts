@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DropdownOption } from '@brand/dropdown/dropdown-option';
@@ -10,6 +10,7 @@ import { Question, Round } from '../quiz.model';
 
 import { RoundService } from '../round.service';
 import { QuestionService } from '../question.service';
+import { BrandExpansionComponent } from 'projects/brand/src/lib/expansion/expansion.component';
 
 @Component({
     templateUrl: './lobby.component.html',
@@ -31,11 +32,14 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
     private isDestroyed = new Subject();
 
+    @ViewChildren('expansions') expansionComponents: QueryList<BrandExpansionComponent>;
+
     constructor(
         private route: ActivatedRoute,
         private forms: FormBuilder,
         private roundService: RoundService,
         private questionService: QuestionService,
+        private changeDetectorRef: ChangeDetectorRef
     ) { }
 
     public ngOnInit(): void {
@@ -43,11 +47,9 @@ export class LobbyComponent implements OnInit, OnDestroy {
             .findAll(this.route.snapshot.params.gameId)
             .pipe(takeUntil(this.isDestroyed))
             .subscribe((rounds) => {
-                this.rounds = [
-                    ...this.rounds,
-                    ...rounds,
-                ];
+                this.updateRoundDataKeepingExpandedPanels(rounds);
                 this.availableRounds = this.rounds.map((round) => ({ id: round.uid, title: round.title }));
+
             });
 
         this.availableTypes = [
@@ -77,6 +79,18 @@ export class LobbyComponent implements OnInit, OnDestroy {
         this.isDestroyed.complete();
     }
 
+    private updateRoundDataKeepingExpandedPanels(rounds): void {
+        let expandedList: boolean[] = this.expansionComponents.map(c => !c.collapsed);
+        this.rounds = [...rounds];
+        if (this.expansionComponents.length != expandedList.length) return;
+        let iExpanded = 0;
+        this.changeDetectorRef.detectChanges();
+        this.expansionComponents.forEach(comp => {
+            if (expandedList[iExpanded++])
+                comp.toggle();
+        });
+    }
+
     get formOptions(): FormArray {
         return <FormArray> this.questionForm.get('choices');
     }
@@ -103,7 +117,6 @@ export class LobbyComponent implements OnInit, OnDestroy {
     private checkQuestion(control: AbstractControl) {
         const choices = control.get('choices').value;
         const valid = choices.reduce((isValid, choice) => isValid || choice.correct, false);
-
         if (!valid) {
             control.get('choices').setErrors({ answer: true });
         }
@@ -128,13 +141,21 @@ export class LobbyComponent implements OnInit, OnDestroy {
         this.questionService
             .create(gameId, roundId, question.text, question.type.id, question.choices)
             .subscribe(
-                () => this.questionForm.reset({ type: question.type }),
+                (questionUid) => {
+                    this.questionForm.reset({ type: question.type, round: question.round });
+                    this.loadQuestions(this.rounds.find(r => r.uid = roundId));
+                }
             );
+    }
+
+    public roundQuestionsToogle(round: Round, collapsing: any) {
+        if (!collapsing) {//if its geting collapsed we dont need new details.
+            this.loadQuestions(round);
+        }
     }
 
     public loadQuestions(round: Round): void {
         const gameId = this.route.snapshot.params.gameId;
-
         this.questionService.findAll(gameId, round.uid)
             .pipe(
                 take(1),

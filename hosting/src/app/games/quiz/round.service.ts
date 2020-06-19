@@ -58,7 +58,7 @@ export class RoundService {
 
         return quizDoc
             .collection<Round>('rounds', (ref: firestore.Query) => ref.orderBy('created'))
-            .stateChanges([ 'added' ])
+            .snapshotChanges()
             .pipe(
                 map((rounds) => rounds
                     .map((round: DocumentChangeAction<Round>) => round.payload.doc.data({ serverTimestamps: 'estimate' })),
