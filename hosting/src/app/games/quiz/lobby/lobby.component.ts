@@ -49,7 +49,6 @@ export class LobbyComponent implements OnInit, OnDestroy {
             .subscribe((rounds) => {
                 this.updateRoundDataKeepingExpandedPanels(rounds);
                 this.availableRounds = this.rounds.map((round) => ({ id: round.uid, title: round.title }));
-
             });
 
         this.availableTypes = [
@@ -81,12 +80,12 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
     private updateRoundDataKeepingExpandedPanels(rounds): void {
         let expandedList: boolean[] = this.expansionComponents.map(c => !c.collapsed);
-        this.rounds = [...rounds];
+        this.rounds = [ ...rounds ];
         if (this.expansionComponents.length != expandedList.length) return;
         let iExpanded = 0;
         this.changeDetectorRef.detectChanges();
         this.expansionComponents.forEach(comp => {
-            if (expandedList[iExpanded++])
+            if (expandedList[ iExpanded++ ])
                 comp.toggle();
         });
     }
