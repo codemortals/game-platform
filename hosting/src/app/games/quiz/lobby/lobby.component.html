@@ -8,7 +8,7 @@
                     <form [formGroup]="questionForm" *ngIf="availableRounds.length; else noRounds" (submit)="saveQuestion()">
 
                         <brand-dropdown label="Round" placeholder="Select a round" formControlName="round" [options]="availableRounds"></brand-dropdown>
-                        
+
                         <brand-dropdown label="Type" placeholder="Select an option" formControlName="type" [options]="availableTypes"></brand-dropdown>
 
                         <span *ngIf="questionForm.get('type').value.id =='image'; else standardQuestion">
