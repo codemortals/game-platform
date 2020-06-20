@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { of, Subject } from 'rxjs';
 import { filter, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
 
 import { Game } from '@core/models';
+import { GameService } from '@core/services';
 
 import { Question, Quiz, Round, RoundSummary } from '../quiz.model';
 
@@ -32,6 +33,8 @@ export class PlayComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
+        private gameService: GameService,
         private quizService: QuizService,
         private roundService: RoundService,
         private questionService: QuestionService,
@@ -39,6 +42,17 @@ export class PlayComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.game = this.route.snapshot.data.gameData;
+
+        this.gameService.findOne(this.game.uid)
+            .pipe(
+                takeUntil(this.isDestroyed),
+                tap((game) => {
+                    if (game.status === 'COMPLETE') {
+                        this.router.navigate([ 'games', game.uid, 'results' ]);
+                    }
+                }),
+            )
+            .subscribe();
 
         this.roundService.findAll(this.game.uid)
             .pipe(
@@ -85,7 +99,7 @@ export class PlayComponent implements OnInit, OnDestroy {
         }
 
         const rounds = <Array<RoundSummary>> this.quiz.roundList;
-        return rounds.find((round) => round.uid === this.quiz.currentRound).status === 'COMPLETED';
+        return rounds.find((round) => round.uid === this.quiz.currentRound).status === 'COMPLETE';
     }
 
 }

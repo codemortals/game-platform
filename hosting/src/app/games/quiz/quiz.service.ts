@@ -19,6 +19,11 @@ export class QuizService {
         return endRound({ quizId, roundId });
     }
 
+    public endQuiz(quizId: string): Observable<void> {
+        const endQuiz = this.fireFunctions.httpsCallable<any, void>('QuizEnd');
+        return endQuiz({ quizId });
+    }
+
     public changeQuestion(quizId: string, currentRound: string, currentQuestion: string = null): Observable<void> {
         const quizDoc = this.angularFirestore
             .collection<Quiz>('quizzes')

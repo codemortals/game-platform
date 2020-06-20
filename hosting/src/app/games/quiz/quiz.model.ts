@@ -43,7 +43,7 @@ export interface Round {
 
 export interface RoundSummary {
     uid: string;
-    status: 'CREATED' | 'COMPLETED';
+    status: 'CREATED' | 'COMPLETE';
 }
 
 export interface Quiz {

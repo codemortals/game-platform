@@ -54,7 +54,7 @@ export const QuizRoundEnd = functions
 
         const roundList = quizData.roundList.map((entry: any) => {
             if (entry.uid === data.roundId) {
-                entry.status = 'COMPLETED';
+                entry.status = 'COMPLETE';
             }
             return entry;
         });

@@ -1,0 +1,17 @@
+<brand-card>
+    <div class="headline">
+        <h4>{{ game.name }}</h4>
+        <h1>Game Over</h1>
+    </div>
+
+    <ul class="results">
+        <li *ngFor="let player of players">
+            <div class="score">{{ player.score }}</div>
+            <game-avatar [user]="player.user"></game-avatar>
+            <div>
+                <h4>{{ player.user.alias }}</h4>
+                <div>{{ player.message }}</div>
+            </div>
+        </li>
+    </ul>
+</brand-card>

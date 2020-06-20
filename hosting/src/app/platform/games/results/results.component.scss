@@ -1,0 +1,52 @@
+@import '../../../../../variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 3em);
+    margin: 3em auto;
+}
+
+.headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results {
+    list-style: none;
+    margin: 0;
+
+    li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0.875em 0;
+
+        .score {
+            display: flex;
+            width: 3em;
+            height: 2em;
+            margin-right: 1.5em;
+            padding: 0 0.5em;
+            border: 2px dotted $brand-secondary-dark;
+            border-radius: $border-radius;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        &:nth-child(2), &:nth-child(3) {
+            .score {
+                color: $brand-primary-dark;
+                border: 2px dotted $brand-primary-dark;
+            }
+        }
+
+        &:nth-child(1) {
+            .score {
+                color: $brand-primary-dark;
+                border: 3px solid $brand-primary-dark;
+            }
+        }
+    }
+}
