@@ -6,6 +6,7 @@ import { WidgetsModule } from '@widgets/widgets.module';
 import { GameCreateComponent } from './create/create.component';
 import { GameLobbyComponent } from './lobby/lobby.component';
 import { GamePlayComponent } from './play/play.component';
+import { GameResultsComponent } from './results/results.component';
 
 import { GamesRouting } from './games.routing';
 
@@ -14,6 +15,7 @@ import { GamesRouting } from './games.routing';
         GameCreateComponent,
         GameLobbyComponent,
         GamePlayComponent,
+        GameResultsComponent,
     ],
     imports: [
         CoreModule,

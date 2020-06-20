@@ -44,10 +44,10 @@ export class ControlsComponent {
             (questionIdx === 0 || questionIdx === questionIds.length) &&
             (roundIdx === 0 && roundIds.length > 0 || roundIdx < roundIds.length)
         ) {
-            return roundIds[ roundIdx - 1 ].status === 'COMPLETED' ? 'ROUND' : 'CALCULATE';
+            return roundIds[ roundIdx - 1 ].status === 'COMPLETE' ? 'ROUND' : 'CALCULATE';
         }
 
-        return roundIds[ roundIdx - 1 ].status === 'COMPLETED' ? 'FINISH' : 'CALCULATE';
+        return roundIds[ roundIdx - 1 ].status === 'COMPLETE' ? 'FINISH' : 'CALCULATE';
     }
 
     public startQuiz(): void {
@@ -83,7 +83,10 @@ export class ControlsComponent {
     }
 
     public endQuiz(): void {
-        console.log('END THE QUIZ');
+        this.waiting = true;
+        this.quizService
+            .endQuiz(this.quiz.uid)
+            .subscribe(() => this.waiting = false);
     }
 
 }
