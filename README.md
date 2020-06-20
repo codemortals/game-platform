@@ -1,5 +1,5 @@
 # Game Platform
-
+ 
 ![Code Mortals](https://cdn.codemortals.io/mascot/5.png)
 
 ## Getting Started
@@ -14,7 +14,7 @@ This is a game platform developed using Angular framework with Node and Firestor
 
 - 2a. Navigate from the project directory in the **hosting** directory with `cd hosting`
 - 3a. Install sub project dependencies with `npm install`
-- 4a. Duplicate the `src/environments/environment.ts` file and name it `src/environments/environment.local.ts`
+- 4a. Duplicate the `src/environments/environment.ts` file and name it `src/environments/environment.local.ts` 
 - 5a. In the `src/environments/environment.local.ts` replace it with your **Firebase** config
 - 6a. Run the sub project (Angular UI) with `npm start`
 - 7a. Open in the browser `http://localhost:4200`
