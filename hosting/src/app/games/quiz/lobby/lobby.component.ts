@@ -31,6 +31,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
     private isDestroyed = new Subject();
     private isRoundPreloadNeeded: boolean = true;
+    
     constructor(
         private route: ActivatedRoute,
         private forms: FormBuilder,
