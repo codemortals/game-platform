@@ -16,7 +16,8 @@
         margin: 0.25em 0;
         padding-left: 0.25em;
         border-left: 4px solid $brand-primary;
-        .question-number::before {
+        display:flex;
+        &::before {
             color: $brand-primary;
             counter-increment: question-counter;
             content: counter(question-counter)".";
