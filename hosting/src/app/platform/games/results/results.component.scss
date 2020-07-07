@@ -1,4 +1,4 @@
-@import '../../../../../variables';
+@import '../../../../../_variables';
 
 :host {
     display: flex;
@@ -33,6 +33,10 @@
             border-radius: $border-radius;
             justify-content: flex-end;
             align-items: center;
+        }
+
+        > :last-child {
+            margin-left: 1em;
         }
 
         &:nth-child(2), &:nth-child(3) {

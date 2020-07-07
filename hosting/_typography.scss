@@ -1,0 +1,41 @@
+h1, h2, h3, h4, h5 {
+    margin: 0 0 0.5em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 1.8em;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 1.5em;
+    line-height: 1.2;
+    font-weight: 300;
+}
+
+h3 {
+    font-size: 1.2em;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+h4 {
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1;
+}
+
+h5 {
+    font-weight: 700;
+    font-size: 0.8em;
+    line-height: 1;
+}
+
+.game-body {
+
+    &__caption {
+        font-size: 0.8em;
+    }
+
+}

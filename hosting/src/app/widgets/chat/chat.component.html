@@ -2,9 +2,12 @@
     <div gameChat class="messages">
         <div class="messages__none" *ngIf="!messages.length">No messages, be the first to say hello</div>
         <div class="messages__entry" *ngFor="let chat of messages">
-            <game-avatar [user]="chat.user"></game-avatar>
+            <div class="game-layout__center">
+                <game-avatar [user]="chat.user"></game-avatar>
+                <div class="game-body__caption">{{ chat.created.toDate() | date: 'HH:mm' }}</div>
+            </div>
             <div>
-                <h4>{{ chat.user.alias }} ( {{ chat.created.toDate() | date: 'HH:mm' }} )</h4>
+                <h5>{{ chat.user.alias }}</h5>
                 <div>{{ chat.message }}</div>
             </div>
         </div>

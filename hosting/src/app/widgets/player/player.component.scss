@@ -1,21 +1,16 @@
-@import '../../../../variables';
+@import '../../../../_variables';
 
 .widget-player {
     display: flex;
     flex-direction: row;
     margin: 0.5em 0;
 
-    img {
-        border: 1px solid $brand-light-color;
-        border-radius: 100%;
-        margin: 0.5em 0.5em 0.5em 0;
-    }
-
     .user {
         display: flex;
         flex-direction: column;
         flex: 1;
         font-size: 1.75rem;
+        margin-left: 0.5em;
         color: $brand-light-color;
         text-align: start;
         justify-content: center;
@@ -23,12 +18,5 @@
         h4 {
             margin: 0;
         }
-    }
-
-    .score {
-        display: flex;
-        align-items: center;
-        font-size: 1.4em;
-        margin: 0.5em;
     }
 }

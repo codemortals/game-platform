@@ -1,4 +1,4 @@
-@import '../../../../../variables';
+@import '../../../../../_variables';
 
 .leaderboard {
     display: flex;
@@ -31,6 +31,10 @@
             color: $brand-secondary-dark;
             border: 2px dotted $brand-secondary-dark;
             border-radius: 50%;
+        }
+
+        > :first-child {
+            margin-right: 1em;
         }
 
         &:nth-child(2), &:nth-child(3) {

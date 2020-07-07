@@ -1,9 +1,9 @@
-@import '../../../../variables';
+@import '../../../../_variables';
 
 .widget-chat {
 
     .messages {
-        margin: 1em 0;
+        margin: 0 0 1em;
         padding: 0 0.5em;
         border: 1px solid $brand-light-color;
         border-radius: $border-radius;
@@ -19,6 +19,10 @@
             flex-direction: row;
             align-items: center;
             padding: 0.75em;
+
+            > :last-child {
+                margin-left: 1em;
+            }
 
             &:not(:last-of-type) {
                 border-bottom: 1px dashed transparentize($brand-light-color, 0.8);
