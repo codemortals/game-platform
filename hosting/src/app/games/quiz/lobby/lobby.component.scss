@@ -14,14 +14,15 @@
 
     .question {
         margin: 0.25em 0;
-        padding-left: 0.25em;
-        border-left: 4px solid $brand-primary;
-        > div {
-            &::before {
-                color: $brand-primary;
-                counter-increment: question-counter;
-                content: counter(question-counter)".";
-            }
+        word-break: break-all;
+
+        &::before {
+            display: inline-block;
+            color: $brand-primary;
+            width: 1.5em;
+            margin-right: 0.25em;
+            counter-increment: question-counter;
+            content: counter(question-counter)".";
         }
     }
 }
