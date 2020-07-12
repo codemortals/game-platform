@@ -30,7 +30,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
     public availableTypes: Array<DropdownOption>;
 
     private isDestroyed = new Subject();
-
+    private isRoundPreloadNeeded: boolean = true;
+    
     constructor(
         private route: ActivatedRoute,
         private forms: FormBuilder,
@@ -48,6 +49,11 @@ export class LobbyComponent implements OnInit, OnDestroy {
                     ...rounds,
                 ];
                 this.availableRounds = this.rounds.map((round) => ({ id: round.uid, title: round.title }));
+                let roundNumber = this.availableRounds.length;
+                if (this.isRoundPreloadNeeded) {
+                    this.questionForm.controls[ 'round' ].setValue(roundNumber > 0 ? this.availableRounds[ roundNumber - 1 ] : undefined);
+                    this.isRoundPreloadNeeded = false;
+                }
             });
 
         this.availableTypes = [
@@ -113,6 +119,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         const gameId = this.route.snapshot.params.gameId;
         const round = this.roundForm.getRawValue();
 
+        this.isRoundPreloadNeeded = true;
         this.roundService
             .create(gameId, round.title, round.description)
             .subscribe(
@@ -127,9 +134,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
         this.questionService
             .create(gameId, roundId, question.text, question.type.id, question.choices)
-            .subscribe(
-                () => this.questionForm.reset({ type: question.type }),
-            );
+            .subscribe(questionUid => { this.questionForm.reset({ type: question.type, round: question.round }); });
     }
 
     public loadQuestions(round: Round): void {
