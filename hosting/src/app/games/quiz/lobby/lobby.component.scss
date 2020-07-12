@@ -9,12 +9,20 @@
 .round-list {
     &__item {
         margin-bottom: 1em;
+        counter-reset: question-counter;
     }
 
     .question {
         margin: 0.25em 0;
         padding-left: 0.25em;
         border-left: 4px solid $brand-primary;
+        > div {
+            &::before {
+                color: $brand-primary;
+                counter-increment: question-counter;
+                content: counter(question-counter)".";
+            }
+        }
     }
 }
 
