@@ -67,7 +67,7 @@
 
             <div class="round-list" *ngFor="let round of rounds">
                 <div class="round-list__item">
-                    <brand-expansion label="{{ round.title }} ({{ round.questionList | count }})" (onToggle)="loadQuestions(round)">
+                    <brand-expansion #expansions label="{{ round.title }} ({{ round.questionList | count }})" (onToggle)="roundQuestionsToogle(round,$event)">
                         <ng-container *ngIf="round.questions; else noQuestions">
                             <div class="question" *ngFor="let question of round.questions">
                                 <div>{{ question.text | slice: 0 : 30 }}</div>
