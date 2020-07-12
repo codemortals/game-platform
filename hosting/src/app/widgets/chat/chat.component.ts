@@ -11,8 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Game, Message, User } from '@core/models';
 import { MessageService } from '@core/services';
 
-import { of, Subject, timer } from 'rxjs';
-import { delay, filter, map, takeUntil } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { delay, filter, map, mergeMap, takeUntil, throttleTime } from 'rxjs/operators';
 
 import { WidgetChatDirective } from './chat.directive';
 
@@ -47,7 +47,6 @@ export class WidgetChatComponent implements OnInit, AfterViewInit, OnDestroy {
             .pipe(
                 takeUntil(this.isDestroyed),
                 map((messages) => this.messages = [ ...this.messages, ...messages ]),
-                // filter(() => !!this.chatElement),
                 filter(() => this.chatElement.scrollTop > (this.chatElement.scrollHeight - this.chatElement.clientHeight - 100)),
                 delay(200),
             )
@@ -74,12 +73,14 @@ export class WidgetChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public sendMessage() {
-        const message = this.messageForm.get('message').value;
-
-        this.messageService
-            .create(this.game.uid, message)
+        of(this.messageForm.get('message').value)
+            .pipe(
+                throttleTime(500),
+                filter((message) => !!message),
+                mergeMap((message) => this.messageService.create(this.game.uid, message)),
+            )
             .subscribe(
-                () => this.messageForm.reset({ message: '' })
+                () => this.messageForm.reset({ message: '' }),
             );
     }
 
