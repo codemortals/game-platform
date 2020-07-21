@@ -8,6 +8,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { ForgottenComponent } from './authentication/forgotten/forgotten.component';
+import { PrivacyComponent } from './legal/privacy/privacy.component';
+import { TermsComponent } from './legal/terms/terms.component';
 
 import { MainRouting } from './main.routing';
 
@@ -18,6 +20,8 @@ import { MainRouting } from './main.routing';
         LoginComponent,
         RegisterComponent,
         ForgottenComponent,
+        PrivacyComponent,
+        TermsComponent,
     ],
     imports: [
         CoreModule,

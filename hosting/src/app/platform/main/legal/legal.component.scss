@@ -1,0 +1,50 @@
+@import '../../../../../_variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 2rem;
+    align-items: center;
+    counter-reset: clauses;
+}
+
+.legal {
+    margin: auto;
+    max-width: 800px;
+}
+
+ol {
+    margin: 0 0 0 2em;
+    padding: 0 0 1em;
+    list-style: none;
+
+    > li {
+        &:before {
+            display: inline-block;
+            width: 2em;
+            margin-left: -2em;
+        }
+    }
+}
+
+ol.clauses {
+    > li {
+        padding: 0 0 0.75em 0;
+        counter-increment: clauses;
+
+        &:before {
+            content: counter(clauses) '. ';
+        }
+    }
+
+    ol {
+        > li {
+            padding: 0.75em 0 0 0;
+            counter-increment: subclause;
+
+            &:before {
+                content: counter(subclause, lower-alpha) '. ';
+            }
+        }
+    }
+}
