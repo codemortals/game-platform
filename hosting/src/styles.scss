@@ -4,7 +4,6 @@ html, body {
     font-family: 'Oxygen', sans-serif;
     font-size: 7px;
     color: $brand-dark-color;
-    height: 100vh;
 
     @media all and (min-width: $tablet-viewport) {
         font-size: 8px;
@@ -23,6 +22,10 @@ html, body {
 @import '../_layout';
 
 body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
     font-size: 2rem;
     background-color: $brand-light-color;
     background-image: url(/assets/background.jpg);
@@ -53,6 +56,44 @@ a {
 
 p {
     margin: 0.5em 0;
+}
+
+table {
+    margin: 1em 0;
+    background-color: transparentize($brand-primary-dark, 0.9);
+
+    tr {
+        :first-child {
+            width: 15%;
+            min-width: 8em;
+        }
+    }
+
+    th, td {
+        padding: 0.25em 0.375em;
+    }
+
+    th {
+        text-align: start;
+        white-space: nowrap;
+        font-weight: 700;
+    }
+
+    td {
+        min-width: 20%;
+    }
+
+    thead {
+        tr {
+            background-color: transparentize($brand-primary-dark, 0.5);
+        }
+    }
+
+    tbody {
+        > :nth-child(odd) {
+            background-color: transparentize($brand-primary-dark, 0.8);
+        }
+    }
 }
 
 button {

@@ -9,6 +9,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { ForgottenComponent } from './authentication/forgotten/forgotten.component';
+import { PrivacyComponent } from './legal/privacy/privacy.component';
+import { TermsComponent } from './legal/terms/terms.component';
 
 const routes: Routes = [
     {
@@ -37,6 +39,19 @@ const routes: Routes = [
         ],
         canActivate: [
             AnonymousGuard,
+        ],
+    },
+    {
+        path: 'legal',
+        children: [
+            {
+                path: 'terms',
+                component: TermsComponent,
+            },
+            {
+                path: 'privacy',
+                component: PrivacyComponent,
+            },
         ],
     },
 ];
