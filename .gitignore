@@ -22,4 +22,4 @@ Thumbs.db
 *.log
 
 # Firebase
-.firebase/*
+.firebase/
