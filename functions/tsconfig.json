@@ -5,7 +5,8 @@
         "noUnusedLocals": true,
         "outDir": "lib",
         "sourceMap": true,
-        "target": "es2017"
+        "target": "es2017",
+        "lib": ["ES6", "ESNext"]
     },
     "compileOnSave": true,
     "include": [
