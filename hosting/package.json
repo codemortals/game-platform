@@ -24,6 +24,7 @@
         "@fortawesome/free-brands-svg-icons": "5.15.1",
         "@fortawesome/free-regular-svg-icons": "5.15.1",
         "@fortawesome/free-solid-svg-icons": "5.15.1",
+        "dompurify": "2.2.0",
         "firebase": "7.24.0",
         "g": "2.0.1",
         "marked": "1.2.2",

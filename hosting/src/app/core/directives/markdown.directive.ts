@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import DOMPurify from 'dompurify';
 
 @Directive({
     selector: '[gameMarkdown]',
@@ -17,14 +18,16 @@ export class MarkdownDirective implements OnChanges {
     @Input() headers: 'none' | 'simple' | 'full' = 'full';
 
     constructor(
-        protected element: ElementRef,
+        private element: ElementRef,
     ) { }
 
-    ngOnChanges(): void {
+    public ngOnChanges(): void {
+        const sanitize = (html: string): string => DOMPurify.sanitize(html);
+
         this.marked.setOptions({
             gfm: true,
             breaks: true,
-            highlight: this.highlight,
+            highlight: this.highlight
         });
 
         if (!this.$original) {
@@ -32,13 +35,13 @@ export class MarkdownDirective implements OnChanges {
         }
 
         if (this.gameMarkdown) {
-            this.element.nativeElement.innerHTML = this.marked(this.gameMarkdown, { renderer: this.customRender() });
+            this.element.nativeElement.innerHTML = sanitize(this.marked(this.gameMarkdown, { renderer: this.customRender() }));
         } else {
             this.element.nativeElement.innerHTML = this.$original;
         }
     }
 
-    customRender() {
+    private customRender() {
         const renderer = new this.marked.Renderer();
 
         switch (this.headers) {
