@@ -20,3 +20,6 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# Firebase
+.firebase/
