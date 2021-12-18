@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: '16.x'
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
@@ -52,7 +52,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: '16.x'
       - name: Setup Tools
         run: |
           npm install -g firebase-tools
